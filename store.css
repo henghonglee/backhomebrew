@@ -2,6 +2,35 @@
     padding-top: 80px;
 }
 
+@media (max-width: 768px) {
+    .store-hero {
+        padding: 8rem 0 4rem;
+    }
+    
+    .store-hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .store-hero p {
+        font-size: 1.1rem;
+    }
+    
+    .bitcoin-badge {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .store-hero {
+        padding: 9rem 0 4rem;
+    }
+    
+    .store-hero h1 {
+        font-size: 1.8rem;
+    }
+}
+
 .nav-brand a {
     text-decoration: none;
     color: inherit;

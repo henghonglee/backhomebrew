@@ -3,6 +3,35 @@
     padding-top: 80px;
 }
 
+@media (max-width: 768px) {
+    .order-hero {
+        padding: 8rem 0 4rem;
+    }
+    
+    .order-hero h1 {
+        font-size: 2.2rem;
+    }
+    
+    .order-hero p {
+        font-size: 1.1rem;
+    }
+    
+    .bitcoin-badge {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .order-hero {
+        padding: 9rem 0 4rem;
+    }
+    
+    .order-hero h1 {
+        font-size: 1.8rem;
+    }
+}
+
 .order-hero {
     background: linear-gradient(rgba(26, 26, 26, 0.5), rgba(26, 26, 26, 0.5)), url('https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg') center center/cover no-repeat;
     color: var(--white);
