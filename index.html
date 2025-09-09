@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back Home Brew - Home-Based Coffee Shop</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1>
+                    <a href="index.html">
+                        Back Home Brew
+                        <svg class="logo-house-svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 21V10.5L12 4L20 10.5V21"></path>
+                            <circle cx="12" cy="9" r="1"></circle>
+                        </svg>
+                    </a>
+                </h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#about">About</a>
+                <a href="index.html#menu">Menu</a>
+                <a href="store.html">Store</a>
+                <a href="order.html">Order</a>
+                <a href="index.html#contact">Contact</a>
+                <div class="cart-icon" onclick="toggleCart()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                    </svg>
+                    <span id="cart-count">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Welcome Home to Perfect Coffee</h2>
+                <p>Experience artisanal coffee crafted with love in our cozy home-based coffee shop. Every cup tells a story of passion, quality, and community.</p>
+                <div class="hero-buttons">
+                    <a href="order.html" class="btn btn-primary">Order Now</a>
+                    <a href="#menu" class="btn btn-secondary">View Menu</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg" alt="Artisanal coffee setup">
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2>Our Story</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Back Home Brew started as a dream to bring café-quality coffee to your neighborhood. From our home-based setup, we carefully select, roast, and brew each cup with the attention and care that only a local, family-run business can provide.</p>
+                        <p>We believe that great coffee brings people together, creates moments of joy, and makes every day a little brighter. That's why we've made it our mission to serve not just coffee, but a warm, welcoming experience that feels like home.</p>
+                    </div>
+                    <div class="about-features">
+                        <div class="feature">
+                            <div class="feature-icon">🏠</div>
+                            <h3>Home-Based</h3>
+                            <p>Crafted with personal care in our cozy home setup</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">🌱</div>
+                            <h3>Sustainable</h3>
+                            <p>Ethically sourced beans with eco-friendly practices</p>
+                        </div>
+                        <div class="feature">
+                            <div class="feature-icon">❤️</div>
+                            <h3>Community</h3>
+                            <p>Supporting local community one cup at a time</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="menu">
+            <div class="container">
+                <h2>Our Menu</h2>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <h3>Classic Espresso</h3>
+                        <p>Rich, bold espresso shot made from our signature blend</p>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Home Brew Latte</h3>
+                        <p>Smooth espresso with steamed milk and a touch of love</p>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Artisan Cappuccino</h3>
+                        <p>Perfect balance of espresso, steamed milk, and foam</p>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Cold Brew Special</h3>
+                        <p>Smooth, refreshing cold brew steeped for 24 hours</p>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Seasonal Blend</h3>
+                        <p>Our rotating seasonal coffee featuring local flavors</p>
+                    </div>
+                    <div class="menu-item">
+                        <h3>Homemade Pastries</h3>
+                        <p>Fresh baked goods made daily in our home kitchen</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="container">
+                <h2>What Our Customers Say</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial">
+                        <p>"The best coffee in the neighborhood! You can taste the love and care in every cup."</p>
+                        <div class="testimonial-author">- Sarah M.</div>
+                    </div>
+                    <div class="testimonial">
+                        <p>"Back Home Brew feels like visiting a friend. The coffee is amazing and the atmosphere is so welcoming."</p>
+                        <div class="testimonial-author">- Mike T.</div>
+                    </div>
+                    <div class="testimonial">
+                        <p>"Finally found my perfect morning coffee spot. The attention to detail is incredible!"</p>
+                        <div class="testimonial-author">- Emma L.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>Visit Us</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <h3>Hours</h3>
+                            <p>Monday - Friday: 7:00 AM - 3:00 PM</p>
+                            <p>Saturday - Sunday: 8:00 AM - 4:00 PM</p>
+                        </div>
+                        <div class="contact-item">
+                            <h3>Location</h3>
+                            <p>123 Cozy Street</p>
+                            <p>Hometown, ST 12345</p>
+                        </div>
+                        <div class="contact-item">
+                            <h3>Contact</h3>
+                            <p>Phone: (555) 123-BREW</p>
+                            <p>Email: hello@backhomebrew.com</p>
+                        </div>
+                        <div class="contact-item">
+                            <h3>Payment</h3>
+                            <p>We accept Bitcoin only</p>
+                            <p>Experience the future of coffee payments</p>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <h3>Get in Touch</h3>
+                        <form>
+                            <input type="text" placeholder="Your Name" required>
+                            <input type="email" placeholder="Your Email" required>
+                            <textarea placeholder="Your Message" rows="4" required></textarea>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Back Home Brew ⌂</h3>
+                    <p>Bringing you home to perfect coffee</p>
+                </div>
+                <div class="footer-social">
+                    <p>Follow us: @backhomebrew</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Back Home Brew. Made with ❤️ and lots of coffee.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart ⌂</h3>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <p class="empty-cart">Your cart is empty</p>
+        </div>
+        <div class="cart-footer" id="cart-footer" style="display: none;">
+            <div class="cart-total">
+                <div class="total-btc">Total: <span id="total-btc">0</span> BTC</div>
+                <div class="total-usd">≈ $<span id="total-usd">0.00</span></div>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Checkout with Bitcoin</button>
+        </div>
+    </div>
+    
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+    <script src="store.js"></script>
+    <script src="main.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            document.body.style.visibility = 'visible';
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>

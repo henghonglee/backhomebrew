@@ -1,0 +1,478 @@
+/* Order page specific styles */
+.order-main {
+    padding-top: 80px;
+}
+
+.order-hero {
+    background: linear-gradient(rgba(26, 26, 26, 0.5), rgba(26, 26, 26, 0.5)), url('https://images.pexels.com/photos/2159065/pexels-photo-2159065.jpeg') center center/cover no-repeat;
+    color: var(--white);
+    padding: 6rem 0;
+    text-align: center;
+}
+
+.order-hero h1 {
+    font-size: 2.8rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.order-hero h1::after {
+    content: '⌂';
+    display: block;
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 1rem;
+    font-weight: 300;
+}
+
+.order-hero p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.bitcoin-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+}
+
+.bitcoin-icon {
+    font-size: 1.5rem;
+    color: #f7931a;
+}
+
+.coffee-menu {
+    padding: 5rem 0;
+    background: var(--background-light);
+}
+
+.coffee-menu h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.coffee-menu h2::before,
+.coffee-menu h2::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 80px;
+    height: 1px;
+    background: var(--divider-color);
+}
+
+.coffee-menu h2::before {
+    left: calc(50% - 200px);
+}
+
+.coffee-menu h2::after {
+    right: calc(50% - 200px);
+}
+
+.menu-categories {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    padding: 0.8rem 2rem;
+    border: 2px solid var(--primary-color);
+    background: transparent;
+    color: var(--primary-color);
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.category-btn.active,
+.category-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.menu-category {
+    display: none;
+}
+
+.menu-category.active {
+    display: block;
+}
+
+.coffee-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.coffee-card {
+    background: var(--white-transparent);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px var(--shadow);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(232, 226, 212, 0.3);
+}
+
+.coffee-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px var(--shadow);
+    border-color: var(--divider-color);
+}
+
+.coffee-info, .delivery-option {
+    text-align: center;
+}
+
+.coffee-visual {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.coffee-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.coffee-card:hover .coffee-visual img {
+    transform: scale(1.05);
+}
+
+/* Coffee Info Styling */
+.coffee-info {
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.coffee-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: var(--primary-color);
+}
+
+.coffee-info p {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.coffee-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.option-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.option-group span {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.size-select,
+.milk-select,
+.pastry-select {
+    padding: 0.8rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    background: var(--white);
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.size-select:focus,
+.milk-select:focus,
+.pastry-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.pricing {
+    margin-bottom: 1.5rem;
+    margin-top: auto;
+}
+
+.btc-price {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #f7931a;
+    margin-bottom: 0.2rem;
+}
+
+.sats-price {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ff8c00;
+    margin-bottom: 0.3rem;
+    font-style: normal;
+}
+
+.usd-price {
+    color: var(--text-light);
+    font-style: italic;
+}
+
+.add-to-order {
+    padding: 1rem;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-to-order:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Delivery Info */
+.delivery-info {
+    padding: 4rem 0;
+    background: var(--white-transparent);
+    backdrop-filter: blur(5px);
+}
+
+.delivery-info h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.delivery-info h2::before,
+.delivery-info h2::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 80px;
+    height: 1px;
+    background: var(--divider-color);
+}
+
+.delivery-info h2::before {
+    left: calc(50% - 180px);
+}
+
+.delivery-info h2::after {
+    right: calc(50% - 180px);
+}
+
+.delivery-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.delivery-option {
+    text-align: center;
+    padding: 2rem;
+    background: var(--background-transparent);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(232, 226, 212, 0.3);
+}
+
+.delivery-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--shadow);
+    border-color: var(--divider-color);
+}
+
+.delivery-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.delivery-option h3 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.delivery-option p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.delivery-fee {
+    font-weight: 600;
+    color: var(--primary-color);
+    background: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    display: inline-block;
+}
+
+/* Order Cart Sidebar Additions */
+.delivery-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(139, 69, 19, 0.2);
+}
+
+.delivery-section h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.delivery-choice {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.delivery-choice:hover {
+    background: rgba(139, 69, 19, 0.1);
+}
+
+.delivery-choice input[type="radio"] {
+    accent-color: var(--primary-color);
+}
+
+/* Animations */
+@keyframes steamRise {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: rotate(45deg) scale(1); }
+    50% { transform: rotate(45deg) scale(1.2); }
+}
+
+@keyframes foamBubble {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes condensation {
+    0%, 100% { filter: blur(0px); }
+    50% { filter: blur(1px); }
+}
+
+@keyframes iceFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+}
+
+@keyframes seasonalGlow {
+    0%, 100% { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(30deg); }
+}
+
+@keyframes bakingAroma {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.05); }
+    75% { transform: scale(0.98); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .coffee-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .coffee-visual {
+        height: 150px;
+    }
+    
+    .menu-categories {
+        gap: 0.5rem;
+    }
+    
+    .category-btn {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .order-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .delivery-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .coffee-menu h2::before,
+    .coffee-menu h2::after,
+    .delivery-info h2::before,
+    .delivery-info h2::after {
+        width: 40px;
+    }
+    
+    .coffee-menu h2::before {
+        left: calc(50% - 120px);
+    }
+    
+    .coffee-menu h2::after {
+        right: calc(50% - 120px);
+    }
+    
+    .delivery-info h2::before {
+        left: calc(50% - 110px);
+    }
+    
+    .delivery-info h2::after {
+        right: calc(50% - 110px);
+    }
+}
+
+@media (max-width: 480px) {
+    .coffee-card {
+        margin: 0 1rem;
+    }
+    
+    .bitcoin-badge {
+        flex-direction: column;
+        gap: 0.3rem;
+        padding: 0.8rem 1.5rem;
+    }
+}

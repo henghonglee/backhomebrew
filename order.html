@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Online - Back Home Brew</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="store.css">
+    <link rel="stylesheet" href="order.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1>
+                    <a href="index.html">
+                        Back Home Brew
+                        <svg class="logo-house-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 21V10.5L12 4L20 10.5V21"></path>
+                            <circle cx="12" cy="9" r="1"></circle>
+                        </svg>
+                    </a>
+                </h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#about">About</a>
+                <a href="index.html#menu">Menu</a>
+                <a href="store.html">Store</a>
+                <a href="order.html" class="active">Order</a>
+                <a href="index.html#contact">Contact</a>
+                <div class="cart-icon" onclick="toggleCart()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                    </svg>
+                    <span id="cart-count">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="order-main">
+        <section class="order-hero">
+            <div class="container">
+                <h1>Order Your Perfect Cup</h1>
+                <p>Freshly brewed coffee delivered to your door</p>
+                <div class="bitcoin-badge">
+                    <span class="bitcoin-icon">₿</span>
+                    <span>Bitcoin Payments Only</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="coffee-menu">
+            <div class="container">
+                <h2>Our Coffee Menu</h2>
+                <div class="menu-categories">
+                    <button class="category-btn active" onclick="showCategory('espresso')">Espresso Drinks</button>
+                    <button class="category-btn" onclick="showCategory('specialty')">Specialty Coffee</button>
+                    <button class="category-btn" onclick="showCategory('cold')">Cold Brews</button>
+                    <button class="category-btn" onclick="showCategory('pastries')">Fresh Pastries</button>
+                </div>
+
+                <!-- Espresso Drinks -->
+                <div class="menu-category active" id="espresso">
+                    <div class="coffee-grid">
+                        <div class="coffee-card">
+                            <div class="coffee-visual">
+                                <img src="https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg" alt="Classic Espresso">
+                            </div>
+                            <div class="coffee-info">
+                                <h3>Classic Espresso</h3>
+                                <p>Rich, bold shot of our signature blend with perfect crema</p>
+                                <div class="coffee-options">
+                                    <label class="option-group">
+                                        <span>Size:</span>
+                                        <select class="size-select">
+                                            <option value="single">Single Shot</option>
+                                            <option value="double">Double Shot</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="pricing">
+                                    <span class="btc-price">0.00011 BTC</span>
+                                    <span class="sats-price">11,000 sats</span>
+                                    <span class="usd-price">≈ $3.50</span>
+                                </div>
+                                <button class="add-to-order" onclick="addToOrder('espresso', 'Classic Espresso', 0.00011, 3.50)">Add to Order</button>
+                            </div>
+                        </div>
+
+                        <div class="coffee-card">
+                            <div class="coffee-visual">
+                                <img src="https://images.pexels.com/photos/1235717/pexels-photo-1235717.jpeg" alt="Home Brew Latte">
+                            </div>
+                            <div class="coffee-info">
+                                <h3>Home Brew Latte</h3>
+                                <p>Smooth espresso with perfectly steamed milk and signature latte art</p>
+                                <div class="coffee-options">
+                                    <label class="option-group">
+                                        <span>Size:</span>
+                                        <select class="size-select">
+                                            <option value="12oz">12oz</option>
+                                            <option value="16oz">16oz</option>
+                                        </select>
+                                    </label>
+                                    <label class="option-group">
+                                        <span>Milk:</span>
+                                        <select class="milk-select">
+                                            <option value="whole">Whole Milk</option>
+                                            <option value="oat">Oat Milk (+$0.50)</option>
+                                            <option value="almond">Almond Milk</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="pricing">
+                                    <span class="btc-price">0.00015 BTC</span>
+                                    <span class="sats-price">15,000 sats</span>
+                                    <span class="usd-price">≈ $4.75</span>
+                                </div>
+                                <button class="add-to-order" onclick="addToOrder('latte', 'Home Brew Latte', 0.00015, 4.75)">Add to Order</button>
+                            </div>
+                        </div>
+
+                        <div class="coffee-card">
+                            <div class="coffee-visual">
+                                <img src="https://images.pexels.com/photos/302896/pexels-photo-302896.jpeg" alt="Artisan Cappuccino">
+                            </div>
+                            <div class="coffee-info">
+                                <h3>Artisan Cappuccino</h3>
+                                <p>Perfect balance of espresso, steamed milk, and thick foam</p>
+                                <div class="coffee-options">
+                                    <label class="option-group">
+                                        <span>Size:</span>
+                                        <select class="size-select">
+                                            <option value="traditional">Traditional 6oz</option>
+                                            <option value="large">Large 8oz</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="pricing">
+                                    <span class="btc-price">0.00014 BTC</span>
+                                    <span class="sats-price">14,000 sats</span>
+                                    <span class="usd-price">≈ $4.25</span>
+                                </div>
+                                <button class="add-to-order" onclick="addToOrder('cappuccino', 'Artisan Cappuccino', 0.00014, 4.25)">Add to Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Specialty Coffee -->
+                <div class="menu-category" id="specialty">
+                    <div class="coffee-grid">
+                        <div class="coffee-card">
+                            <div class="coffee-visual">
+                                <img src="https://images.pexels.com/photos/982612/pexels-photo-982612.jpeg" alt="Seasonal Blend">
+                            </div>
+                            <div class="coffee-info">
+                                <h3>Seasonal Blend</h3>
+                                <p>Our rotating seasonal coffee featuring unique local flavors</p>
+                                <div class="coffee-options">
+                                    <label class="option-group">
+                                        <span>Size:</span>
+                                        <select class="size-select">
+                                            <option value="12oz">12oz</option>
+                                            <option value="16oz">16oz</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="pricing">
+                                    <span class="btc-price">0.00016 BTC</span>
+                                    <span class="sats-price">16,000 sats</span>
+                                    <span class="usd-price">≈ $5.00</span>
+                                </div>
+                                <button class="add-to-order" onclick="addToOrder('seasonal', 'Seasonal Blend', 0.00016, 5.00)">Add to Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cold Brews -->
+                <div class="menu-category" id="cold">
+                    <div class="coffee-grid">
+                        <div class="coffee-card">
+                            <div class="coffee-visual">
+                                <img src="https://images.pexels.com/photos/4226881/pexels-photo-4226881.jpeg" alt="Cold Brew Special">
+                            </div>
+                            <div class="coffee-info">
+                                <h3>Cold Brew Special</h3>
+                                <p>Smooth, refreshing cold brew steeped for 24 hours</p>
+                                <div class="coffee-options">
+                                    <label class="option-group">
+                                        <span>Size:</span>
+                                        <select class="size-select">
+                                            <option value="16oz">16oz</option>
+                                            <option value="20oz">20oz</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="pricing">
+                                    <span class="btc-price">0.00013 BTC</span>
+                                    <span class="sats-price">13,000 sats</span>
+                                    <span class="usd-price">≈ $4.00</span>
+                                </div>
+                                <button class="add-to-order" onclick="addToOrder('coldbrew', 'Cold Brew Special', 0.00013, 4.00)">Add to Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pastries -->
+                <div class="menu-category" id="pastries">
+                    <div class="coffee-grid">
+                        <div class="coffee-card">
+                            <div class="coffee-visual">
+                                <img src="https://images.pexels.com/photos/2067423/pexels-photo-2067423.jpeg" alt="Fresh Baked Pastries">
+                            </div>
+                            <div class="coffee-info">
+                                <h3>Fresh Baked Pastries</h3>
+                                <p>Homemade pastries baked fresh daily in our kitchen</p>
+                                <div class="coffee-options">
+                                    <label class="option-group">
+                                        <span>Type:</span>
+                                        <select class="pastry-select">
+                                            <option value="croissant">Butter Croissant</option>
+                                            <option value="muffin">Blueberry Muffin</option>
+                                            <option value="scone">Chocolate Chip Scone</option>
+                                        </select>
+                                    </label>
+                                </div>
+                                <div class="pricing">
+                                    <span class="btc-price">0.00008 - 0.00013 BTC</span>
+                                    <span class="sats-price">8,000 - 13,000 sats</span>
+                                    <span class="usd-price">≈ $2.50 - $4.00</span>
+                                </div>
+                                <button class="add-to-order" onclick="addToOrder('pastry', 'Fresh Baked Pastry', 0.00008, 2.50)">Add to Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="delivery-info">
+            <div class="container">
+                <h2>Delivery Information</h2>
+                <div class="delivery-options">
+                    <div class="delivery-option">
+                        <div class="delivery-icon">🚗</div>
+                        <h3>Home Delivery</h3>
+                        <p>Fresh coffee delivered to your door within 30 minutes</p>
+                        <span class="delivery-fee">Free within 3 miles</span>
+                    </div>
+                    <div class="delivery-option">
+                        <div class="delivery-icon">📦</div>
+                        <h3>Pickup</h3>
+                        <p>Order ahead and pick up at our home location</p>
+                        <span class="delivery-fee">Ready in 10-15 minutes</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Shopping Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart ⌂</h3>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <p class="empty-cart">Your cart is empty</p>
+        </div>
+        <div class="cart-footer" id="cart-footer" style="display: none;">
+            <div class="delivery-section">
+                <h4>Delivery Method</h4>
+                <label class="delivery-choice">
+                    <input type="radio" name="delivery" value="delivery" checked>
+                    <span>Home Delivery (Free within 3 miles)</span>
+                </label>
+                <label class="delivery-choice">
+                    <input type="radio" name="delivery" value="pickup">
+                    <span>Pickup at Location</span>
+                </label>
+            </div>
+            <div class="cart-total">
+                <div class="total-btc">Total: <span id="total-btc">0</span> BTC</div>
+                <div class="total-usd">≈ $<span id="total-usd">0.00</span></div>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Checkout with Bitcoin</button>
+        </div>
+    </div>
+    
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Back Home Brew ⌂</h3>
+                    <p>Fresh coffee delivered with Bitcoin</p>
+                </div>
+                <div class="footer-social">
+                    <p>Follow us: @backhomebrew</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Back Home Brew. Powered by Bitcoin ₿</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="store.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            document.body.style.visibility = 'visible';
+            document.body.style.opacity = '1';
+            
+            // Initialize coffee menu
+            showCategory('espresso');
+        });
+    </script>
+</body>
+</html>

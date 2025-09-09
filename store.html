@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back Home Brew Store - Bitcoin Only</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="store.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <h1>
+                    <a href="index.html">
+                        Back Home Brew
+                        <svg class="logo-house-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 21V10.5L12 4L20 10.5V21"></path>
+                            <circle cx="12" cy="9" r="1"></circle>
+                        </svg>
+                    </a>
+                </h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html#about">About</a>
+                <a href="index.html#menu">Menu</a>
+                <a href="store.html" class="active">Store</a>
+                <a href="order.html">Order</a>
+                <a href="index.html#contact">Contact</a>
+                <div class="cart-icon" onclick="toggleCart()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                    </svg>
+                    <span id="cart-count">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="store-main">
+        <section class="store-hero">
+            <div class="container">
+                <h1>Back Home Brew Store</h1>
+                <p>Premium coffee swag for the Bitcoin community</p>
+                <div class="bitcoin-badge">
+                    <span class="bitcoin-icon">₿</span>
+                    <span>Bitcoin Payments Only</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="products">
+            <div class="container">
+                <div class="products-grid">
+                    <div class="product-card" data-product="tshirt">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a" alt="T-Shirt">
+                        </div>
+                        <div class="product-info">
+                            <h3>Back Home Brew T-Shirt</h3>
+                            <p>Premium cotton tee with our signature logo</p>
+                            <div class="product-options">
+                                <select class="size-select">
+                                    <option value="">Select Size</option>
+                                    <option value="S">Small</option>
+                                    <option value="M">Medium</option>
+                                    <option value="L">Large</option>
+                                    <option value="XL">X-Large</option>
+                                    <option value="XXL">XX-Large</option>
+                                </select>
+                            </div>
+                            <div class="product-price">
+                                <span class="btc-price">0.0008 BTC</span>
+                                <span class="sats-price">80,000 sats</span>
+                                <span class="usd-price">≈ $25.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('tshirt', 'Back Home Brew T-Shirt', 0.0008, 25.00)">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-product="cap">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1533827432537-70133748f5c8" alt="Cap">
+                        </div>
+                        <div class="product-info">
+                            <h3>Coffee Lover's Cap</h3>
+                            <p>Adjustable cap with embroidered logo</p>
+                            <div class="product-options">
+                                <select class="color-select">
+                                    <option value="">Select Color</option>
+                                    <option value="black">Black</option>
+                                    <option value="brown">Coffee Brown</option>
+                                    <option value="cream">Cream</option>
+                                </select>
+                            </div>
+                            <div class="product-price">
+                                <span class="btc-price">0.0006 BTC</span>
+                                <span class="sats-price">60,000 sats</span>
+                                <span class="usd-price">≈ $20.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('cap', 'Coffee Lover\'s Cap', 0.0006, 20.00)">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-product="cup">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772" alt="Coffee Cup">
+                        </div>
+                        <div class="product-info">
+                            <h3>Ceramic Coffee Cup</h3>
+                            <p>Perfect 12oz ceramic mug for your morning brew</p>
+                            <div class="product-options">
+                                <select class="color-select">
+                                    <option value="">Select Color</option>
+                                    <option value="white">Classic White</option>
+                                    <option value="brown">Coffee Brown</option>
+                                    <option value="black">Midnight Black</option>
+                                </select>
+                            </div>
+                            <div class="product-price">
+                                <span class="btc-price">0.0005 BTC</span>
+                                <span class="sats-price">50,000 sats</span>
+                                <span class="usd-price">≈ $15.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('cup', 'Ceramic Coffee Cup', 0.0005, 15.00)">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-product="jacket">
+                        <div class="product-image">
+                            <img src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg" alt="Back Home Brew Hoodie">
+                        </div>
+                        <div class="product-info">
+                            <h3>Back Home Brew Hoodie</h3>
+                            <p>Cozy fleece hoodie perfect for coffee runs</p>
+                            <div class="product-options">
+                                <select class="size-select">
+                                    <option value="">Select Size</option>
+                                    <option value="S">Small</option>
+                                    <option value="M">Medium</option>
+                                    <option value="L">Large</option>
+                                    <option value="XL">X-Large</option>
+                                    <option value="XXL">XX-Large</option>
+                                </select>
+                            </div>
+                            <div class="product-price">
+                                <span class="btc-price">0.002 BTC</span>
+                                <span class="sats-price">200,000 sats</span>
+                                <span class="usd-price">≈ $65.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('jacket', 'Back Home Brew Hoodie', 0.002, 65.00)">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-product="bag">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1547949003-9792a18a2601" alt="Messenger Bag">
+                        </div>
+                        <div class="product-info">
+                            <h3>Messenger Bag</h3>
+                            <p>Durable canvas bag for your daily essentials</p>
+                            <div class="product-options">
+                                <select class="color-select">
+                                    <option value="">Select Color</option>
+                                    <option value="khaki">Khaki</option>
+                                    <option value="brown">Coffee Brown</option>
+                                    <option value="black">Black</option>
+                                </select>
+                            </div>
+                            <div class="product-price">
+                                <span class="btc-price">0.0015 BTC</span>
+                                <span class="sats-price">150,000 sats</span>
+                                <span class="usd-price">≈ $45.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('bag', 'Messenger Bag', 0.0015, 45.00)">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-product="tumbler">
+                        <div class="product-image">
+                            <img src="https://images.pexels.com/photos/8581023/pexels-photo-8581023.jpeg" alt="Insulated Tumbler">
+                        </div>
+                        <div class="product-info">
+                            <h3>Insulated Tumbler</h3>
+                            <p>20oz stainless steel tumbler keeps drinks hot or cold</p>
+                            <div class="product-options">
+                                <select class="color-select">
+                                    <option value="">Select Color</option>
+                                    <option value="silver">Stainless Steel</option>
+                                    <option value="black">Matte Black</option>
+                                    <option value="brown">Coffee Brown</option>
+                                </select>
+                            </div>
+                            <div class="product-price">
+                                <span class="btc-price">0.0007 BTC</span>
+                                <span class="sats-price">70,000 sats</span>
+                                <span class="usd-price">≈ $22.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('tumbler', 'Insulated Tumbler', 0.0007, 22.00)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bitcoin-info">
+            <div class="container">
+                <div class="bitcoin-payment-info">
+                    <h2>Bitcoin Payments Only</h2>
+                    <div class="bitcoin-features">
+                        <div class="bitcoin-feature">
+                            <span class="feature-icon">🔒</span>
+                            <h3>Secure</h3>
+                            <p>Decentralized and encrypted transactions</p>
+                        </div>
+                        <div class="bitcoin-feature">
+                            <span class="feature-icon">⚡</span>
+                            <h3>Fast</h3>
+                            <p>Quick processing with Lightning Network</p>
+                        </div>
+                        <div class="bitcoin-feature">
+                            <span class="feature-icon">🌍</span>
+                            <h3>Global</h3>
+                            <p>No borders, no traditional banking limits</p>
+                        </div>
+                    </div>
+                    <p class="bitcoin-note">We believe in the future of decentralized currency. All prices are calculated in Bitcoin first, USD is for reference only.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Shopping Cart Sidebar -->
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart ⌂</h3>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <p class="empty-cart">Your cart is empty</p>
+        </div>
+        <div class="cart-footer" id="cart-footer" style="display: none;">
+            <div class="cart-total">
+                <div class="total-btc">Total: <span id="total-btc">0</span> BTC</div>
+                <div class="total-usd">≈ $<span id="total-usd">0.00</span></div>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Checkout with Bitcoin</button>
+        </div>
+    </div>
+    
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Back Home Brew ⌂</h3>
+                    <p>Coffee & Bitcoin - The Perfect Blend</p>
+                </div>
+                <div class="footer-social">
+                    <p>Follow us: @backhomebrew</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Back Home Brew. Powered by Bitcoin ₿</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="store.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            document.body.style.visibility = 'visible';
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>

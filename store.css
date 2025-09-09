@@ -1,0 +1,534 @@
+.store-main {
+    padding-top: 80px;
+}
+
+.nav-brand a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.store-hero {
+    background: linear-gradient(rgba(26, 26, 26, 0.5), rgba(26, 26, 26, 0.5)), url('https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg') center center/cover no-repeat;
+    color: var(--white);
+    padding: 6rem 0;
+    text-align: center;
+}
+
+.store-hero h1 {
+    font-size: 2.8rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.store-hero h1::after {
+    content: '⌂';
+    display: block;
+    font-size: 1.8rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 1rem;
+    font-weight: 300;
+}
+
+.store-hero p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.bitcoin-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+}
+
+.bitcoin-icon {
+    font-size: 1.5rem;
+    color: #f7931a;
+}
+
+.products {
+    padding: 5rem 0;
+    background: var(--background-light);
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background: var(--white-transparent);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px var(--shadow);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(232, 226, 212, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px var(--shadow);
+    border-color: var(--divider-color);
+}
+
+.product-info, .bitcoin-feature {
+    text-align: center;
+}
+
+.product-image {
+    height: 300px;
+    background: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.05);
+}
+
+.product-info {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.product-info p {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+.product-options {
+    margin-bottom: 1.5rem;
+    margin-top: auto;
+}
+
+.size-select,
+.color-select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    background: var(--white);
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.size-select:focus,
+.color-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.product-price {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-bottom: 1.5rem;
+}
+
+.product-price .btc-price {
+    color: #f7931a;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.product-price .sats-price {
+    color: #ff8c00;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.product-price .usd-price {
+    color: var(--text-light);
+    font-style: italic;
+    font-size: 1rem;
+}
+
+.btc-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f7931a;
+}
+
+.usd-price {
+    font-size: 1rem;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+.add-to-cart {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.add-to-cart:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.bitcoin-info {
+    background: var(--white-transparent);
+    backdrop-filter: blur(5px);
+    padding: 5rem 0;
+}
+
+.bitcoin-payment-info {
+    text-align: center;
+}
+
+.bitcoin-payment-info h2 {
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.bitcoin-payment-info h2::before,
+.bitcoin-payment-info h2::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 80px;
+    height: 1px;
+    background: var(--divider-color);
+}
+
+.bitcoin-payment-info h2::before {
+    left: calc(50% - 190px);
+}
+
+.bitcoin-payment-info h2::after {
+    right: calc(50% - 190px);
+}
+
+.bitcoin-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.bitcoin-feature {
+    text-align: center;
+    padding: 2rem;
+    background: var(--background-transparent);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(232, 226, 212, 0.3);
+    transition: all 0.3s ease;
+}
+
+.bitcoin-feature:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px var(--shadow);
+    border-color: var(--divider-color);
+}
+
+.bitcoin-feature .feature-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.bitcoin-feature h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+}
+
+.bitcoin-feature p {
+    color: var(--text-light);
+}
+
+.bitcoin-note {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Cart Sidebar */
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background: var(--white);
+    box-shadow: -5px 0 20px var(--shadow);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.3s ease;
+}
+
+.cart-sidebar.open {
+    right: 0;
+}
+
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1500;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.cart-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    border-bottom: 1px solid var(--accent-color);
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.cart-header h3 {
+    color: var(--white);
+    margin: 0;
+}
+
+.close-cart {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-items {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.empty-cart {
+    text-align: center;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--accent-color);
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item-info h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--primary-color);
+}
+
+.cart-item-details {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.cart-item-price {
+    font-weight: 600;
+}
+
+.cart-item-price .btc-price {
+    color: #f7931a;
+    display: block;
+}
+
+.cart-item-price .sats-price {
+    color: #ff8c00;
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.cart-item-price .usd-price {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.remove-item {
+    background: #ff4757;
+    color: var(--white);
+    border: none;
+    padding: 0.3rem 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background 0.3s ease;
+}
+
+.remove-item:hover {
+    background: #ff3838;
+}
+
+.cart-footer {
+    padding: 2rem;
+    border-top: 1px solid var(--accent-color);
+    background: var(--accent-color);
+}
+
+.cart-total {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.total-btc {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f7931a;
+    margin-bottom: 0.5rem;
+}
+
+.total-usd {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #f7931a;
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.checkout-btn:hover {
+    background: #e8830e;
+    transform: translateY(-2px);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .cart-sidebar {
+        width: 100vw;
+        right: -100vw;
+    }
+    
+    .store-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .store-hero p {
+        font-size: 1.1rem;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .bitcoin-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .bitcoin-payment-info h2::before,
+    .bitcoin-payment-info h2::after {
+        width: 40px;
+    }
+    
+    .bitcoin-payment-info h2::before {
+        left: calc(50% - 120px);
+    }
+    
+    .bitcoin-payment-info h2::after {
+        right: calc(50% - 120px);
+    }
+    
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .cart-icon {
+        order: -1;
+    }
+}
+
+@media (max-width: 480px) {
+    .bitcoin-badge {
+        flex-direction: column;
+        gap: 0.3rem;
+        padding: 0.8rem 1.5rem;
+    }
+    
+    .product-card {
+        margin: 0 1rem;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+}
