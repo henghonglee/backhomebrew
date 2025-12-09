@@ -1,5 +1,4 @@
 # Back Home Brew - Production Deployment
-dkh
 
 ## Quick Deploy
 
