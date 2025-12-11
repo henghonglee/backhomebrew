@@ -2,12 +2,37 @@
 let cart = [];
 let isCartOpen = false;
 
-// Bitcoin to USD rate (you would typically fetch this from an API)
-const BTC_TO_USD_RATE = 31250; // Example rate
+const CART_STORAGE_KEY = 'back-home-brew-cart';
 
 // Helper function to convert BTC to sats
 function btcToSats(btcAmount) {
     return Math.round(btcAmount * 100000000).toLocaleString();
+}
+
+function persistCart() {
+    try {
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+    } catch (error) {
+        console.warn('Unable to persist cart', error);
+    }
+}
+
+function restoreCartFromStorage() {
+    try {
+        const storedCart = localStorage.getItem(CART_STORAGE_KEY);
+        if (storedCart) {
+            const parsed = JSON.parse(storedCart);
+            if (Array.isArray(parsed)) {
+                cart = parsed.map(item => ({
+                    ...item,
+                    btcPrice: Number(item.btcPrice),
+                    usdPrice: Number(item.usdPrice)
+                }));
+            }
+        }
+    } catch (error) {
+        console.warn('Unable to restore cart', error);
+    }
 }
 
 // Function to add coffee orders to the unified cart
@@ -76,6 +101,7 @@ function addToOrder(productId, productName, btcPrice, usdPrice) {
     
     // Add to unified cart
     cart.push(orderItem);
+    persistCart();
     
     // Update UI
     updateCartUI();
@@ -92,24 +118,64 @@ function addToOrder(productId, productName, btcPrice, usdPrice) {
 
 function addToCart(productId, productName, btcPrice, usdPrice) {
     const productCard = document.querySelector(`[data-product="${productId}"]`);
+    if (!productCard) {
+        alert('Unable to find the selected product.');
+        return;
+    }
+
     const sizeSelect = productCard.querySelector('.size-select');
     const colorSelect = productCard.querySelector('.color-select');
+    const optionSelects = productCard.querySelectorAll('[data-option-label]');
     
-    // Get selected options
     let selectedOption = '';
+    let adjustedBtcPrice = btcPrice;
+    let adjustedUsdPrice = usdPrice;
+    let validationMessage = '';
+    
     if (sizeSelect) {
         if (!sizeSelect.value) {
-            alert('Please select a size');
-            return;
+            validationMessage = 'Please select a size';
+        } else {
+            selectedOption = `Size: ${sizeSelect.value}`;
         }
-        selectedOption = `Size: ${sizeSelect.value}`;
     }
-    if (colorSelect) {
+    
+    if (!validationMessage && colorSelect) {
         if (!colorSelect.value) {
-            alert('Please select a color');
-            return;
+            validationMessage = 'Please select a color';
+        } else {
+            selectedOption = selectedOption ? `${selectedOption}, Color: ${colorSelect.value}` : `Color: ${colorSelect.value}`;
         }
-        selectedOption = selectedOption ? `${selectedOption}, Color: ${colorSelect.value}` : `Color: ${colorSelect.value}`;
+    }
+
+    if (!validationMessage && optionSelects.length > 0) {
+        optionSelects.forEach(select => {
+            if (validationMessage) return;
+            const required = select.dataset.required === 'true';
+            const label = select.dataset.optionLabel || 'Option';
+            const selectedValue = select.value;
+            const selectedText = select.options[select.selectedIndex]?.text || '';
+            
+            if (required && !selectedValue) {
+                validationMessage = `Please select a ${label.toLowerCase()}`;
+                return;
+            }
+
+            if (selectedValue) {
+                selectedOption = selectedOption ? `${selectedOption}, ${label}: ${selectedText}` : `${label}: ${selectedText}`;
+                const optionBtc = parseFloat(select.options[select.selectedIndex].dataset.btc);
+                const optionUsd = parseFloat(select.options[select.selectedIndex].dataset.usd);
+                if (!Number.isNaN(optionBtc) && !Number.isNaN(optionUsd)) {
+                    adjustedBtcPrice = optionBtc;
+                    adjustedUsdPrice = optionUsd;
+                }
+            }
+        });
+    }
+
+    if (validationMessage) {
+        alert(validationMessage);
+        return;
     }
     
     // Create cart item
@@ -117,8 +183,8 @@ function addToCart(productId, productName, btcPrice, usdPrice) {
         id: Date.now(), // Simple ID generation
         productId: productId,
         name: productName,
-        btcPrice: btcPrice,
-        usdPrice: usdPrice,
+        btcPrice: adjustedBtcPrice,
+        usdPrice: adjustedUsdPrice,
         options: selectedOption,
         quantity: 1,
         type: 'merchandise' // Mark as store merchandise
@@ -126,6 +192,7 @@ function addToCart(productId, productName, btcPrice, usdPrice) {
     
     // Add to cart
     cart.push(cartItem);
+    persistCart();
     
     // Update UI
     updateCartUI();
@@ -137,17 +204,25 @@ function addToCart(productId, productName, btcPrice, usdPrice) {
     // Reset selections
     if (sizeSelect) sizeSelect.value = '';
     if (colorSelect) colorSelect.value = '';
+    optionSelects.forEach(select => {
+        select.value = '';
+    });
 }
 
 function removeFromCart(itemId) {
     cart = cart.filter(item => item.id !== itemId);
+    persistCart();
     updateCartUI();
     updateCartCount();
 }
 
 function updateCartCount() {
     const cartCount = document.getElementById('cart-count');
+    const mobileCartCount = document.getElementById('mobile-cart-count');
     cartCount.textContent = cart.length;
+    if (mobileCartCount) {
+        mobileCartCount.textContent = cart.length;
+    }
 }
 
 function updateCartUI() {
@@ -173,7 +248,7 @@ function updateCartUI() {
             <div class="cart-item">
                 <div class="cart-item-info">
                     <h4>${item.name}</h4>
-                    <div class="cart-item-details">${item.options}</div>
+                    <div class="cart-item-details">${item.options || 'No options selected'}</div>
                     <div class="cart-item-price">
                         <span class="btc-price">${item.btcPrice} BTC</span>
                         <span class="sats-price">${btcToSats(item.btcPrice)} sats</span>
@@ -239,135 +314,52 @@ function checkout() {
         return;
     }
     
-    // Calculate totals
-    const totalBTC = cart.reduce((sum, item) => sum + item.btcPrice, 0);
-    const totalUSD = cart.reduce((sum, item) => sum + item.usdPrice, 0);
-    
-    // Create order summary
-    let orderSummary = "Back Home Brew Order Summary:\\n\\n";
-    cart.forEach(item => {
-        orderSummary += `${item.name}\\n`;
-        orderSummary += `${item.options}\\n`;
-        orderSummary += `${item.btcPrice} BTC (≈ $${item.usdPrice.toFixed(2)})\\n\\n`;
-    });
-    
-    orderSummary += `Total: ${totalBTC.toFixed(4)} BTC (≈ $${totalUSD.toFixed(2)})\\n\\n`;
-    orderSummary += "Bitcoin Payment Address:\\n";
-    orderSummary += "bc1qak0r24z2elxnku9akznhap2ppg3pjpwsg2hds5\\n\\n";
-    orderSummary += "Please send the exact BTC amount to complete your order.\\n";
-    orderSummary += "Email us at orders@backhomebrew.com with your transaction ID.";
-    
-    // Show checkout modal
-    showCheckoutModal(orderSummary, totalBTC, totalUSD);
-}
-
-function showCheckoutModal(orderSummary, totalBTC, totalUSD) {
-    const modal = document.createElement('div');
-    modal.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 4000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-    `;
-    
-    const modalContent = document.createElement('div');
-    modalContent.style.cssText = `
-        background: white;
-        padding: 2rem;
-        border-radius: 15px;
-        max-width: 500px;
-        width: 100%;
-        max-height: 80vh;
-        overflow-y: auto;
-        text-align: center;
-    `;
-    
-    modalContent.innerHTML = `
-        <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Bitcoin Checkout</h2>
-        <div style="background: var(--accent-color); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
-            <div style="font-size: 1.5rem; font-weight: bold; color: #f7931a; margin-bottom: 0.5rem;">
-                ${totalBTC.toFixed(4)} BTC
-            </div>
-            <div style="color: var(--text-light);">≈ $${totalUSD.toFixed(2)} USD</div>
-        </div>
-        
-        <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; font-family: monospace; word-break: break-all;">
-            bc1qak0r24z2elxnku9akznhap2ppg3pjpwsg2hds5
-        </div>
-        
-        <div style="text-align: left; margin-bottom: 1.5rem; color: var(--text-dark);">
-            <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Order Summary:</h3>
-            <div style="font-size: 0.9rem; line-height: 1.6;">
-                ${cart.map(item => `
-                    <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eee;">
-                        <strong>${item.name}</strong><br>
-                        ${item.options}<br>
-                        <span style="color: #f7931a;">${item.btcPrice} BTC</span><br>
-                        <span style="color: #ff8c00; font-size: 0.9rem;">${btcToSats(item.btcPrice)} sats</span><br>
-                        <span style="color: var(--text-light);">≈ $${item.usdPrice.toFixed(2)}</span>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-        
-        <div style="margin-bottom: 1.5rem; padding: 1rem; background: #fff3cd; border-radius: 8px; color: #856404; font-size: 0.9rem;">
-            <strong>Important:</strong> Send the exact BTC amount to the address above. 
-            After payment, email us at <strong>orders@backhomebrew.com</strong> with your transaction ID to complete the order.
-        </div>
-        
-        <div style="display: flex; gap: 1rem; justify-content: center;">
-            <button onclick="copyBitcoinAddress()" style="padding: 0.8rem 1.5rem; background: #f7931a; color: white; border: none; border-radius: 25px; cursor: pointer; font-weight: 600;">
-                Copy Address
-            </button>
-            <button onclick="closeCheckoutModal()" style="padding: 0.8rem 1.5rem; background: var(--text-light); color: white; border: none; border-radius: 25px; cursor: pointer; font-weight: 600;">
-                Close
-            </button>
-        </div>
-    `;
-    
-    modal.appendChild(modalContent);
-    document.body.appendChild(modal);
-    document.body.style.overflow = 'hidden';
-    
-    // Store reference for closing
-    window.currentModal = modal;
-}
-
-function copyBitcoinAddress() {
-    const address = 'bc1qak0r24z2elxnku9akznhap2ppg3pjpwsg2hds5';
-    navigator.clipboard.writeText(address).then(() => {
-        alert('Bitcoin address copied to clipboard!');
-    }).catch(() => {
-        // Fallback for older browsers
-        const textArea = document.createElement('textarea');
-        textArea.value = address;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        alert('Bitcoin address copied to clipboard!');
-    });
-}
-
-function closeCheckoutModal() {
-    if (window.currentModal) {
-        window.currentModal.remove();
-        document.body.style.overflow = 'auto';
-        
-        // Clear cart after showing checkout
-        cart = [];
-        updateCartUI();
-        updateCartCount();
-        toggleCart(); // Close cart sidebar
+    const checkoutButton = document.querySelector('.checkout-btn');
+    const originalLabel = checkoutButton ? checkoutButton.textContent : '';
+    if (checkoutButton) {
+        checkoutButton.textContent = 'Generating invoice...';
+        checkoutButton.disabled = true;
     }
+
+    persistCart();
+
+    fetch('/api/checkout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            cart,
+            returnUrl: window.location.href
+        })
+    })
+    .then(async response => {
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+            throw new Error(data.error || 'Unable to create invoice right now.');
+        }
+        if (data.checkoutLink) {
+            const expires = data.expiresAt ? new Date(data.expiresAt) : null;
+            if (expires) {
+                showAddToCartMessage(`Invoice ready. Expires at ${expires.toLocaleTimeString()}`);
+            }
+            window.location.href = data.checkoutLink;
+            return;
+        }
+        throw new Error('Invoice link missing from BTCPay response.');
+    })
+    .catch(error => {
+        console.error('Checkout error:', error);
+        alert('Unable to start Bitcoin checkout right now. Please try again or contact us.');
+    })
+    .finally(() => {
+        if (checkoutButton) {
+            checkoutButton.textContent = originalLabel || 'Checkout with Bitcoin';
+            checkoutButton.disabled = false;
+        }
+    });
 }
+
 
 // Add CSS animation for success message
 const style = document.createElement('style');
@@ -387,6 +379,8 @@ document.head.appendChild(style);
 
 // Initialize cart count on page load
 document.addEventListener('DOMContentLoaded', function() {
+    restoreCartFromStorage();
+    updateCartUI();
     updateCartCount();
 });
 

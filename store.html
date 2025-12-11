@@ -70,8 +70,179 @@
             </div>
         </section>
 
-        <section class="products">
+        <section class="products coffee-products">
             <div class="container">
+                <div class="section-header">
+                    <h2>Coffee Products</h2>
+                    <p>Freshly roasted beans, ground-to-order, and flexible subscriptions</p>
+                </div>
+                <div class="products-grid">
+                    <div class="product-card" data-product="coffee-house-blend">
+                        <div class="product-image">
+                            <img src="https://images.pexels.com/photos/1656666/pexels-photo-1656666.jpeg" alt="House Blend Coffee">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-meta">
+                                <span class="product-badge">Coffee</span>
+                                <span class="product-badge secondary">Whole Bean / Ground</span>
+                            </div>
+                            <h3>House Blend</h3>
+                            <p>Balanced chocolate & caramel notes roasted weekly in small batches.</p>
+                            <div class="product-options">
+                                <div class="option-group">
+                                    <label class="option-label">Weight</label>
+                                    <select class="weight-select" data-option-label="Weight" data-required="true">
+                                        <option value="">Select weight</option>
+                                        <option value="12oz" data-btc="0.0006" data-usd="18.75">12oz Bag — 0.0006 BTC</option>
+                                        <option value="1lb" data-btc="0.00096" data-usd="30.00">1lb Bag — 0.00096 BTC</option>
+                                    </select>
+                                </div>
+                                <div class="option-group">
+                                    <label class="option-label">Grind</label>
+                                    <select class="grind-select" data-option-label="Grind" data-required="true">
+                                        <option value="">Select grind</option>
+                                        <option value="whole">Whole Bean</option>
+                                        <option value="medium">Ground - Medium</option>
+                                        <option value="espresso">Ground - Espresso</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <span class="btc-price">from 0.0006 BTC</span>
+                                <span class="sats-price">60,000 sats</span>
+                                <span class="usd-price">≈ $18.75</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('coffee-house-blend', 'House Blend Coffee', 0.0006, 18.75)">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-product="coffee-single-origin">
+                        <div class="product-image">
+                            <img src="https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg" alt="Single Origin Coffee">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-meta">
+                                <span class="product-badge">Coffee</span>
+                                <span class="product-badge secondary">Seasonal</span>
+                            </div>
+                            <h3>Single Origin Rotation</h3>
+                            <p>Rotating single origin lots highlighting fruit-forward, traceable farms.</p>
+                            <div class="product-options">
+                                <div class="option-group">
+                                    <label class="option-label">Weight</label>
+                                    <select class="weight-select" data-option-label="Weight" data-required="true">
+                                        <option value="">Select weight</option>
+                                        <option value="12oz" data-btc="0.00072" data-usd="22.50">12oz Bag — 0.00072 BTC</option>
+                                        <option value="1lb" data-btc="0.00128" data-usd="40.00">1lb Bag — 0.00128 BTC</option>
+                                    </select>
+                                </div>
+                                <div class="option-group">
+                                    <label class="option-label">Grind</label>
+                                    <select class="grind-select" data-option-label="Grind" data-required="true">
+                                        <option value="">Select grind</option>
+                                        <option value="whole">Whole Bean</option>
+                                        <option value="medium">Ground - Medium</option>
+                                        <option value="pour-over">Ground - Pour Over</option>
+                                        <option value="espresso">Ground - Espresso</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <span class="btc-price">from 0.00072 BTC</span>
+                                <span class="sats-price">72,000 sats</span>
+                                <span class="usd-price">≈ $22.50</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('coffee-single-origin', 'Single Origin Rotation', 0.00072, 22.50)">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-product="coffee-cold-brew">
+                        <div class="product-image">
+                            <img src="https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg" alt="Cold Brew Coffee">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-meta">
+                                <span class="product-badge">Coffee</span>
+                                <span class="product-badge secondary">Ready to Brew</span>
+                            </div>
+                            <h3>Cold Brew Packs</h3>
+                            <p>Pre-measured coarse grind packs for effortless overnight brews.</p>
+                            <div class="product-options">
+                                <div class="option-group">
+                                    <label class="option-label">Pack Size</label>
+                                    <select class="pack-select" data-option-label="Pack Size" data-required="true">
+                                        <option value="">Select pack</option>
+                                        <option value="6-pack" data-btc="0.0008" data-usd="25.00">6 Pack — 0.0008 BTC</option>
+                                        <option value="12-pack" data-btc="0.0015" data-usd="47.00">12 Pack — 0.0015 BTC</option>
+                                    </select>
+                                </div>
+                                <div class="option-group">
+                                    <label class="option-label">Grind</label>
+                                    <select class="grind-select" data-option-label="Grind" data-required="true">
+                                        <option value="">Select grind</option>
+                                        <option value="coarse">Ground - Cold Brew</option>
+                                        <option value="medium">Ground - Medium</option>
+                                        <option value="whole">Whole Bean (for home grinding)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <span class="btc-price">from 0.0008 BTC</span>
+                                <span class="sats-price">80,000 sats</span>
+                                <span class="usd-price">≈ $25.00</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('coffee-cold-brew', 'Cold Brew Packs', 0.0008, 25.00)">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-product="coffee-subscription">
+                        <div class="product-image">
+                            <img src="https://images.pexels.com/photos/5857521/pexels-photo-5857521.jpeg" alt="Coffee Subscription">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-meta">
+                                <span class="product-badge">Coffee</span>
+                                <span class="product-badge secondary">Subscription</span>
+                            </div>
+                            <h3>Roaster's Choice Subscription</h3>
+                            <p>Two rotating bags delivered on your cadence, always roasted to order.</p>
+                            <div class="product-options">
+                                <div class="option-group">
+                                    <label class="option-label">Frequency</label>
+                                    <select class="plan-select" data-option-label="Frequency" data-required="true">
+                                        <option value="">Select cadence</option>
+                                        <option value="biweekly" data-btc="0.0018" data-usd="56.00">Every 2 Weeks — 0.0018 BTC</option>
+                                        <option value="monthly" data-btc="0.0012" data-usd="37.50">Monthly — 0.0012 BTC</option>
+                                    </select>
+                                </div>
+                                <div class="option-group">
+                                    <label class="option-label">Grind</label>
+                                    <select class="grind-select" data-option-label="Grind" data-required="true">
+                                        <option value="">Select grind</option>
+                                        <option value="whole">Whole Bean</option>
+                                        <option value="medium">Ground - Medium</option>
+                                        <option value="espresso">Ground - Espresso</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="product-price">
+                                <span class="btc-price">from 0.0012 BTC</span>
+                                <span class="sats-price">120,000 sats</span>
+                                <span class="usd-price">≈ $37.50</span>
+                            </div>
+                            <button class="add-to-cart" onclick="addToCart('coffee-subscription', 'Roaster\'s Choice Subscription', 0.0012, 37.50)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="products merchandise-products">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Merchandise</h2>
+                    <p>Apparel and drinkware for the Bitcoin coffee crowd</p>
+                </div>
                 <div class="products-grid">
                     <div class="product-card" data-product="tshirt">
                         <div class="product-image">

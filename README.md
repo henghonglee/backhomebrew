@@ -31,6 +31,15 @@ Copy files to your web server directory:
 sudo cp -r * /var/www/html/
 ```
 
+## BTCPay configuration
+
+Create a `.env` file (or set environment variables) with:
+
+- `BTCPAY_HOST`
+- `BTCPAY_STORE_ID`
+- `BTCPAY_API_KEY`
+- `BTCPAY_WEBHOOK_SECRET`
+
 ## Files Structure
 - `index.html` - Main homepage
 - `store.html` - Store page
