@@ -87,6 +87,22 @@
     background: var(--background-light);
 }
 
+.section-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.section-header h2 {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.section-header p {
+    color: var(--text-light);
+    font-size: 1.05rem;
+}
+
 .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -142,6 +158,29 @@
     flex-grow: 1;
 }
 
+.product-meta {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.8rem;
+}
+
+.product-badge {
+    background: rgba(247, 147, 26, 0.12);
+    color: #f7931a;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(247, 147, 26, 0.25);
+}
+
+.product-badge.secondary {
+    background: rgba(75, 63, 53, 0.12);
+    color: #4b3f35;
+    border-color: rgba(75, 63, 53, 0.25);
+}
+
 .product-info h3 {
     font-size: 1.4rem;
     margin-bottom: 0.5rem;
@@ -158,8 +197,24 @@
     margin-top: auto;
 }
 
+.option-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.option-label {
+    font-size: 0.95rem;
+    color: var(--text-light);
+}
+
 .size-select,
-.color-select {
+.color-select,
+.weight-select,
+.grind-select,
+.pack-select,
+.plan-select {
     width: 100%;
     padding: 0.8rem;
     border: 2px solid var(--accent-color);
@@ -172,7 +227,11 @@
 }
 
 .size-select:focus,
-.color-select:focus {
+.color-select:focus,
+.weight-select:focus,
+.grind-select:focus,
+.pack-select:focus,
+.plan-select:focus {
     outline: none;
     border-color: var(--primary-color);
 }
