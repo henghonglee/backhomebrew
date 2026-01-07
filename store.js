@@ -5,6 +5,19 @@ let isCartOpen = false;
 // Bitcoin to USD rate (you would typically fetch this from an API)
 const BTC_TO_USD_RATE = 31250; // Example rate
 
+// Cart persistence functions
+function saveCartToStorage() {
+    localStorage.setItem('backhomebrew-cart', JSON.stringify(cart));
+}
+
+function loadCartFromStorage() {
+    try {
+        cart = JSON.parse(localStorage.getItem('backhomebrew-cart')) || [];
+    } catch {
+        cart = [];
+    }
+}
+
 // Helper function to convert BTC to sats
 function btcToSats(btcAmount) {
     return Math.round(btcAmount * 100000000).toLocaleString();
@@ -76,7 +89,10 @@ function addToOrder(productId, productName, btcPrice, usdPrice) {
     
     // Add to unified cart
     cart.push(orderItem);
-    
+
+    // Save to localStorage
+    saveCartToStorage();
+
     // Update UI
     updateCartUI();
     updateCartCount();
@@ -126,7 +142,10 @@ function addToCart(productId, productName, btcPrice, usdPrice) {
     
     // Add to cart
     cart.push(cartItem);
-    
+
+    // Save to localStorage
+    saveCartToStorage();
+
     // Update UI
     updateCartUI();
     updateCartCount();
@@ -141,6 +160,7 @@ function addToCart(productId, productName, btcPrice, usdPrice) {
 
 function removeFromCart(itemId) {
     cart = cart.filter(item => item.id !== itemId);
+    saveCartToStorage();
     updateCartUI();
     updateCartCount();
 }
@@ -360,9 +380,10 @@ function closeCheckoutModal() {
     if (window.currentModal) {
         window.currentModal.remove();
         document.body.style.overflow = 'auto';
-        
+
         // Clear cart after showing checkout
         cart = [];
+        saveCartToStorage();
         updateCartUI();
         updateCartCount();
         toggleCart(); // Close cart sidebar
@@ -387,6 +408,8 @@ document.head.appendChild(style);
 
 // Initialize cart count on page load
 document.addEventListener('DOMContentLoaded', function() {
+    loadCartFromStorage();
+    updateCartUI();
     updateCartCount();
 });
 
