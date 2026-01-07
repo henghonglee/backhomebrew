@@ -2,8 +2,48 @@
 let cart = [];
 let isCartOpen = false;
 
-// Bitcoin to USD rate (you would typically fetch this from an API)
-const BTC_TO_USD_RATE = 31250; // Example rate
+// Global BTC to USD rate (fetched from Coingecko API)
+let currentBtcUsdRate = parseFloat(localStorage.getItem('btcUsdRate')) || 65000;
+
+// Fetch current BTC/USD rate from Coingecko API
+async function fetchRate() {
+    try {
+        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+        const data = await response.json();
+        currentBtcUsdRate = data.bitcoin.usd;
+        localStorage.setItem('btcUsdRate', currentBtcUsdRate.toString());
+        updateAllDisplays();
+    } catch (error) {
+        console.warn('Failed to fetch BTC/USD rate:', error);
+        // Keep current rate on error
+    }
+}
+
+// Update product card USD prices based on current BTC rate
+function updateProductPrices() {
+    const productCards = document.querySelectorAll('.product-card, .coffee-card');
+    productCards.forEach(card => {
+        const btcPriceElement = card.querySelector('.btc-price');
+        const usdPriceElement = card.querySelector('.usd-price');
+
+        if (btcPriceElement && usdPriceElement) {
+            // Extract BTC amount from text (e.g., "0.0008 BTC" -> 0.0008)
+            const btcText = btcPriceElement.textContent;
+            const btcMatch = btcText.match(/([\d.]+)\s*BTC/);
+            if (btcMatch) {
+                const btcAmount = parseFloat(btcMatch[1]);
+                const usdAmount = btcAmount * currentBtcUsdRate;
+                usdPriceElement.textContent = `≈ $${usdAmount.toFixed(2)}`;
+            }
+        }
+    });
+}
+
+// Update all price displays (products and cart)
+function updateAllDisplays() {
+    updateProductPrices();
+    updateCartUI();
+}
 
 // Helper function to convert BTC to sats
 function btcToSats(btcAmount) {
@@ -167,8 +207,8 @@ function updateCartUI() {
     
     cart.forEach(item => {
         totalBTC += item.btcPrice;
-        totalUSD += item.usdPrice;
-        
+        totalUSD += item.btcPrice * currentBtcUsdRate;
+
         const cartItemHTML = `
             <div class="cart-item">
                 <div class="cart-item-info">
@@ -177,7 +217,7 @@ function updateCartUI() {
                     <div class="cart-item-price">
                         <span class="btc-price">${item.btcPrice} BTC</span>
                         <span class="sats-price">${btcToSats(item.btcPrice)} sats</span>
-                        <span class="usd-price">≈ $${item.usdPrice.toFixed(2)}</span>
+                        <span class="usd-price">≈ $${(item.btcPrice * currentBtcUsdRate).toFixed(2)}</span>
                     </div>
                 </div>
                 <button class="remove-item" onclick="removeFromCart(${item.id})">Remove</button>
@@ -241,14 +281,14 @@ function checkout() {
     
     // Calculate totals
     const totalBTC = cart.reduce((sum, item) => sum + item.btcPrice, 0);
-    const totalUSD = cart.reduce((sum, item) => sum + item.usdPrice, 0);
-    
+    const totalUSD = totalBTC * currentBtcUsdRate;
+
     // Create order summary
     let orderSummary = "Back Home Brew Order Summary:\\n\\n";
     cart.forEach(item => {
         orderSummary += `${item.name}\\n`;
         orderSummary += `${item.options}\\n`;
-        orderSummary += `${item.btcPrice} BTC (≈ $${item.usdPrice.toFixed(2)})\\n\\n`;
+        orderSummary += `${item.btcPrice} BTC (≈ $${(item.btcPrice * currentBtcUsdRate).toFixed(2)})\\n\\n`;
     });
     
     orderSummary += `Total: ${totalBTC.toFixed(4)} BTC (≈ $${totalUSD.toFixed(2)})\\n\\n`;
@@ -311,7 +351,7 @@ function showCheckoutModal(orderSummary, totalBTC, totalUSD) {
                         ${item.options}<br>
                         <span style="color: #f7931a;">${item.btcPrice} BTC</span><br>
                         <span style="color: #ff8c00; font-size: 0.9rem;">${btcToSats(item.btcPrice)} sats</span><br>
-                        <span style="color: var(--text-light);">≈ $${item.usdPrice.toFixed(2)}</span>
+                        <span style="color: var(--text-light);">≈ $${(item.btcPrice * currentBtcUsdRate).toFixed(2)}</span>
                     </div>
                 `).join('')}
             </div>
@@ -388,6 +428,10 @@ document.head.appendChild(style);
 // Initialize cart count on page load
 document.addEventListener('DOMContentLoaded', function() {
     updateCartCount();
+
+    // Fetch initial BTC rate and set up periodic updates
+    fetchRate();
+    setInterval(fetchRate, 30000); // Update every 30 seconds
 });
 
 // Aliases for order page compatibility
