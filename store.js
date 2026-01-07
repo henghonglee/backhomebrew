@@ -2,8 +2,42 @@
 let cart = [];
 let isCartOpen = false;
 
-// Bitcoin to USD rate (you would typically fetch this from an API)
-const BTC_TO_USD_RATE = 31250; // Example rate
+// Current BTC to USD rate (fetched from API)
+let currentRate = 31250;
+
+// Fetch BTC/USD rate from Coingecko API
+async function fetchRate() {
+    try {
+        const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
+        const data = await response.json();
+        currentRate = data.bitcoin.usd;
+        updateAllPrices();
+    } catch (error) {
+        console.error('Failed to fetch BTC rate:', error);
+        // Keep current rate on error
+    }
+}
+
+// Update all product card USD prices based on current BTC rate
+function updateProductPrices() {
+    const productCards = document.querySelectorAll('.product-card');
+    productCards.forEach(card => {
+        const btcSpan = card.querySelector('.btc-price');
+        const usdSpan = card.querySelector('.usd-price');
+
+        if (btcSpan && usdSpan) {
+            const btcAmount = parseFloat(btcSpan.textContent.replace(' BTC', ''));
+            const usdAmount = (btcAmount * currentRate).toFixed(2);
+            usdSpan.textContent = `≈ $${usdAmount}`;
+        }
+    });
+}
+
+// Update all prices across the interface
+function updateAllPrices() {
+    updateProductPrices();
+    updateCartUI();
+}
 
 // Helper function to convert BTC to sats
 function btcToSats(btcAmount) {
@@ -11,90 +45,85 @@ function btcToSats(btcAmount) {
 }
 
 // Function to add coffee orders to the unified cart
-function addToOrder(productId, productName, btcPrice, usdPrice) {
+function addToOrder(productId, productName, btcPrice) {
     const productCard = event.target.closest('.coffee-card');
     const sizeSelect = productCard.querySelector('.size-select');
     const milkSelect = productCard.querySelector('.milk-select');
     const pastrySelect = productCard.querySelector('.pastry-select');
-    
+
     // Get selected options
     let selectedOptions = [];
     let adjustedBtcPrice = btcPrice;
-    let adjustedUsdPrice = usdPrice;
-    
+
     if (sizeSelect && sizeSelect.value) {
         selectedOptions.push(`Size: ${sizeSelect.options[sizeSelect.selectedIndex].text}`);
     }
-    
+
     if (milkSelect && milkSelect.value) {
         const selectedMilk = milkSelect.options[milkSelect.selectedIndex].text;
         selectedOptions.push(`Milk: ${selectedMilk}`);
-        
+
         // Add oat milk surcharge
         if (milkSelect.value === 'oat') {
             adjustedBtcPrice += 0.000016; // $0.50 in BTC
-            adjustedUsdPrice += 0.50;
         }
     }
-    
+
     if (pastrySelect && pastrySelect.value) {
         const selectedPastry = pastrySelect.options[pastrySelect.selectedIndex].text;
         selectedOptions.push(`Type: ${selectedPastry}`);
-        
+
         // Adjust price based on pastry type
         if (pastrySelect.value === 'muffin') {
             adjustedBtcPrice = 0.00010; // $3.00
-            adjustedUsdPrice = 3.00;
         } else if (pastrySelect.value === 'scone') {
             adjustedBtcPrice = 0.00013; // $4.00
-            adjustedUsdPrice = 4.00;
         }
     }
-    
+
     // Validate required selections
     if (sizeSelect && !sizeSelect.value) {
         alert('Please select a size');
         return;
     }
-    
+
     if (pastrySelect && !pastrySelect.value) {
         alert('Please select a pastry type');
         return;
     }
-    
+
     // Create order item
     const orderItem = {
         id: Date.now(),
         productId: productId,
         name: productName,
         btcPrice: adjustedBtcPrice,
-        usdPrice: adjustedUsdPrice,
         options: selectedOptions.join(', '),
         quantity: 1,
         type: 'coffee' // Mark as coffee order
     };
-    
+
     // Add to unified cart
     cart.push(orderItem);
-    
+
     // Update UI
     updateCartUI();
     updateCartCount();
-    
+
     // Show success message
     showAddToCartMessage(productName);
-    
+
     // Reset selections
     if (sizeSelect) sizeSelect.selectedIndex = 0;
     if (milkSelect) milkSelect.selectedIndex = 0;
     if (pastrySelect) pastrySelect.selectedIndex = 0;
 }
 
-function addToCart(productId, productName, btcPrice, usdPrice) {
+function addToCart(productId, productName, btcPrice) {
     const productCard = document.querySelector(`[data-product="${productId}"]`);
     const sizeSelect = productCard.querySelector('.size-select');
     const colorSelect = productCard.querySelector('.color-select');
-    
+
     // Get selected options
     let selectedOption = '';
     if (sizeSelect) {
@@ -111,29 +140,28 @@ function addToCart(productId, productName, btcPrice, usdPrice) {
         }
         selectedOption = selectedOption ? `${selectedOption}, Color: ${colorSelect.value}` : `Color: ${colorSelect.value}`;
     }
-    
+
     // Create cart item
     const cartItem = {
         id: Date.now(), // Simple ID generation
         productId: productId,
         name: productName,
         btcPrice: btcPrice,
-        usdPrice: usdPrice,
         options: selectedOption,
         quantity: 1,
         type: 'merchandise' // Mark as store merchandise
     };
-    
+
     // Add to cart
     cart.push(cartItem);
-    
+
     // Update UI
     updateCartUI();
     updateCartCount();
-    
+
     // Show success message
     showAddToCartMessage(productName);
-    
+
     // Reset selections
     if (sizeSelect) sizeSelect.value = '';
     if (colorSelect) colorSelect.value = '';
@@ -153,22 +181,21 @@ function updateCartCount() {
 function updateCartUI() {
     const cartItems = document.getElementById('cart-items');
     const cartFooter = document.getElementById('cart-footer');
-    
+
     if (cart.length === 0) {
         cartItems.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
         cartFooter.style.display = 'none';
         return;
     }
-    
+
     // Show cart items
     cartItems.innerHTML = '';
     let totalBTC = 0;
-    let totalUSD = 0;
-    
+
     cart.forEach(item => {
         totalBTC += item.btcPrice;
-        totalUSD += item.usdPrice;
-        
+        const itemUSD = (item.btcPrice * currentRate).toFixed(2);
+
         const cartItemHTML = `
             <div class="cart-item">
                 <div class="cart-item-info">
@@ -177,7 +204,7 @@ function updateCartUI() {
                     <div class="cart-item-price">
                         <span class="btc-price">${item.btcPrice} BTC</span>
                         <span class="sats-price">${btcToSats(item.btcPrice)} sats</span>
-                        <span class="usd-price">≈ $${item.usdPrice.toFixed(2)}</span>
+                        <span class="usd-price">≈ $${itemUSD}</span>
                     </div>
                 </div>
                 <button class="remove-item" onclick="removeFromCart(${item.id})">Remove</button>
@@ -185,11 +212,12 @@ function updateCartUI() {
         `;
         cartItems.innerHTML += cartItemHTML;
     });
-    
+
     // Update totals
+    const totalUSD = (totalBTC * currentRate).toFixed(2);
     document.getElementById('total-btc').textContent = totalBTC.toFixed(4);
-    document.getElementById('total-usd').textContent = totalUSD.toFixed(2);
-    
+    document.getElementById('total-usd').textContent = totalUSD;
+
     cartFooter.style.display = 'block';
 }
 
@@ -238,25 +266,26 @@ function checkout() {
         alert('Your cart is empty');
         return;
     }
-    
+
     // Calculate totals
     const totalBTC = cart.reduce((sum, item) => sum + item.btcPrice, 0);
-    const totalUSD = cart.reduce((sum, item) => sum + item.usdPrice, 0);
-    
+    const totalUSD = totalBTC * currentRate;
+
     // Create order summary
     let orderSummary = "Back Home Brew Order Summary:\\n\\n";
     cart.forEach(item => {
+        const itemUSD = (item.btcPrice * currentRate).toFixed(2);
         orderSummary += `${item.name}\\n`;
         orderSummary += `${item.options}\\n`;
-        orderSummary += `${item.btcPrice} BTC (≈ $${item.usdPrice.toFixed(2)})\\n\\n`;
+        orderSummary += `${item.btcPrice} BTC (≈ $${itemUSD})\\n\\n`;
     });
-    
+
     orderSummary += `Total: ${totalBTC.toFixed(4)} BTC (≈ $${totalUSD.toFixed(2)})\\n\\n`;
     orderSummary += "Bitcoin Payment Address:\\n";
     orderSummary += "bc1qak0r24z2elxnku9akznhap2ppg3pjpwsg2hds5\\n\\n";
     orderSummary += "Please send the exact BTC amount to complete your order.\\n";
     orderSummary += "Email us at orders@backhomebrew.com with your transaction ID.";
-    
+
     // Show checkout modal
     showCheckoutModal(orderSummary, totalBTC, totalUSD);
 }
@@ -305,15 +334,17 @@ function showCheckoutModal(orderSummary, totalBTC, totalUSD) {
         <div style="text-align: left; margin-bottom: 1.5rem; color: var(--text-dark);">
             <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Order Summary:</h3>
             <div style="font-size: 0.9rem; line-height: 1.6;">
-                ${cart.map(item => `
+                ${cart.map(item => {
+                    const itemUSD = (item.btcPrice * currentRate).toFixed(2);
+                    return `
                     <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #eee;">
                         <strong>${item.name}</strong><br>
                         ${item.options}<br>
                         <span style="color: #f7931a;">${item.btcPrice} BTC</span><br>
                         <span style="color: #ff8c00; font-size: 0.9rem;">${btcToSats(item.btcPrice)} sats</span><br>
-                        <span style="color: var(--text-light);">≈ $${item.usdPrice.toFixed(2)}</span>
+                        <span style="color: var(--text-light);">≈ $${itemUSD}</span>
                     </div>
-                `).join('')}
+                `}).join('')}
             </div>
         </div>
         
@@ -385,9 +416,11 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Initialize cart count on page load
+// Initialize cart count and start live rate updates on page load
 document.addEventListener('DOMContentLoaded', function() {
     updateCartCount();
+    fetchRate(); // Initial fetch
+    setInterval(fetchRate, 30000); // Update every 30 seconds
 });
 
 // Aliases for order page compatibility
