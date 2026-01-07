@@ -10,6 +10,16 @@ function btcToSats(btcAmount) {
     return Math.round(btcAmount * 100000000).toLocaleString();
 }
 
+// Cart persistence functions
+function saveCart() {
+    localStorage.setItem('backhomebrew_cart', JSON.stringify(cart));
+}
+
+function loadCart() {
+    const saved = localStorage.getItem('backhomebrew_cart');
+    cart = saved ? JSON.parse(saved) : [];
+}
+
 // Function to add coffee orders to the unified cart
 function addToOrder(productId, productName, btcPrice, usdPrice) {
     const productCard = event.target.closest('.coffee-card');
@@ -76,7 +86,8 @@ function addToOrder(productId, productName, btcPrice, usdPrice) {
     
     // Add to unified cart
     cart.push(orderItem);
-    
+    saveCart();
+
     // Update UI
     updateCartUI();
     updateCartCount();
@@ -126,7 +137,8 @@ function addToCart(productId, productName, btcPrice, usdPrice) {
     
     // Add to cart
     cart.push(cartItem);
-    
+    saveCart();
+
     // Update UI
     updateCartUI();
     updateCartCount();
@@ -141,6 +153,7 @@ function addToCart(productId, productName, btcPrice, usdPrice) {
 
 function removeFromCart(itemId) {
     cart = cart.filter(item => item.id !== itemId);
+    saveCart();
     updateCartUI();
     updateCartCount();
 }
@@ -363,6 +376,7 @@ function closeCheckoutModal() {
         
         // Clear cart after showing checkout
         cart = [];
+        saveCart();
         updateCartUI();
         updateCartCount();
         toggleCart(); // Close cart sidebar
@@ -387,6 +401,8 @@ document.head.appendChild(style);
 
 // Initialize cart count on page load
 document.addEventListener('DOMContentLoaded', function() {
+    loadCart();
+    updateCartUI();
     updateCartCount();
 });
 
