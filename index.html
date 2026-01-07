@@ -181,10 +181,12 @@
                     </div>
                     <div class="contact-form">
                         <h3>Get in Touch</h3>
-                        <form>
-                            <input type="text" placeholder="Your Name" required>
-                            <input type="email" placeholder="Your Email" required>
-                            <textarea placeholder="Your Message" rows="4" required></textarea>
+                        <form action='https://formspree.io/f/YOUR_ID' method='POST'>
+                            <input type="text" name="name" placeholder="Your Name" required>
+                            <input type="email" name="email" placeholder="Your Email" required>
+                            <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+                            <input type='hidden' name='_subject' value='New contact form submission'>
+                            <input type='hidden' name='_cc' value='hello@backhomebrew.com'>
                             <button type="submit" class="btn btn-primary">Send Message</button>
                         </form>
                     </div>
