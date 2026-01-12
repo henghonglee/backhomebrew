@@ -2,6 +2,29 @@
 let cart = [];
 let isCartOpen = false;
 
+// localStorage persistence functions
+function saveCartToStorage() {
+    try {
+        localStorage.setItem('backhomebrew_cart', JSON.stringify(cart));
+    } catch (error) {
+        console.warn('Failed to save cart to localStorage:', error);
+    }
+}
+
+function loadCartFromStorage() {
+    try {
+        const storedCart = localStorage.getItem('backhomebrew_cart');
+        if (storedCart) {
+            cart = JSON.parse(storedCart);
+        } else {
+            cart = [];
+        }
+    } catch (error) {
+        console.warn('Failed to load cart from localStorage, using empty cart:', error);
+        cart = [];
+    }
+}
+
 // Bitcoin to USD rate (you would typically fetch this from an API)
 const BTC_TO_USD_RATE = 31250; // Example rate
 
@@ -175,6 +198,9 @@ function addToOrder(productId, productName, btcPrice, usdPrice) {
     if (sizeSelect) sizeSelect.selectedIndex = 0;
     if (milkSelect) milkSelect.selectedIndex = 0;
     if (pastrySelect) pastrySelect.selectedIndex = 0;
+
+    // Save cart to localStorage
+    saveCartToStorage();
 }
 
 function addToCart(productId, productName, btcPrice, usdPrice) {
@@ -224,17 +250,26 @@ function addToCart(productId, productName, btcPrice, usdPrice) {
     // Reset selections
     if (sizeSelect) sizeSelect.value = '';
     if (colorSelect) colorSelect.value = '';
+
+    // Save cart to localStorage
+    saveCartToStorage();
 }
 
 function removeFromCart(itemId) {
     cart = cart.filter(item => item.id !== itemId);
     updateCartUI();
     updateCartCount();
+
+    // Save cart to localStorage
+    saveCartToStorage();
 }
 
 function updateCartCount() {
     const cartCount = document.getElementById('cart-count');
-    cartCount.textContent = cart.length;
+    const mobileCartCount = document.getElementById('mobile-cart-count');
+
+    if (cartCount) cartCount.textContent = cart.length;
+    if (mobileCartCount) mobileCartCount.textContent = cart.length;
 }
 
 function updateCartUI() {
@@ -452,6 +487,7 @@ function closeCheckoutModal() {
         cart = [];
         updateCartUI();
         updateCartCount();
+        saveCartToStorage(); // Save empty cart to localStorage
         toggleCart(); // Close cart sidebar
     }
 }
@@ -474,7 +510,20 @@ document.head.appendChild(style);
 
 // Initialize cart count on page load
 document.addEventListener('DOMContentLoaded', function() {
+    loadCartFromStorage();
+    updateCartUI();
     updateCartCount();
+
+    // Listen for storage changes from other tabs/windows
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'backhomebrew_cart') {
+            loadCartFromStorage();
+            updateCartCount();
+            if (isCartOpen) {
+                updateCartUI();
+            }
+        }
+    });
 });
 
 // Aliases for order page compatibility
