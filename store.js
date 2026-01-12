@@ -5,6 +5,93 @@ let isCartOpen = false;
 // Bitcoin to USD rate (you would typically fetch this from an API)
 const BTC_TO_USD_RATE = 31250; // Example rate
 
+// Toast notification system
+function showToast(message, options = {}) {
+    const type = options.type || 'info'; // 'error', 'success', or 'info'
+
+    // Create toast container if it doesn't exist
+    let toastContainer = document.getElementById('toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.id = 'toast-container';
+        toastContainer.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 5000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        `;
+        document.body.appendChild(toastContainer);
+    }
+
+    // Create individual toast element
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+        background: rgba(255, 255, 255, 0.95);
+        color: #333;
+        padding: 16px 20px;
+        border-radius: 8px;
+        max-width: 300px;
+        min-width: 250px;
+        font-size: 14px;
+        line-height: 1.5;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        pointer-events: auto;
+        opacity: 0;
+        transform: translateX(400px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        word-wrap: break-word;
+        border-left: 4px solid ${type === 'error' ? '#dc3545' : type === 'success' ? '#28a745' : '#007bff'};
+    `;
+
+    // Set text color based on type
+    if (type === 'error') {
+        toast.style.color = '#dc3545';
+    } else if (type === 'success') {
+        toast.style.color = '#28a745';
+    }
+
+    toast.textContent = message;
+
+    // Add toast to container
+    toastContainer.appendChild(toast);
+
+    // Trigger animation using requestAnimationFrame
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(0)';
+        });
+    });
+
+    // Auto-remove after 4 seconds
+    const removeToast = () => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(400px)';
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.remove();
+            }
+            // Remove container if no more toasts
+            if (toastContainer.children.length === 0) {
+                toastContainer.remove();
+            }
+        }, 300);
+    };
+
+    const autoRemoveTimeout = setTimeout(removeToast, 4000);
+
+    // Click to dismiss
+    toast.addEventListener('click', () => {
+        clearTimeout(autoRemoveTimeout);
+        removeToast();
+    });
+}
+
 // Helper function to convert BTC to sats
 function btcToSats(btcAmount) {
     return Math.round(btcAmount * 100000000).toLocaleString();
@@ -53,12 +140,12 @@ function addToOrder(productId, productName, btcPrice, usdPrice) {
     
     // Validate required selections
     if (sizeSelect && !sizeSelect.value) {
-        alert('Please select a size');
+        showToast('Please select a size', {type: 'error'});
         return;
     }
     
     if (pastrySelect && !pastrySelect.value) {
-        alert('Please select a pastry type');
+        showToast('Please select a pastry type', {type: 'error'});
         return;
     }
     
@@ -99,14 +186,14 @@ function addToCart(productId, productName, btcPrice, usdPrice) {
     let selectedOption = '';
     if (sizeSelect) {
         if (!sizeSelect.value) {
-            alert('Please select a size');
+            showToast('Please select a size', {type: 'error'});
             return;
         }
         selectedOption = `Size: ${sizeSelect.value}`;
     }
     if (colorSelect) {
         if (!colorSelect.value) {
-            alert('Please select a color');
+            showToast('Please select a color', {type: 'error'});
             return;
         }
         selectedOption = selectedOption ? `${selectedOption}, Color: ${colorSelect.value}` : `Color: ${colorSelect.value}`;
@@ -235,7 +322,7 @@ function showAddToCartMessage(productName) {
 
 function checkout() {
     if (cart.length === 0) {
-        alert('Your cart is empty');
+        showToast('Your cart is empty', {type: 'error'});
         return;
     }
     
@@ -343,7 +430,7 @@ function showCheckoutModal(orderSummary, totalBTC, totalUSD) {
 function copyBitcoinAddress() {
     const address = 'bc1qak0r24z2elxnku9akznhap2ppg3pjpwsg2hds5';
     navigator.clipboard.writeText(address).then(() => {
-        alert('Bitcoin address copied to clipboard!');
+        showToast('Bitcoin address copied to clipboard!', {type: 'success'});
     }).catch(() => {
         // Fallback for older browsers
         const textArea = document.createElement('textarea');
@@ -352,7 +439,7 @@ function copyBitcoinAddress() {
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        alert('Bitcoin address copied to clipboard!');
+        showToast('Bitcoin address copied to clipboard!', {type: 'success'});
     });
 }
 
