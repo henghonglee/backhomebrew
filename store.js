@@ -53,12 +53,12 @@ function addToOrder(productId, productName, btcPrice, usdPrice) {
     
     // Validate required selections
     if (sizeSelect && !sizeSelect.value) {
-        alert('Please select a size');
+        showToast('Please select a size', 'error');
         return;
     }
     
     if (pastrySelect && !pastrySelect.value) {
-        alert('Please select a pastry type');
+        showToast('Please select a pastry type', 'error');
         return;
     }
     
@@ -99,14 +99,14 @@ function addToCart(productId, productName, btcPrice, usdPrice) {
     let selectedOption = '';
     if (sizeSelect) {
         if (!sizeSelect.value) {
-            alert('Please select a size');
+            showToast('Please select a size', 'error');
             return;
         }
         selectedOption = `Size: ${sizeSelect.value}`;
     }
     if (colorSelect) {
         if (!colorSelect.value) {
-            alert('Please select a color');
+            showToast('Please select a color', 'error');
             return;
         }
         selectedOption = selectedOption ? `${selectedOption}, Color: ${colorSelect.value}` : `Color: ${colorSelect.value}`;
@@ -225,17 +225,64 @@ function showAddToCartMessage(productName) {
         animation: slideIn 0.3s ease;
     `;
     message.textContent = `${productName} added to cart!`;
-    
+
     document.body.appendChild(message);
-    
+
     setTimeout(() => {
         message.remove();
     }, 3000);
 }
 
+function showToast(message, type = 'success', duration = null) {
+    // Set default duration based on type if not provided
+    if (duration === null) {
+        duration = type === 'error' ? 5000 : 3000;
+    }
+
+    // Create toast element
+    const toast = document.createElement('div');
+
+    // Set position and color based on type
+    const position = type === 'error'
+        ? 'bottom: 20px; right: 20px;'
+        : 'top: 100px; right: 20px;';
+
+    const backgroundColor = type === 'error'
+        ? '#ff4757'
+        : 'var(--primary-color)';
+
+    toast.style.cssText = `
+        position: fixed;
+        ${position}
+        background: ${backgroundColor};
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        z-index: 3000;
+        animation: slideIn 0.3s ease;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    `;
+    toast.textContent = message;
+
+    // Click to dismiss
+    toast.addEventListener('click', () => {
+        toast.remove();
+    });
+
+    document.body.appendChild(toast);
+
+    // Auto-dismiss after duration
+    setTimeout(() => {
+        if (toast.parentElement) {
+            toast.remove();
+        }
+    }, duration);
+}
+
 function checkout() {
     if (cart.length === 0) {
-        alert('Your cart is empty');
+        showToast('Your cart is empty', 'error');
         return;
     }
     
@@ -343,7 +390,7 @@ function showCheckoutModal(orderSummary, totalBTC, totalUSD) {
 function copyBitcoinAddress() {
     const address = 'bc1qak0r24z2elxnku9akznhap2ppg3pjpwsg2hds5';
     navigator.clipboard.writeText(address).then(() => {
-        alert('Bitcoin address copied to clipboard!');
+        showToast('Bitcoin address copied to clipboard!', 'success');
     }).catch(() => {
         // Fallback for older browsers
         const textArea = document.createElement('textarea');
@@ -352,7 +399,7 @@ function copyBitcoinAddress() {
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        alert('Bitcoin address copied to clipboard!');
+        showToast('Bitcoin address copied to clipboard!', 'success');
     });
 }
 
