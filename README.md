@@ -9,12 +9,15 @@ Back Home Brew is a single-page web application designed to showcase a home-base
 ## Features
 
 - 🏠 **Home Page** - Welcome section with about, featured menu, and contact information
-- 🛍️ **Store Page** - Browse and filter coffee products with detailed descriptions
+- 🛍️ **Store Page** - Browse premium coffee products with detailed descriptions
 - 📦 **Order Page** - User-friendly ordering system with cart management
-- 📱 **Responsive Design** - Mobile-first design that works on all devices
+- 💰 **Bitcoin Payments** - Accept cryptocurrency payments with BTC to USD conversion
+- 📱 **Responsive Design** - Mobile-first design that works seamlessly on all devices
 - 🎨 **Modern Styling** - Clean, professional UI with smooth animations
-- 🛒 **Cart Management** - Add/remove items with real-time cart updates
+- 🛒 **Cart Management** - Add/remove items with real-time cart updates and persistent state
+- 🔔 **Toast Notifications** - User feedback system for actions and confirmations
 - 📍 **Navigation** - Smooth scroll navigation with active link highlighting
+- 📱 **Mobile-Optimized Menu** - Hamburger menu with smooth interactions on mobile devices
 
 ## Project Structure
 
@@ -104,9 +107,27 @@ python -m SimpleHTTPServer 8080
 
 - **HTML5** - Semantic markup and structure
 - **CSS3** - Styling, flexbox, and responsive design
-- **JavaScript (Vanilla)** - DOM manipulation, event handling, cart functionality
-- **Python** - HTTP server for deployment
-- **Google Fonts** - Raleway and Inter typefaces
+- **JavaScript (Vanilla)** - DOM manipulation, event handling, cart functionality, and notifications
+- **Python** - HTTP server for local development and deployment
+- **Google Fonts** - Raleway and Inter typefaces for typography
+- **Bitcoin** - Cryptocurrency payment integration with BTC/USD conversion
+
+## Payment Methods
+
+Back Home Brew accepts **Bitcoin (BTC)** as the primary payment method, designed for customers who prefer cryptocurrency transactions.
+
+### Bitcoin Payments
+
+- **Cryptocurrency Accepted** - All orders can be paid exclusively with Bitcoin
+- **Real-time Conversion** - BTC prices are displayed with current USD conversion rates
+- **Satoshi Support** - Prices can be displayed in satoshis (1 BTC = 100,000,000 sats) for micro-transactions
+- **Secure Transactions** - Blockchain-verified payment settlements
+
+### Payment Integration Notes
+
+- Exchange rates are configurable via the `BTC_TO_USD_RATE` variable in `store.js`
+- For production use, integrate a live Bitcoin price API (e.g., CoinGecko, CoinMarketCap)
+- All Bitcoin payment processing should be secured and verified before order fulfillment
 
 ## Deployment
 
@@ -156,8 +177,17 @@ PORT=3000 HOST=localhost ./deploy.sh
 
 ### JavaScript Files
 
-- **main.js** - Core functionality including navigation highlighting, mobile menu toggle, and cart synchronization
-- **store.js** - Store-specific features including product handling and cart management
+- **main.js** - Core functionality including:
+  - Navigation highlighting during scroll
+  - Mobile hamburger menu toggle
+  - Cart count synchronization across pages
+  - Close menu on outside click
+
+- **store.js** - Store-specific features including:
+  - Product cart management
+  - Toast notification system (success, error, info messages)
+  - Bitcoin to satoshi conversion utilities
+  - BTC/USD price calculations and display
 
 ### Stylesheets
 
@@ -186,6 +216,23 @@ Edit the menu items in `index.html` and corresponding product data in `store.js`
 
 Update color variables and styles in the respective CSS files. Consider using CSS variables for easier theme customization.
 
+### Updating Bitcoin Rates
+
+To change the Bitcoin to USD conversion rate:
+
+1. Open `store.js`
+2. Find the `BTC_TO_USD_RATE` variable
+3. Update with current exchange rate
+
+For production, replace this with an API call to a live price feed:
+```javascript
+fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd')
+  .then(response => response.json())
+  .then(data => {
+    BTC_TO_USD_RATE = data.bitcoin.usd;
+  });
+```
+
 ## Troubleshooting
 
 ### Server Won't Start
@@ -213,14 +260,60 @@ Update color variables and styles in the respective CSS files. Consider using CS
 
 Contributions are welcome! Please follow these guidelines:
 
-1. Create a feature branch (`git checkout -b feature/your-feature`)
-2. Commit your changes (`git commit -am 'Add new feature'`)
-3. Push to your branch (`git push origin feature/your-feature`)
-4. Create a Pull Request
+1. **Fork the repository** (if you don't have push access)
+2. **Create a feature branch:**
+   ```bash
+   git checkout -b feature/your-feature
+   ```
+3. **Make your changes** following existing code style and patterns
+4. **Test your changes** locally using the development server
+5. **Commit with clear messages:**
+   ```bash
+   git commit -m 'Add new feature or fix description'
+   ```
+6. **Push to your branch:**
+   ```bash
+   git push origin feature/your-feature
+   ```
+7. **Create a Pull Request** with a clear description of your changes
+
+### Contribution Areas
+- Bug fixes and improvements
+- New features (products, pages, functionality)
+- Documentation and guides
+- Performance optimizations
+- Accessibility improvements
+- Mobile experience enhancements
 
 ## License
 
 This project is open source. Please check the repository for specific license information.
+
+## Quick Start Reference
+
+### Common Commands
+
+```bash
+# Start development server with Python 3
+python3 -m http.server 8080
+
+# Start with custom port
+PORT=3000 ./deploy.sh
+
+# Start with custom host and port
+PORT=3000 HOST=localhost ./deploy.sh
+```
+
+### Key Files for Customization
+
+| File | Purpose | Customize For |
+|------|---------|---------------|
+| `styles.css` | Global styling | Colors, fonts, spacing |
+| `store.js` | Cart & products | Bitcoin rates, products |
+| `main.js` | Navigation | Navigation behavior |
+| `index.html` | Home page | Content, menu items |
+| `store.html` | Product page | Products, pricing |
+| `order.html` | Cart page | Cart layout |
 
 ## Contact & Support
 
