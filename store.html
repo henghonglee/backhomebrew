@@ -6,6 +6,7 @@
     <title>Back Home Brew Store - Bitcoin Only</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="store.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -72,153 +73,13 @@
 
         <section class="products">
             <div class="container">
-                <div class="products-grid">
-                    <div class="product-card" data-product="tshirt">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a" alt="T-Shirt">
-                        </div>
-                        <div class="product-info">
-                            <h3>Back Home Brew T-Shirt</h3>
-                            <p>Premium cotton tee with our signature logo</p>
-                            <div class="product-options">
-                                <select class="size-select">
-                                    <option value="">Select Size</option>
-                                    <option value="S">Small</option>
-                                    <option value="M">Medium</option>
-                                    <option value="L">Large</option>
-                                    <option value="XL">X-Large</option>
-                                    <option value="XXL">XX-Large</option>
-                                </select>
-                            </div>
-                            <div class="product-price">
-                                <span class="btc-price">0.0008 BTC</span>
-                                <span class="sats-price">80,000 sats</span>
-                                <span class="usd-price">≈ $25.00</span>
-                            </div>
-                            <button class="add-to-cart" onclick="addToCart('tshirt', 'Back Home Brew T-Shirt', 0.0008, 25.00)">Add to Cart</button>
-                        </div>
+                <div class="products-grid" id="products-grid">
+                    <div class="products-loading" id="products-loading">
+                        <p>Loading products...</p>
                     </div>
-
-                    <div class="product-card" data-product="cap">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1533827432537-70133748f5c8" alt="Cap">
-                        </div>
-                        <div class="product-info">
-                            <h3>Coffee Lover's Cap</h3>
-                            <p>Adjustable cap with embroidered logo</p>
-                            <div class="product-options">
-                                <select class="color-select">
-                                    <option value="">Select Color</option>
-                                    <option value="black">Black</option>
-                                    <option value="brown">Coffee Brown</option>
-                                    <option value="cream">Cream</option>
-                                </select>
-                            </div>
-                            <div class="product-price">
-                                <span class="btc-price">0.0006 BTC</span>
-                                <span class="sats-price">60,000 sats</span>
-                                <span class="usd-price">≈ $20.00</span>
-                            </div>
-                            <button class="add-to-cart" onclick="addToCart('cap', 'Coffee Lover\'s Cap', 0.0006, 20.00)">Add to Cart</button>
-                        </div>
-                    </div>
-
-                    <div class="product-card" data-product="cup">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772" alt="Coffee Cup">
-                        </div>
-                        <div class="product-info">
-                            <h3>Ceramic Coffee Cup</h3>
-                            <p>Perfect 12oz ceramic mug for your morning brew</p>
-                            <div class="product-options">
-                                <select class="color-select">
-                                    <option value="">Select Color</option>
-                                    <option value="white">Classic White</option>
-                                    <option value="brown">Coffee Brown</option>
-                                    <option value="black">Midnight Black</option>
-                                </select>
-                            </div>
-                            <div class="product-price">
-                                <span class="btc-price">0.0005 BTC</span>
-                                <span class="sats-price">50,000 sats</span>
-                                <span class="usd-price">≈ $15.00</span>
-                            </div>
-                            <button class="add-to-cart" onclick="addToCart('cup', 'Ceramic Coffee Cup', 0.0005, 15.00)">Add to Cart</button>
-                        </div>
-                    </div>
-
-                    <div class="product-card" data-product="jacket">
-                        <div class="product-image">
-                            <img src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg" alt="Back Home Brew Hoodie">
-                        </div>
-                        <div class="product-info">
-                            <h3>Back Home Brew Hoodie</h3>
-                            <p>Cozy fleece hoodie perfect for coffee runs</p>
-                            <div class="product-options">
-                                <select class="size-select">
-                                    <option value="">Select Size</option>
-                                    <option value="S">Small</option>
-                                    <option value="M">Medium</option>
-                                    <option value="L">Large</option>
-                                    <option value="XL">X-Large</option>
-                                    <option value="XXL">XX-Large</option>
-                                </select>
-                            </div>
-                            <div class="product-price">
-                                <span class="btc-price">0.002 BTC</span>
-                                <span class="sats-price">200,000 sats</span>
-                                <span class="usd-price">≈ $65.00</span>
-                            </div>
-                            <button class="add-to-cart" onclick="addToCart('jacket', 'Back Home Brew Hoodie', 0.002, 65.00)">Add to Cart</button>
-                        </div>
-                    </div>
-
-                    <div class="product-card" data-product="bag">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1547949003-9792a18a2601" alt="Messenger Bag">
-                        </div>
-                        <div class="product-info">
-                            <h3>Messenger Bag</h3>
-                            <p>Durable canvas bag for your daily essentials</p>
-                            <div class="product-options">
-                                <select class="color-select">
-                                    <option value="">Select Color</option>
-                                    <option value="khaki">Khaki</option>
-                                    <option value="brown">Coffee Brown</option>
-                                    <option value="black">Black</option>
-                                </select>
-                            </div>
-                            <div class="product-price">
-                                <span class="btc-price">0.0015 BTC</span>
-                                <span class="sats-price">150,000 sats</span>
-                                <span class="usd-price">≈ $45.00</span>
-                            </div>
-                            <button class="add-to-cart" onclick="addToCart('bag', 'Messenger Bag', 0.0015, 45.00)">Add to Cart</button>
-                        </div>
-                    </div>
-
-                    <div class="product-card" data-product="tumbler">
-                        <div class="product-image">
-                            <img src="https://images.pexels.com/photos/8581023/pexels-photo-8581023.jpeg" alt="Insulated Tumbler">
-                        </div>
-                        <div class="product-info">
-                            <h3>Insulated Tumbler</h3>
-                            <p>20oz stainless steel tumbler keeps drinks hot or cold</p>
-                            <div class="product-options">
-                                <select class="color-select">
-                                    <option value="">Select Color</option>
-                                    <option value="silver">Stainless Steel</option>
-                                    <option value="black">Matte Black</option>
-                                    <option value="brown">Coffee Brown</option>
-                                </select>
-                            </div>
-                            <div class="product-price">
-                                <span class="btc-price">0.0007 BTC</span>
-                                <span class="sats-price">70,000 sats</span>
-                                <span class="usd-price">≈ $22.00</span>
-                            </div>
-                            <button class="add-to-cart" onclick="addToCart('tumbler', 'Insulated Tumbler', 0.0007, 22.00)">Add to Cart</button>
-                        </div>
+                    <div class="products-error" id="products-error" style="display: none;">
+                        <p>Unable to load products. Please try again later.</p>
+                        <button class="retry-btn" onclick="loadProducts()">Retry</button>
                     </div>
                 </div>
             </div>
@@ -290,10 +151,86 @@
 
     <script src="main.js"></script>
     <script src="store.js"></script>
+    <script src="supabase-config.js"></script>
     <script>
+        function renderProductCard(product) {
+            const options = product.options || [];
+            const selectClass = product.option_type === 'size' ? 'size-select' : 'color-select';
+            const selectLabel = product.option_type === 'size' ? 'Select Size' : 'Select Color';
+
+            const optionsHTML = options.map(opt =>
+                `<option value="${opt.value}">${opt.label}</option>`
+            ).join('');
+
+            const satsFormatted = Number(product.sats_price).toLocaleString();
+            const escapedName = product.name.replace(/'/g, "\\'");
+
+            return `
+                <div class="product-card" data-product="${product.product_id}">
+                    <div class="product-image">
+                        <img src="${product.image_url}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        <div class="product-options">
+                            <select class="${selectClass}">
+                                <option value="">${selectLabel}</option>
+                                ${optionsHTML}
+                            </select>
+                        </div>
+                        <div class="product-price">
+                            <span class="btc-price">${product.btc_price} BTC</span>
+                            <span class="sats-price">${satsFormatted} sats</span>
+                            <span class="usd-price">≈ $${Number(product.usd_price).toFixed(2)}</span>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart('${product.product_id}', '${escapedName}', ${product.btc_price}, ${product.usd_price})">Add to Cart</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function loadProducts() {
+            const grid = document.getElementById('products-grid');
+            const loading = document.getElementById('products-loading');
+            const error = document.getElementById('products-error');
+
+            loading.style.display = 'block';
+            error.style.display = 'none';
+
+            // Remove any previously rendered product cards
+            grid.querySelectorAll('.product-card').forEach(card => card.remove());
+
+            try {
+                const { data, error: fetchError } = await supabase
+                    .from('products')
+                    .select('*')
+                    .order('created_at', { ascending: true });
+
+                if (fetchError) throw fetchError;
+
+                loading.style.display = 'none';
+
+                if (!data || data.length === 0) {
+                    error.querySelector('p').textContent = 'No products available at the moment.';
+                    error.style.display = 'block';
+                    return;
+                }
+
+                data.forEach(product => {
+                    grid.insertAdjacentHTML('beforeend', renderProductCard(product));
+                });
+            } catch (err) {
+                console.error('Failed to load products:', err);
+                loading.style.display = 'none';
+                error.style.display = 'block';
+            }
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             document.body.style.visibility = 'visible';
             document.body.style.opacity = '1';
+            loadProducts();
         });
     </script>
 </body>
