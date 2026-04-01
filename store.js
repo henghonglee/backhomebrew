@@ -206,7 +206,7 @@ function addToCart(productId, productName, btcPrice, usdPrice) {
         name: productName,
         btcPrice: btcPrice,
         usdPrice: usdPrice,
-        options: selectedOption,
+        options: selectedOption || 'Standard',
         quantity: 1,
         type: 'merchandise' // Mark as store merchandise
     };
