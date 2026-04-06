@@ -19,6 +19,11 @@
         font-size: 1rem;
         padding: 0.8rem 1.5rem;
     }
+
+    .wedwed-element {
+        font-size: 1.2rem;
+        padding: 0.85rem 1.5rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -79,6 +84,51 @@
 
 .bitcoin-icon {
     font-size: 1.5rem;
+    color: #f7931a;
+}
+
+.wedwed-banner {
+    background: linear-gradient(rgba(26, 26, 26, 0.35), rgba(26, 26, 26, 0.35)), url('https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg') center center/cover no-repeat;
+    padding: 0 0 2rem;
+    margin-top: -1px;
+}
+
+.wedwed-banner-inner {
+    display: flex;
+    justify-content: center;
+}
+
+.wedwed-element {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    margin: 0 auto 2rem;
+    text-align: center;
+    color: var(--white);
+    border: 1px solid rgba(247, 147, 26, 0.5);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.wedwed-element:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(247, 147, 26, 0.25);
+    border-color: rgba(247, 147, 26, 0.85);
+}
+
+.wedwed-element:focus-visible {
+    outline: 2px solid #f7931a;
+    outline-offset: 3px;
+}
+
+.wedwed-element::before {
+    content: '₿ ';
     color: #f7931a;
 }
 

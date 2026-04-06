@@ -475,6 +475,20 @@ document.head.appendChild(style);
 // Initialize cart count on page load
 document.addEventListener('DOMContentLoaded', function() {
     updateCartCount();
+
+    const wedwedEl = document.getElementById('wedwed');
+    if (wedwedEl) {
+        const activateWedwed = () => {
+            showToast('Wedwed activated!', { type: 'success' });
+        };
+        wedwedEl.addEventListener('click', activateWedwed);
+        wedwedEl.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                activateWedwed();
+            }
+        });
+    }
 });
 
 // Aliases for order page compatibility
