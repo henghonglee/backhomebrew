@@ -233,8 +233,11 @@ function removeFromCart(itemId) {
 }
 
 function updateCartCount() {
+    const count = cart.length.toString();
     const cartCount = document.getElementById('cart-count');
-    cartCount.textContent = cart.length;
+    if (cartCount) cartCount.textContent = count;
+    const mobileCartCount = document.getElementById('mobile-cart-count');
+    if (mobileCartCount) mobileCartCount.textContent = count;
 }
 
 function updateCartUI() {
