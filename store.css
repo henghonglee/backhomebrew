@@ -1,34 +1,6 @@
 .store-main {
     padding-top: 80px;
-}
-
-@media (max-width: 768px) {
-    .store-hero {
-        padding: 8rem 0 4rem;
-    }
-    
-    .store-hero h1 {
-        font-size: 2.2rem;
-    }
-    
-    .store-hero p {
-        font-size: 1.1rem;
-    }
-    
-    .bitcoin-badge {
-        font-size: 1rem;
-        padding: 0.8rem 1.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .store-hero {
-        padding: 9rem 0 4rem;
-    }
-    
-    .store-hero h1 {
-        font-size: 1.8rem;
-    }
+    background: #f2ede6;
 }
 
 .nav-brand a {
@@ -36,212 +8,347 @@
     color: inherit;
 }
 
+/* =========================================================
+   HERO — DARK MOODY (REFINED)
+   ========================================================= */
 .store-hero {
-    background: linear-gradient(rgba(26, 26, 26, 0.5), rgba(26, 26, 26, 0.5)), url('https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg') center center/cover no-repeat;
-    color: var(--white);
-    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+    padding: 5.5rem 0 4.5rem;
     text-align: center;
+    color: var(--white);
+    background:
+        linear-gradient(rgba(44, 24, 16, 0.72), rgba(15, 8, 4, 0.88)),
+        url('https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg') center center/cover no-repeat;
+}
+
+.store-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 62% 38%, rgba(150, 74, 20, 0.22) 0%, transparent 62%);
+    pointer-events: none;
+}
+
+.store-hero .container {
+    position: relative;
+    z-index: 1;
 }
 
 .store-hero h1 {
     font-size: 2.8rem;
-    color: var(--white);
-    margin-bottom: 1rem;
-    position: relative;
-}
-
-.store-hero h1::after {
-    content: '⌂';
-    display: block;
-    font-size: 1.8rem;
-    color: rgba(255, 255, 255, 0.8);
-    margin-top: 1rem;
-    font-weight: 300;
+    color: #f5ede0;
+    margin-bottom: 0.9rem;
+    letter-spacing: 0.22em;
+    line-height: 1;
 }
 
 .store-hero p {
-    font-size: 1.3rem;
+    font-size: 1.05rem;
+    color: rgba(200, 162, 118, 0.72);
+    letter-spacing: 0.06em;
     margin-bottom: 2rem;
-    opacity: 0.9;
 }
 
 .bitcoin-badge {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 1rem 2rem;
+    border: 1px solid rgba(247, 147, 26, 0.42);
+    background: rgba(247, 147, 26, 0.1);
+    color: #f7931a;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.65rem 1.5rem;
     border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(6px);
 }
 
 .bitcoin-icon {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     color: #f7931a;
 }
 
+/* =========================================================
+   PRODUCTS SECTION
+   ========================================================= */
 .products {
-    padding: 5rem 0;
-    background: var(--background-light);
+    padding: 3.5rem 0 5rem;
+    background: #f2ede6;
 }
 
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
+.section-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #a08060;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
 }
 
+/* ---------- Shared card base ---------- */
 .product-card {
-    background: var(--white-transparent);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
+    position: relative;
     overflow: hidden;
-    box-shadow: 0 10px 30px var(--shadow);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(232, 226, 212, 0.3);
-    display: flex;
-    flex-direction: column;
+    border-radius: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(20, 8, 2, 0.13);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px var(--shadow);
-    border-color: var(--divider-color);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(20, 8, 2, 0.2);
 }
 
-.product-info, .bitcoin-feature {
-    text-align: center;
-}
-
-.product-image {
-    height: 300px;
-    background: var(--accent-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.product-card .product-image {
+    position: absolute;
+    inset: 0;
     overflow: hidden;
+    background: #2c1810;
 }
 
-.product-image img {
+.product-card .product-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
 }
 
 .product-card:hover .product-image img {
     transform: scale(1.05);
 }
 
-.product-info {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.product-info h3 {
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
-    color: var(--primary-color);
-}
-
-.product-info p {
-    color: var(--text-light);
-    margin-bottom: 1.5rem;
-}
-
-.product-options {
-    margin-bottom: 1.5rem;
-    margin-top: auto;
-}
-
-.size-select,
-.color-select {
-    width: 100%;
-    padding: 0.8rem;
-    border: 2px solid var(--accent-color);
-    border-radius: 8px;
-    background: var(--white);
-    font-family: inherit;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: border-color 0.3s ease;
-}
-
-.size-select:focus,
-.color-select:focus {
-    outline: none;
-    border-color: var(--primary-color);
-}
-
-.product-price {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    margin-bottom: 1.5rem;
-}
-
-.product-price .btc-price {
-    color: #f7931a;
-    font-size: 1.4rem;
-    font-weight: 700;
-}
-
-.product-price .sats-price {
-    color: #ff8c00;
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-.product-price .usd-price {
-    color: var(--text-light);
-    font-style: italic;
-    font-size: 1rem;
-}
-
-.btc-price {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #f7931a;
-}
-
-.usd-price {
-    font-size: 1rem;
-    color: var(--text-light);
-    font-style: italic;
-}
-
-.add-to-cart {
-    width: 100%;
-    padding: 1rem;
-    background: var(--primary-color);
+.product-card .product-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    background: linear-gradient(transparent 0%, rgba(12, 5, 1, 0.93) 100%);
+    padding: 1.4rem 1.3rem 1.3rem;
     color: var(--white);
-    border: none;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 600;
+    text-align: left;
+}
+
+.product-card .product-overlay h3 {
+    color: #f0e8dc;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.85rem;
+}
+
+.product-card .product-overlay p {
+    color: rgba(195, 162, 118, 0.7);
+    font-size: 0.85rem;
+    margin-bottom: 1.1rem;
+}
+
+.product-card .product-price {
+    display: block;
+    margin-bottom: 0.15rem;
+}
+
+.product-card .product-price .btc-price {
+    color: #f7931a;
+    font-size: 1rem;
+    font-weight: 800;
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+}
+
+.product-card .product-price .usd-price {
+    color: rgba(255, 255, 255, 0.42);
+    font-size: 0.75rem;
+    font-style: normal;
+    display: block;
+    margin-bottom: 0.7rem;
+}
+
+.product-card .product-options {
+    margin-bottom: 0.6rem;
+}
+
+.product-card .size-select,
+.product-card .color-select {
+    width: 100%;
+    padding: 0.45rem 0.65rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 7px;
+    font-family: inherit;
+    font-size: 0.78rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: border-color 0.2s ease, background 0.2s ease;
 }
 
-.add-to-cart:hover {
-    background: var(--secondary-color);
-    transform: translateY(-2px);
+.product-card .size-select option,
+.product-card .color-select option {
+    color: #1a1a1a;
+    background: #fff;
 }
 
-.add-to-cart:disabled {
-    background: #ccc;
+.product-card .size-select:focus,
+.product-card .color-select:focus {
+    outline: none;
+    border-color: rgba(247, 147, 26, 0.7);
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.product-card .add-to-cart {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    padding: 0.5rem 1.1rem;
+    border-radius: 50px;
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: fit-content;
+}
+
+.product-card .add-to-cart:hover {
+    background: #f7931a;
+    border-color: #f7931a;
+    transform: translateY(-1px);
+}
+
+.product-card .add-to-cart:disabled {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.3);
     cursor: not-allowed;
     transform: none;
 }
 
+/* ---------- Featured card (T-Shirt) ---------- */
+.product-card--featured {
+    width: 100%;
+    height: 440px;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(30, 12, 4, 0.18);
+    margin-bottom: 1.5rem;
+}
+
+.product-card--featured:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 48px rgba(30, 12, 4, 0.24);
+}
+
+.featured-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 3;
+    background: rgba(247, 147, 26, 0.92);
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+}
+
+.product-card--featured .product-overlay {
+    background: linear-gradient(transparent 0%, rgba(14, 7, 2, 0.97) 100%);
+    padding: 3.5rem 2.25rem 2rem;
+}
+
+.product-card--featured .product-overlay h3 {
+    font-size: 1.65rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.35rem;
+}
+
+.product-card--featured .product-overlay p {
+    margin-bottom: 1.3rem;
+    max-width: 560px;
+}
+
+.product-card--featured .product-price .btc-price {
+    font-size: 1.4rem;
+    margin-bottom: 0.2rem;
+}
+
+.product-card--featured .product-price .usd-price {
+    font-size: 0.82rem;
+    margin-bottom: 0.6rem;
+}
+
+.product-card--featured .overlay-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.product-card--featured .product-options {
+    margin: 0;
+    min-width: 160px;
+}
+
+.product-card--featured .size-select {
+    padding: 0.65rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.product-card--featured .add-to-cart {
+    background: #f7931a;
+    border-color: #f7931a;
+    color: #fff;
+    padding: 0.7rem 1.6rem;
+    font-size: 0.85rem;
+}
+
+.product-card--featured .add-to-cart:hover {
+    background: #e8841a;
+    border-color: #e8841a;
+}
+
+/* ---------- Remainder rows ---------- */
+.products-remainder {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.products-row--wide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.products-row--trio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.products-row--wide .product-card {
+    height: 300px;
+}
+
+.products-row--trio .product-card {
+    height: 240px;
+}
+
+/* =========================================================
+   BITCOIN INFO SECTION
+   ========================================================= */
 .bitcoin-info {
-    background: var(--white-transparent);
-    backdrop-filter: blur(5px);
+    background: #faf3e8;
     padding: 5rem 0;
+    border-top: 1px solid #ece1cf;
 }
 
 .bitcoin-payment-info {
@@ -249,12 +356,13 @@
 }
 
 .bitcoin-payment-info h2 {
-    font-size: 2.2rem;
+    font-size: 2rem;
     margin-bottom: 3rem;
-    color: var(--primary-color);
+    color: #2c1810;
     position: relative;
     display: inline-block;
     width: 100%;
+    letter-spacing: 0.18em;
 }
 
 .bitcoin-payment-info h2::before,
@@ -262,9 +370,9 @@
     content: '';
     position: absolute;
     top: 50%;
-    width: 80px;
+    width: 60px;
     height: 1px;
-    background: var(--divider-color);
+    background: #d8c8a8;
 }
 
 .bitcoin-payment-info h2::before {
@@ -278,51 +386,54 @@
 .bitcoin-features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    gap: 1.5rem;
     margin-bottom: 3rem;
 }
 
 .bitcoin-feature {
     text-align: center;
-    padding: 2rem;
-    background: var(--background-transparent);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    border: 1px solid rgba(232, 226, 212, 0.3);
+    padding: 2rem 1.5rem;
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #ece1cf;
     transition: all 0.3s ease;
 }
 
 .bitcoin-feature:hover {
     transform: translateY(-3px);
-    box-shadow: 0 5px 20px var(--shadow);
-    border-color: var(--divider-color);
+    box-shadow: 0 8px 24px rgba(30, 12, 4, 0.09);
+    border-color: #d8c8a8;
 }
 
 .bitcoin-feature .feature-icon {
-    font-size: 3rem;
+    font-size: 2.4rem;
     display: block;
     margin-bottom: 1rem;
 }
 
 .bitcoin-feature h3 {
-    font-size: 1.3rem;
+    font-size: 1.05rem;
     margin-bottom: 0.5rem;
-    color: var(--primary-color);
+    color: #2c1810;
+    letter-spacing: 0.12em;
 }
 
 .bitcoin-feature p {
-    color: var(--text-light);
+    color: #7a6a55;
+    font-size: 0.92rem;
 }
 
 .bitcoin-note {
-    font-size: 1.1rem;
-    color: var(--text-light);
+    font-size: 1rem;
+    color: #7a6a55;
     max-width: 600px;
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
-/* Cart Sidebar */
+/* =========================================================
+   CART SIDEBAR — REFINED
+   ========================================================= */
 .cart-sidebar {
     position: fixed;
     top: 0;
@@ -330,11 +441,11 @@
     width: 400px;
     height: 100vh;
     background: var(--white);
-    box-shadow: -5px 0 20px var(--shadow);
+    box-shadow: -4px 0 28px rgba(10, 4, 1, 0.14);
     z-index: 2000;
     display: flex;
     flex-direction: column;
-    transition: right 0.3s ease;
+    transition: right 0.32s ease;
 }
 
 .cart-sidebar.open {
@@ -347,7 +458,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(10, 4, 1, 0.52);
     z-index: 1500;
     opacity: 0;
     visibility: hidden;
@@ -363,22 +474,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem;
-    border-bottom: 1px solid var(--accent-color);
-    background: var(--primary-color);
+    padding: 1.4rem 1.8rem;
+    background: #1a1a1a;
     color: var(--white);
+    flex-shrink: 0;
 }
 
 .cart-header h3 {
     color: var(--white);
     margin: 0;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
 }
 
 .close-cart {
     background: none;
     border: none;
-    color: var(--white);
-    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 1.75rem;
     cursor: pointer;
     padding: 0;
     width: 30px;
@@ -386,178 +499,259 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.close-cart:hover {
+    color: var(--white);
 }
 
 .cart-items {
     flex: 1;
-    padding: 2rem;
+    padding: 1.4rem 1.8rem;
     overflow-y: auto;
 }
 
 .empty-cart {
     text-align: center;
-    color: var(--text-light);
+    color: #bbb;
     font-style: italic;
+    padding: 2rem 0;
 }
 
 .cart-item {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--accent-color);
+    padding: 1.1rem 0;
+    border-bottom: 1px solid #f0ebe4;
 }
 
 .cart-item:last-child {
     border-bottom: none;
 }
 
+.cart-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
 .cart-item-info h4 {
-    margin: 0 0 0.5rem 0;
-    color: var(--primary-color);
+    margin: 0 0 0.35rem 0;
+    color: #1a1a1a;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
 }
 
 .cart-item-details {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    margin-bottom: 0.5rem;
+    font-size: 0.78rem;
+    color: #999;
+    margin-bottom: 0.45rem;
 }
 
 .cart-item-price {
     font-weight: 600;
+    line-height: 1.35;
 }
 
 .cart-item-price .btc-price {
     color: #f7931a;
     display: block;
+    font-size: 0.95rem;
+    font-weight: 700;
 }
 
 .cart-item-price .sats-price {
-    color: #ff8c00;
+    color: #c78a3a;
     display: block;
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.75rem;
+    font-weight: 500;
 }
 
 .cart-item-price .usd-price {
-    color: var(--text-light);
-    font-size: 0.9rem;
+    color: #b8b0a4;
+    font-size: 0.75rem;
+    font-style: normal;
+    display: block;
 }
 
 .remove-item {
-    background: #ff4757;
-    color: var(--white);
-    border: none;
-    padding: 0.3rem 0.8rem;
-    border-radius: 5px;
+    background: #fff5f5;
+    color: #ff4757;
+    border: 1px solid #ffe0e0;
+    padding: 0.32rem 0.7rem;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 0.8rem;
-    transition: background 0.3s ease;
+    font-size: 0.72rem;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    margin-left: 0.75rem;
+    flex-shrink: 0;
 }
 
 .remove-item:hover {
-    background: #ff3838;
+    background: #ff4757;
+    color: var(--white);
+    border-color: #ff4757;
 }
 
 .cart-footer {
-    padding: 2rem;
-    border-top: 1px solid var(--accent-color);
-    background: var(--accent-color);
+    padding: 1.4rem 1.8rem;
+    background: #faf3e8;
+    border-top: 1px solid #e8ddd0;
+    flex-shrink: 0;
 }
 
 .cart-total {
-    margin-bottom: 1.5rem;
-    text-align: center;
+    margin-bottom: 1.1rem;
+    text-align: left;
 }
 
 .total-btc {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.2rem;
+    font-weight: 800;
     color: #f7931a;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
 }
 
 .total-usd {
-    color: var(--text-light);
-    font-size: 1.1rem;
+    color: #aaa;
+    font-size: 0.85rem;
 }
 
 .checkout-btn {
     width: 100%;
-    padding: 1rem;
-    background: #f7931a;
+    padding: 0.95rem;
+    background: #1a1a1a;
     color: var(--white);
     border: none;
     border-radius: 50px;
-    font-size: 1.2rem;
+    font-size: 0.88rem;
     font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.3s ease;
+    font-family: inherit;
+    transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .checkout-btn:hover {
-    background: #e8830e;
-    transform: translateY(-2px);
+    background: #2c1810;
+    transform: translateY(-1px);
 }
 
-/* Mobile Responsiveness */
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 900px) {
+    .products-row--trio {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
+    .store-hero {
+        padding: 8rem 0 4rem;
+    }
+
+    .store-hero h1 {
+        font-size: 2rem;
+        letter-spacing: 0.18em;
+    }
+
+    .store-hero p {
+        font-size: 0.95rem;
+    }
+
+    .bitcoin-badge {
+        font-size: 0.75rem;
+        padding: 0.55rem 1.25rem;
+    }
+
+    .products {
+        padding: 2.5rem 0 4rem;
+    }
+
+    .product-card--featured {
+        height: 380px;
+    }
+
+    .product-card--featured .product-overlay {
+        padding: 2.5rem 1.5rem 1.5rem;
+    }
+
+    .product-card--featured .product-overlay h3 {
+        font-size: 1.3rem;
+    }
+
+    .product-card--featured .overlay-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .product-card--featured .product-options {
+        width: 100%;
+    }
+
+    .products-row--wide,
+    .products-row--trio {
+        grid-template-columns: 1fr;
+    }
+
+    .products-row--wide .product-card,
+    .products-row--trio .product-card {
+        height: 280px;
+    }
+
     .cart-sidebar {
         width: 100vw;
         right: -100vw;
     }
-    
-    .store-hero h1 {
-        font-size: 2rem;
-    }
-    
-    .store-hero p {
-        font-size: 1.1rem;
-    }
-    
-    .products-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .bitcoin-features {
-        grid-template-columns: 1fr;
-    }
-    
+
     .bitcoin-payment-info h2::before,
     .bitcoin-payment-info h2::after {
-        width: 40px;
+        width: 30px;
     }
-    
+
     .bitcoin-payment-info h2::before {
         left: calc(50% - 120px);
     }
-    
+
     .bitcoin-payment-info h2::after {
         right: calc(50% - 120px);
     }
-    
+
     .nav-links {
         flex-wrap: wrap;
         gap: 1rem;
     }
-    
+
     .cart-icon {
         order: -1;
     }
 }
 
 @media (max-width: 480px) {
+    .store-hero {
+        padding: 9rem 0 3.5rem;
+    }
+
+    .store-hero h1 {
+        font-size: 1.7rem;
+    }
+
     .bitcoin-badge {
         flex-direction: column;
         gap: 0.3rem;
-        padding: 0.8rem 1.5rem;
+        padding: 0.75rem 1.25rem;
     }
-    
-    .product-card {
-        margin: 0 1rem;
-    }
-    
+
     .container {
         padding: 0 1rem;
+    }
+
+    .product-card--featured {
+        height: 340px;
     }
 }
