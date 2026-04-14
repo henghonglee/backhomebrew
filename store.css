@@ -1,34 +1,6 @@
+/* ===== BASE ===== */
 .store-main {
     padding-top: 80px;
-}
-
-@media (max-width: 768px) {
-    .store-hero {
-        padding: 8rem 0 4rem;
-    }
-    
-    .store-hero h1 {
-        font-size: 2.2rem;
-    }
-    
-    .store-hero p {
-        font-size: 1.1rem;
-    }
-    
-    .bitcoin-badge {
-        font-size: 1rem;
-        padding: 0.8rem 1.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .store-hero {
-        padding: 9rem 0 4rem;
-    }
-    
-    .store-hero h1 {
-        font-size: 1.8rem;
-    }
 }
 
 .nav-brand a {
@@ -36,208 +8,372 @@
     color: inherit;
 }
 
+/* ===== HERO — DARK MOODY REFINED ===== */
 .store-hero {
-    background: linear-gradient(rgba(26, 26, 26, 0.5), rgba(26, 26, 26, 0.5)), url('https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg') center center/cover no-repeat;
+    background:
+        linear-gradient(rgba(44, 24, 16, 0.72), rgba(15, 8, 4, 0.9)),
+        url('https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg') center center / cover no-repeat;
     color: var(--white);
-    padding: 6rem 0;
+    padding: 5.5rem 0 4.5rem;
     text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-.store-hero h1 {
-    font-size: 2.8rem;
-    color: var(--white);
-    margin-bottom: 1rem;
+.store-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 62% 38%, rgba(150, 74, 20, 0.22) 0%, transparent 62%);
+    pointer-events: none;
+}
+
+.store-hero .container {
     position: relative;
 }
 
+.store-hero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #f5ede0;
+    margin-bottom: 0.8rem;
+    line-height: 1;
+}
+
+/* Remove the house glyph */
 .store-hero h1::after {
-    content: '⌂';
-    display: block;
-    font-size: 1.8rem;
-    color: rgba(255, 255, 255, 0.8);
-    margin-top: 1rem;
-    font-weight: 300;
+    display: none;
 }
 
 .store-hero p {
-    font-size: 1.3rem;
+    font-size: 0.95rem;
+    color: rgba(200, 162, 118, 0.72);
+    letter-spacing: 0.06em;
     margin-bottom: 2rem;
-    opacity: 0.9;
+    opacity: 1;
 }
 
 .bitcoin-badge {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 1rem 2rem;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    backdrop-filter: blur(10px);
+    border: 1px solid rgba(247, 147, 26, 0.42);
+    background: rgba(247, 147, 26, 0.1);
+    color: #f7931a;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.3rem;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
 }
 
 .bitcoin-icon {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     color: #f7931a;
 }
 
+/* ===== PRODUCTS SECTION ===== */
 .products {
-    padding: 5rem 0;
+    padding: 3.5rem 0 5rem;
     background: var(--background-light);
 }
 
-.products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
+.section-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #a08060;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
 }
 
-.product-card {
-    background: var(--white-transparent);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
+/* ===== FEATURED CARD ===== */
+.product-card--featured {
+    width: 100%;
+    height: 430px;
+    border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 10px 30px var(--shadow);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(232, 226, 212, 0.3);
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(30, 12, 4, 0.18);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
-.product-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px var(--shadow);
-    border-color: var(--divider-color);
+.product-card--featured:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 48px rgba(30, 12, 4, 0.24);
 }
 
-.product-info, .bitcoin-feature {
-    text-align: center;
-}
-
-.product-image {
-    height: 300px;
-    background: var(--accent-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.product-card--featured .product-image {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    background: none;
+    display: block;
     overflow: hidden;
 }
 
-.product-image img {
+.product-card--featured .product-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
+}
+
+.product-card--featured:hover .product-image img {
+    transform: scale(1.04);
+}
+
+.featured-badge {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 3;
+    background: rgba(247, 147, 26, 0.92);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.product-card--featured .product-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    background: linear-gradient(transparent 0%, rgba(14, 7, 2, 0.97) 100%);
+    padding: 3rem 2.25rem 2rem;
+}
+
+.product-card--featured .product-overlay .btc-price {
+    color: #f7931a;
+    font-weight: 800;
+    font-size: 1.35rem;
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.2rem;
+}
+
+.product-card--featured .product-overlay .usd-price {
+    color: rgba(255, 255, 255, 0.38);
+    font-size: 0.78rem;
+    display: block;
+    margin-bottom: 0.55rem;
+}
+
+.product-card--featured .product-overlay h3 {
+    color: #f0e8dc;
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+}
+
+.product-card--featured .product-overlay p {
+    color: rgba(195, 162, 118, 0.65);
+    font-size: 0.83rem;
+    margin-bottom: 1.3rem;
+}
+
+.overlay-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.product-card--featured .add-to-cart {
+    background: #f7931a;
+    color: #fff;
+    border: none;
+    padding: 0.65rem 1.5rem;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+    width: auto;
+}
+
+.product-card--featured .add-to-cart:hover {
+    background: #e8841a;
+    transform: translateY(-1px);
+}
+
+.product-card--featured .size-select {
+    background: rgba(255, 255, 255, 0.11);
+    color: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.62rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    font-family: inherit;
+    width: auto;
+}
+
+/* ===== PRODUCTS REMAINDER GRID ===== */
+.products-remainder {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.products-row--wide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.products-row--trio {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+/* ===== STANDARD PRODUCT CARDS ===== */
+.product-card {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(20, 8, 2, 0.13);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.products-row--wide .product-card {
+    height: 296px;
+}
+
+.products-row--trio .product-card {
+    height: 238px;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px rgba(20, 8, 2, 0.2);
+}
+
+.product-card .product-image {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    background: var(--accent-color);
+    display: block;
+    overflow: hidden;
+}
+
+.product-card .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
 }
 
 .product-card:hover .product-image img {
     transform: scale(1.05);
 }
 
-.product-info {
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
+.product-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent 0%, rgba(12, 5, 1, 0.93) 100%);
+    padding: 1.4rem 1.3rem 1.3rem;
+    z-index: 2;
 }
 
-.product-info h3 {
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
-    color: var(--primary-color);
+.product-overlay h3 {
+    color: #f0e8dc;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
 }
 
-.product-info p {
-    color: var(--text-light);
-    margin-bottom: 1.5rem;
+.product-overlay .btc-price {
+    color: #f7931a;
+    font-weight: 800;
+    font-size: 1rem;
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.18rem;
+}
+
+.product-overlay .usd-price {
+    color: rgba(255, 255, 255, 0.38);
+    font-size: 0.72rem;
+    display: block;
+    margin-bottom: 0.6rem;
 }
 
 .product-options {
-    margin-bottom: 1.5rem;
-    margin-top: auto;
+    margin-bottom: 0.5rem;
 }
 
 .size-select,
 .color-select {
     width: 100%;
-    padding: 0.8rem;
-    border: 2px solid var(--accent-color);
-    border-radius: 8px;
-    background: var(--white);
-    font-family: inherit;
-    font-size: 1rem;
+    padding: 0.4rem 0.6rem;
+    background: rgba(255, 255, 255, 0.09);
+    color: rgba(255, 255, 255, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 7px;
+    font-size: 0.73rem;
     cursor: pointer;
-    transition: border-color 0.3s ease;
+    font-family: inherit;
+    transition: border-color 0.2s;
 }
 
 .size-select:focus,
 .color-select:focus {
     outline: none;
-    border-color: var(--primary-color);
-}
-
-.product-price {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    margin-bottom: 1.5rem;
-}
-
-.product-price .btc-price {
-    color: #f7931a;
-    font-size: 1.4rem;
-    font-weight: 700;
-}
-
-.product-price .sats-price {
-    color: #ff8c00;
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-.product-price .usd-price {
-    color: var(--text-light);
-    font-style: italic;
-    font-size: 1rem;
-}
-
-.btc-price {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #f7931a;
-}
-
-.usd-price {
-    font-size: 1rem;
-    color: var(--text-light);
-    font-style: italic;
+    border-color: rgba(247, 147, 26, 0.5);
 }
 
 .add-to-cart {
-    width: 100%;
-    padding: 1rem;
-    background: var(--primary-color);
-    color: var(--white);
-    border: none;
-    border-radius: 50px;
-    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    padding: 0.46rem 1rem;
+    border-radius: 20px;
+    font-size: 0.74rem;
     font-weight: 600;
+    letter-spacing: 0.04em;
     cursor: pointer;
-    transition: all 0.3s ease;
+    font-family: inherit;
+    transition: all 0.2s;
+    width: fit-content;
+    margin-top: 0.4rem;
 }
 
 .add-to-cart:hover {
-    background: var(--secondary-color);
-    transform: translateY(-2px);
+    background: #f7931a;
+    border-color: #f7931a;
 }
 
 .add-to-cart:disabled {
-    background: #ccc;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.1);
     cursor: not-allowed;
     transform: none;
 }
 
+/* ===== BITCOIN INFO SECTION ===== */
 .bitcoin-info {
     background: var(--white-transparent);
     backdrop-filter: blur(5px);
@@ -322,7 +458,7 @@
     line-height: 1.6;
 }
 
-/* Cart Sidebar */
+/* ===== CART SIDEBAR — REFINED ===== */
 .cart-sidebar {
     position: fixed;
     top: 0;
@@ -330,7 +466,7 @@
     width: 400px;
     height: 100vh;
     background: var(--white);
-    box-shadow: -5px 0 20px var(--shadow);
+    box-shadow: -4px 0 28px rgba(10, 4, 1, 0.14);
     z-index: 2000;
     display: flex;
     flex-direction: column;
@@ -347,7 +483,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(10, 4, 1, 0.52);
     z-index: 1500;
     opacity: 0;
     visibility: hidden;
@@ -363,22 +499,27 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem;
-    border-bottom: 1px solid var(--accent-color);
-    background: var(--primary-color);
-    color: var(--white);
+    padding: 1.4rem 1.6rem;
+    border-bottom: 1px solid #e8ddd0;
+    background: #1a1a1a;
+    color: #fff;
+    flex-shrink: 0;
 }
 
 .cart-header h3 {
-    color: var(--white);
+    color: #fff;
     margin: 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
 }
 
 .close-cart {
     background: none;
     border: none;
-    color: var(--white);
-    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.5rem;
     cursor: pointer;
     padding: 0;
     width: 30px;
@@ -386,11 +527,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: color 0.2s;
+}
+
+.close-cart:hover {
+    color: #fff;
 }
 
 .cart-items {
     flex: 1;
-    padding: 2rem;
+    padding: 1.4rem 1.6rem;
     overflow-y: auto;
 }
 
@@ -405,7 +551,7 @@
     justify-content: space-between;
     align-items: flex-start;
     padding: 1rem 0;
-    border-bottom: 1px solid var(--accent-color);
+    border-bottom: 1px solid #f0ebe4;
 }
 
 .cart-item:last-child {
@@ -413,14 +559,16 @@
 }
 
 .cart-item-info h4 {
-    margin: 0 0 0.5rem 0;
-    color: var(--primary-color);
+    margin: 0 0 0.3rem 0;
+    color: #1a1a1a;
+    font-size: 0.86rem;
+    font-weight: 600;
 }
 
 .cart-item-details {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    margin-bottom: 0.5rem;
+    font-size: 0.74rem;
+    color: #999;
+    margin-bottom: 0.35rem;
 }
 
 .cart-item-price {
@@ -430,134 +578,184 @@
 .cart-item-price .btc-price {
     color: #f7931a;
     display: block;
+    font-size: 0.86rem;
+    font-weight: 700;
 }
 
 .cart-item-price .sats-price {
-    color: #ff8c00;
+    color: #aaa;
     display: block;
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.75rem;
+    font-weight: 500;
 }
 
 .cart-item-price .usd-price {
-    color: var(--text-light);
-    font-size: 0.9rem;
+    color: #bbb;
+    font-size: 0.7rem;
 }
 
 .remove-item {
-    background: #ff4757;
-    color: var(--white);
-    border: none;
-    padding: 0.3rem 0.8rem;
-    border-radius: 5px;
+    background: #fff5f5;
+    color: #ff4757;
+    border: 1px solid #ffe0e0;
+    padding: 0.3rem 0.65rem;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 0.8rem;
-    transition: background 0.3s ease;
+    font-size: 0.7rem;
+    margin-left: 0.75rem;
+    font-family: inherit;
+    transition: all 0.2s;
+    flex-shrink: 0;
 }
 
 .remove-item:hover {
-    background: #ff3838;
+    background: #ff4757;
+    color: #fff;
+    border-color: #ff4757;
 }
 
 .cart-footer {
-    padding: 2rem;
-    border-top: 1px solid var(--accent-color);
-    background: var(--accent-color);
+    padding: 1.4rem 1.6rem;
+    background: #faf3e8;
+    border-top: 1px solid #e8ddd0;
+    flex-shrink: 0;
 }
 
 .cart-total {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.1rem;
     text-align: center;
 }
 
 .total-btc {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.15rem;
+    font-weight: 800;
     color: #f7931a;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
 }
 
 .total-usd {
-    color: var(--text-light);
-    font-size: 1.1rem;
+    color: #aaa;
+    font-size: 0.8rem;
 }
 
 .checkout-btn {
     width: 100%;
-    padding: 1rem;
-    background: #f7931a;
-    color: var(--white);
+    padding: 0.9rem;
+    background: #1a1a1a;
+    color: #fff;
     border: none;
-    border-radius: 50px;
-    font-size: 1.2rem;
+    border-radius: 25px;
     font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.3s ease;
+    font-family: inherit;
+    transition: background 0.2s;
 }
 
 .checkout-btn:hover {
-    background: #e8830e;
-    transform: translateY(-2px);
+    background: #2c1810;
 }
 
-/* Mobile Responsiveness */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .cart-sidebar {
         width: 100vw;
         right: -100vw;
     }
-    
+
+    .store-hero {
+        padding: 6rem 0 4rem;
+    }
+
     .store-hero h1 {
         font-size: 2rem;
     }
-    
+
     .store-hero p {
-        font-size: 1.1rem;
+        font-size: 0.9rem;
     }
-    
-    .products-grid {
+
+    .product-card--featured {
+        height: 320px;
+    }
+
+    .products-row--wide {
         grid-template-columns: 1fr;
     }
-    
+
+    .products-row--wide .product-card {
+        height: 240px;
+    }
+
+    .products-row--trio {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .products-row--trio .product-card {
+        height: 210px;
+    }
+
     .bitcoin-features {
         grid-template-columns: 1fr;
     }
-    
+
     .bitcoin-payment-info h2::before,
     .bitcoin-payment-info h2::after {
         width: 40px;
     }
-    
+
     .bitcoin-payment-info h2::before {
         left: calc(50% - 120px);
     }
-    
+
     .bitcoin-payment-info h2::after {
         right: calc(50% - 120px);
-    }
-    
-    .nav-links {
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
-    
-    .cart-icon {
-        order: -1;
     }
 }
 
 @media (max-width: 480px) {
+    .store-hero {
+        padding: 6rem 0 3.5rem;
+    }
+
+    .store-hero h1 {
+        font-size: 1.7rem;
+    }
+
     .bitcoin-badge {
         flex-direction: column;
         gap: 0.3rem;
-        padding: 0.8rem 1.5rem;
+        padding: 0.6rem 1.2rem;
     }
-    
-    .product-card {
-        margin: 0 1rem;
+
+    .product-card--featured {
+        height: 280px;
     }
-    
-    .container {
-        padding: 0 1rem;
+
+    .product-card--featured .product-overlay h3 {
+        font-size: 1.2rem;
+    }
+
+    .overlay-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-card--featured .size-select {
+        width: 100%;
+    }
+
+    .products-row--wide {
+        grid-template-columns: 1fr;
+    }
+
+    .products-row--trio {
+        grid-template-columns: 1fr;
+    }
+
+    .products-row--trio .product-card {
+        height: 220px;
     }
 }
