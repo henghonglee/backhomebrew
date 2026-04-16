@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Back Home Brew - Home-Based Coffee Shop</title>
+    <link rel="stylesheet" href="output.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="header">
@@ -58,76 +59,175 @@
     </header>
 
     <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h2>Welcome Home to Perfect Coffee</h2>
-                <p>Experience artisanal coffee crafted with love in our cozy home-based coffee shop. Every cup tells a story of passion, quality, and community.</p>
-                <div class="hero-buttons">
-                    <a href="order.html" class="btn btn-primary">Order Now</a>
-                    <a href="#menu" class="btn btn-secondary">View Menu</a>
+        <!-- Hero Section — Split Layout -->
+        <section class="bg-sand min-h-screen flex items-center">
+            <div class="mx-auto px-8 w-full flex flex-col lg:flex-row items-center gap-12 pt-24 pb-16" style="max-width:1200px;">
+                <!-- Left: Copy -->
+                <div class="flex-1">
+                    <h2 class="font-display font-bold leading-tight mb-6 text-5xl lg:text-6xl">
+                        Welcome Home to Perfect Coffee
+                    </h2>
+                    <p class="text-lg mb-8 max-w-lg leading-relaxed" style="color:#7A5648;">
+                        Experience artisanal coffee crafted with love in our cozy home-based coffee shop. Every cup tells a story of passion, quality, and community.
+                    </p>
+                    <div class="flex flex-wrap gap-4 items-center">
+                        <a href="order.html" class="btn btn-primary">Order Now</a>
+                        <a href="#menu" class="btn btn-secondary">View Menu</a>
+                        <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold" style="background:rgba(247,147,26,0.1);color:#F7931A;border:1px solid rgba(247,147,26,0.3);">&#8383; Bitcoin Only</span>
+                    </div>
                 </div>
-            </div>
-            <div class="hero-image">
-                <img src="https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg" alt="Artisanal coffee setup">
-            </div>
-        </section>
-
-        <section id="about" class="about">
-            <div class="container">
-                <h2>Our Story</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>Back Home Brew started as a dream to bring café-quality coffee to your neighborhood. From our home-based setup, we carefully select, roast, and brew each cup with the attention and care that only a local, family-run business can provide.</p>
-                        <p>We believe that great coffee brings people together, creates moments of joy, and makes every day a little brighter. That's why we've made it our mission to serve not just coffee, but a warm, welcoming experience that feels like home.</p>
-                    </div>
-                    <div class="about-features">
-                        <div class="feature">
-                            <div class="feature-icon">🏠</div>
-                            <h3>Home-Based</h3>
-                            <p>Crafted with personal care in our cozy home setup</p>
-                        </div>
-                        <div class="feature">
-                            <div class="feature-icon">🌱</div>
-                            <h3>Sustainable</h3>
-                            <p>Ethically sourced beans with eco-friendly practices</p>
-                        </div>
-                        <div class="feature">
-                            <div class="feature-icon">❤️</div>
-                            <h3>Community</h3>
-                            <p>Supporting local community one cup at a time</p>
-                        </div>
-                    </div>
+                <!-- Right: Image -->
+                <div class="flex-1 flex justify-center">
+                    <img src="https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=800"
+                         alt="Artisanal coffee setup"
+                         class="w-full rounded-2xl shadow-2xl object-cover"
+                         style="max-width:520px;max-height:580px;">
                 </div>
             </div>
         </section>
 
-        <section id="menu" class="menu">
-            <div class="container">
-                <h2>Our Menu</h2>
-                <div class="menu-grid">
-                    <div class="menu-item">
-                        <h3>Classic Espresso</h3>
-                        <p>Rich, bold espresso shot made from our signature blend</p>
+        <!-- About Section -->
+        <section id="about" class="py-20" style="background:#F0E8DC;">
+            <div class="mx-auto px-8" style="max-width:1200px;">
+                <h2 class="font-display font-bold text-center mb-12 text-4xl">Our Story</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    <div class="text-center" style="color:#7A5648;">
+                        <p class="text-lg mb-6 leading-relaxed">Back Home Brew started as a dream to bring café-quality coffee to your neighborhood. From our home-based setup, we carefully select, roast, and brew each cup with the attention and care that only a local, family-run business can provide.</p>
+                        <p class="text-lg leading-relaxed">We believe that great coffee brings people together, creates moments of joy, and makes every day a little brighter. That's why we've made it our mission to serve not just coffee, but a warm, welcoming experience that feels like home.</p>
                     </div>
-                    <div class="menu-item">
-                        <h3>Home Brew Latte</h3>
-                        <p>Smooth espresso with steamed milk and a touch of love</p>
+                    <div class="flex flex-col gap-6">
+                        <div class="text-center p-6 rounded-2xl shadow-sm" style="background:#FAF6F1;">
+                            <div class="text-4xl mb-3">🏠</div>
+                            <h3 class="font-display text-xl mb-2">Home-Based</h3>
+                            <p style="color:#7A5648;">Crafted with personal care in our cozy home setup</p>
+                        </div>
+                        <div class="text-center p-6 rounded-2xl shadow-sm" style="background:#FAF6F1;">
+                            <div class="text-4xl mb-3">🌱</div>
+                            <h3 class="font-display text-xl mb-2">Sustainable</h3>
+                            <p style="color:#7A5648;">Ethically sourced beans with eco-friendly practices</p>
+                        </div>
+                        <div class="text-center p-6 rounded-2xl shadow-sm" style="background:#FAF6F1;">
+                            <div class="text-4xl mb-3">❤️</div>
+                            <h3 class="font-display text-xl mb-2">Community</h3>
+                            <p style="color:#7A5648;">Supporting local community one cup at a time</p>
+                        </div>
                     </div>
-                    <div class="menu-item">
-                        <h3>Artisan Cappuccino</h3>
-                        <p>Perfect balance of espresso, steamed milk, and foam</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Section — Visual Image Cards -->
+        <section id="menu" class="py-20" style="background:#FAF6F1;">
+            <div class="mx-auto px-8" style="max-width:1200px;">
+                <h2 class="font-display font-bold text-center mb-12 text-4xl">Our Menu</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Classic Espresso -->
+                    <div class="rounded-2xl overflow-hidden shadow-md hover:-translate-y-1 transition-transform duration-300" style="background:white;border:1px solid #E8D5C4;">
+                        <img src="https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=600"
+                             alt="Classic Espresso"
+                             class="w-full object-cover" style="height:200px;">
+                        <div class="p-5">
+                            <h3 class="font-display text-xl mb-2">Classic Espresso</h3>
+                            <p class="text-sm mb-3 leading-relaxed" style="color:#7A5648;">Rich, bold espresso shot made from our signature blend</p>
+                            <div>
+                                <span class="font-bold" style="color:#F7931A;">11,200 sats</span>
+                                <span class="text-sm ml-1" style="color:#9B6B5A;">(~$3.50)</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="menu-item">
-                        <h3>Cold Brew Special</h3>
-                        <p>Smooth, refreshing cold brew steeped for 24 hours</p>
+                    <!-- Home Brew Latte -->
+                    <div class="rounded-2xl overflow-hidden shadow-md hover:-translate-y-1 transition-transform duration-300" style="background:white;border:1px solid #E8D5C4;">
+                        <img src="https://images.pexels.com/photos/1235717/pexels-photo-1235717.jpeg?auto=compress&cs=tinysrgb&w=600"
+                             alt="Home Brew Latte"
+                             class="w-full object-cover" style="height:200px;">
+                        <div class="p-5">
+                            <h3 class="font-display text-xl mb-2">Home Brew Latte</h3>
+                            <p class="text-sm mb-3 leading-relaxed" style="color:#7A5648;">Smooth espresso with steamed milk and a touch of love</p>
+                            <div>
+                                <span class="font-bold" style="color:#F7931A;">16,000 sats</span>
+                                <span class="text-sm ml-1" style="color:#9B6B5A;">(~$5.00)</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="menu-item">
-                        <h3>Seasonal Blend</h3>
-                        <p>Our rotating seasonal coffee featuring local flavors</p>
+                    <!-- Artisan Cappuccino -->
+                    <div class="rounded-2xl overflow-hidden shadow-md hover:-translate-y-1 transition-transform duration-300" style="background:white;border:1px solid #E8D5C4;">
+                        <img src="https://images.pexels.com/photos/302896/pexels-photo-302896.jpeg?auto=compress&cs=tinysrgb&w=600"
+                             alt="Artisan Cappuccino"
+                             class="w-full object-cover" style="height:200px;">
+                        <div class="p-5">
+                            <h3 class="font-display text-xl mb-2">Artisan Cappuccino</h3>
+                            <p class="text-sm mb-3 leading-relaxed" style="color:#7A5648;">Perfect balance of espresso, steamed milk, and foam</p>
+                            <div>
+                                <span class="font-bold" style="color:#F7931A;">15,200 sats</span>
+                                <span class="text-sm ml-1" style="color:#9B6B5A;">(~$4.75)</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="menu-item">
-                        <h3>Homemade Pastries</h3>
-                        <p>Fresh baked goods made daily in our home kitchen</p>
+                    <!-- Cold Brew Special -->
+                    <div class="rounded-2xl overflow-hidden shadow-md hover:-translate-y-1 transition-transform duration-300" style="background:white;border:1px solid #E8D5C4;">
+                        <img src="https://images.pexels.com/photos/4226881/pexels-photo-4226881.jpeg?auto=compress&cs=tinysrgb&w=600"
+                             alt="Cold Brew Special"
+                             class="w-full object-cover" style="height:200px;">
+                        <div class="p-5">
+                            <h3 class="font-display text-xl mb-2">Cold Brew Special</h3>
+                            <p class="text-sm mb-3 leading-relaxed" style="color:#7A5648;">Smooth, refreshing cold brew steeped for 24 hours</p>
+                            <div>
+                                <span class="font-bold" style="color:#F7931A;">17,600 sats</span>
+                                <span class="text-sm ml-1" style="color:#9B6B5A;">(~$5.50)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Seasonal Blend -->
+                    <div class="rounded-2xl overflow-hidden shadow-md hover:-translate-y-1 transition-transform duration-300" style="background:white;border:1px solid #E8D5C4;">
+                        <img src="https://images.pexels.com/photos/982612/pexels-photo-982612.jpeg?auto=compress&cs=tinysrgb&w=600"
+                             alt="Seasonal Blend"
+                             class="w-full object-cover" style="height:200px;">
+                        <div class="p-5">
+                            <h3 class="font-display text-xl mb-2">Seasonal Blend</h3>
+                            <p class="text-sm mb-3 leading-relaxed" style="color:#7A5648;">Our rotating seasonal coffee featuring local flavors</p>
+                            <div>
+                                <span class="font-bold" style="color:#F7931A;">16,000 sats</span>
+                                <span class="text-sm ml-1" style="color:#9B6B5A;">(~$5.00)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Homemade Pastries -->
+                    <div class="rounded-2xl overflow-hidden shadow-md hover:-translate-y-1 transition-transform duration-300" style="background:white;border:1px solid #E8D5C4;">
+                        <img src="https://images.pexels.com/photos/2067423/pexels-photo-2067423.jpeg?auto=compress&cs=tinysrgb&w=600"
+                             alt="Homemade Pastries"
+                             class="w-full object-cover" style="height:200px;">
+                        <div class="p-5">
+                            <h3 class="font-display text-xl mb-2">Homemade Pastries</h3>
+                            <p class="text-sm mb-3 leading-relaxed" style="color:#7A5648;">Fresh baked goods made daily in our home kitchen</p>
+                            <div>
+                                <span class="font-bold" style="color:#F7931A;">12,800 sats</span>
+                                <span class="text-sm ml-1" style="color:#9B6B5A;">(~$4.00)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-12">
+                    <a href="order.html" class="btn btn-primary">View Full Menu &amp; Order</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bitcoin Feature Strip -->
+        <section class="py-16 px-8" style="background:#4A2518;">
+            <div class="mx-auto text-center" style="max-width:1200px;">
+                <h2 class="font-display font-bold mb-10 text-3xl" style="color:white;">Proudly Bitcoin Only</h2>
+                <div class="flex flex-wrap justify-center gap-16">
+                    <div class="text-center">
+                        <div class="text-5xl mb-3">&#8383;</div>
+                        <p class="text-lg font-semibold" style="color:#FAF6F1;">Pay with Bitcoin</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl mb-3">&#9889;</div>
+                        <p class="text-lg font-semibold" style="color:#FAF6F1;">Lightning Fast</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-5xl mb-3">&#127760;</div>
+                        <p class="text-lg font-semibold" style="color:#FAF6F1;">No Middlemen</p>
                     </div>
                 </div>
             </div>
@@ -227,7 +327,7 @@
             <button class="checkout-btn" onclick="checkout()">Checkout with Bitcoin</button>
         </div>
     </div>
-    
+
     <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
 
     <script src="store.js"></script>
