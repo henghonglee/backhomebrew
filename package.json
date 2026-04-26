@@ -1,0 +1,11 @@
+{
+  "name": "back-home-brew",
+  "version": "1.0.0",
+  "description": "A modern, responsive website for a home-based coffee shop with online ordering and Bitcoin payment support.",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "dev": "python3 -m http.server 3000"
+  },
+  "keywords": ["coffee", "e-commerce", "vanilla-js"],
+  "license": "MIT"
+}
