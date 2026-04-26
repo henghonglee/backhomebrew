@@ -5,6 +5,16 @@ let isCartOpen = false;
 // Bitcoin to USD rate (you would typically fetch this from an API)
 const BTC_TO_USD_RATE = 31250; // Example rate
 
+// Centralized product pricing — BTC prices derived from USD using BTC_TO_USD_RATE
+const PRODUCT_PRICES = {
+    tshirt:  { usd: 25.00, btc: 25.00 / BTC_TO_USD_RATE },
+    cap:     { usd: 20.00, btc: 20.00 / BTC_TO_USD_RATE },
+    cup:     { usd: 15.00, btc: 15.00 / BTC_TO_USD_RATE },
+    jacket:  { usd: 65.00, btc: 65.00 / BTC_TO_USD_RATE },
+    bag:     { usd: 45.00, btc: 45.00 / BTC_TO_USD_RATE },
+    tumbler: { usd: 22.00, btc: 22.00 / BTC_TO_USD_RATE },
+};
+
 // Toast notification system
 function showToast(message, options = {}) {
     const type = options.type || 'info'; // 'error', 'success', or 'info'
@@ -177,11 +187,12 @@ function addToOrder(productId, productName, btcPrice, usdPrice) {
     if (pastrySelect) pastrySelect.selectedIndex = 0;
 }
 
-function addToCart(productId, productName, btcPrice, usdPrice) {
+function addToCart(productId, productName) {
+    const { btc: btcPrice, usd: usdPrice } = PRODUCT_PRICES[productId];
     const productCard = document.querySelector(`[data-product="${productId}"]`);
     const sizeSelect = productCard.querySelector('.size-select');
     const colorSelect = productCard.querySelector('.color-select');
-    
+
     // Get selected options
     let selectedOption = '';
     if (sizeSelect) {
@@ -198,7 +209,7 @@ function addToCart(productId, productName, btcPrice, usdPrice) {
         }
         selectedOption = selectedOption ? `${selectedOption}, Color: ${colorSelect.value}` : `Color: ${colorSelect.value}`;
     }
-    
+
     // Create cart item
     const cartItem = {
         id: Date.now(), // Simple ID generation
