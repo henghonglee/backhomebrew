@@ -33,6 +33,7 @@ backhomebrew/
 ├── order.css               # Order page and cart styling
 ├── background.avif         # High-quality hero section background image
 ├── deploy.sh               # Production deployment script (Python HTTP server)
+├── package.json            # npm metadata, scripts, and license
 └── README.md               # Project documentation (this file)
 ```
 
@@ -50,6 +51,7 @@ backhomebrew/
 
 - **Web Browser**: Chrome, Firefox, Safari, Edge, or any modern browser with ES6+ support
 - **Python 3.x**: Required for running the development and production servers (Python 2.7 is supported as a fallback)
+- **Node.js & npm** (optional): Only needed if you want to use the `npm start` / `npm run dev` shortcut scripts defined in `package.json`
 - **Git**: For cloning the repository (optional if downloading as ZIP)
 
 ### Installation
@@ -72,7 +74,18 @@ backhomebrew/
 
 To run the application locally, choose one of the following methods:
 
-#### Option 1: Using the deployment script (Recommended)
+#### Option 1: Using npm scripts (Recommended)
+
+The repository includes a `package.json` with shortcut scripts:
+
+```bash
+npm start    # Serves the site on http://localhost:8080
+npm run dev  # Serves the site on http://localhost:3000
+```
+
+Both scripts wrap `python3 -m http.server`, so Python 3 must be installed.
+
+#### Option 2: Using the deployment script
 ```bash
 chmod +x deploy.sh  # Make script executable (Linux/Mac)
 ./deploy.sh
@@ -80,12 +93,12 @@ chmod +x deploy.sh  # Make script executable (Linux/Mac)
 
 The server will start on `http://localhost:8080` by default.
 
-#### Option 2: Using Python 3
+#### Option 3: Using Python 3 directly
 ```bash
 python3 -m http.server 8080
 ```
 
-#### Option 3: Using Python 2 (Legacy)
+#### Option 4: Using Python 2 (Legacy)
 ```bash
 python -m SimpleHTTPServer 8080
 ```
@@ -863,7 +876,7 @@ Example issue format:
 
 ## License
 
-This project is open source. Please check the repository for specific license information.
+This project is licensed under the **MIT License**, as declared in the `license` field of `package.json`. You are free to use, modify, and distribute the code, provided the original copyright and license notice are retained.
 
 ---
 
