@@ -404,7 +404,7 @@ function showOrderCheckoutSheet(orderSummary, totalBTC, totalUSD) {
                     <p>Send the exact total to the address below. Reply with the txid to <a href="mailto:orders@backhomebrew.com">orders@backhomebrew.com</a> — we'll start brewing as soon as it confirms.</p>
                     <span class="field-label">Address</span>
                     <div class="address-block" id="btc-address">${BITCOIN_ADDRESS}</div>
-                    <div class="actions">
+                    <div class="checkout-actions">
                         <button class="btn btn-primary" type="button" onclick="copyBitcoinAddress()">Copy address</button>
                         <a href="bitcoin:${BITCOIN_ADDRESS}?amount=${formatBtc(totalBTC)}" class="btn btn-ghost">Open in wallet</a>
                     </div>

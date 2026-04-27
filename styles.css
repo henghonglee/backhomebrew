@@ -1904,7 +1904,7 @@ html {
     padding: clamp(1.25rem, 4vw, 2.5rem);
 }
 
-.order .section-band:first-of-type {
+.order .menu-head + .section-band {
     margin-top: 0;
 }
 
