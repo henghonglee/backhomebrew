@@ -2603,20 +2603,19 @@ html {
 
 .order .summary-grid {
     border-top: 1px solid rgba(236, 228, 211, 0.2);
+    display: grid;
 }
 
-.order .summary-grid > div {
+.order .summary-row {
+    align-items: start;
     border-bottom: 1px solid rgba(236, 228, 211, 0.2);
-    padding: 1rem 0;
-}
-
-.order .summary-grid {
     display: grid;
     gap: 1rem;
     grid-template-columns: minmax(0, 1fr) auto;
+    padding: 1rem 0;
 }
 
-.order .summary-grid strong {
+.order .summary-row strong {
     color: var(--bone);
     display: block;
     font-family: var(--display);
@@ -2625,7 +2624,7 @@ html {
     letter-spacing: -0.04em;
 }
 
-.order .summary-grid span,
+.order .summary-row span,
 .order .summary-foot {
     color: rgba(236, 228, 211, 0.64);
     font-size: 0.78rem;
@@ -2634,7 +2633,7 @@ html {
     text-transform: uppercase;
 }
 
-.order .summary-grid > div:nth-child(2n) {
+.order .summary-row .amount {
     color: var(--mustard);
     font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     text-align: right;

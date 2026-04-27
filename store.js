@@ -431,21 +431,6 @@ function showOrderCheckoutSheet(orderSummary, totalBTC, totalUSD) {
             </div>
         </div>
     `;
-                                <strong>${escapeHtml(item.name)}</strong>
-                                <span>${escapeHtml(item.options || 'House selection')} · ×${item.quantity}</span>
-                            </div>
-                            <div>${formatBtc(item.btcPrice * item.quantity)} ฿</div>
-                        `).join('')}
-                    </div>
-                    <div class="summary-total">
-                        <span class="label">Total</span>
-                        <span class="val">${formatBtc(totalBTC)} ฿</span>
-                    </div>
-                    <div class="summary-foot">Pickup · 22 Tanjong Pagar Lane · ready in ~20 min after confirm</div>
-                </div>
-            </div>
-        </div>
-    `;
 
     modal.addEventListener('click', event => {
         if (event.target === modal) {
