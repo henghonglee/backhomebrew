@@ -28,8 +28,7 @@ backhomebrew/
 ├── order.html              # Shopping cart, order review, and Bitcoin checkout page
 ├── main.js                 # Core functionality: navigation, mobile menu, cart synchronization
 ├── store.js                # Store features: product data, cart operations, Bitcoin conversion
-├── styles.css              # Global stylesheet (layout, typography, colors, animations)
-├── store.css               # Store-specific component styling
+├── styles.css              # Global and scoped page styling, including Editorial Onyx shop styles
 ├── order.css               # Order page and cart styling
 ├── background.avif         # High-quality hero section background image
 ├── deploy.sh               # Production deployment script (Python HTTP server)
@@ -369,16 +368,6 @@ Global styles for the entire application:
 - Animation and transition definitions
 - Mobile menu styles
 
-#### `store.css` (9,424 bytes)
-Store page specific styling:
-- Product grid layout with CSS Grid
-- Product card styling and hover effects
-- Add to cart button styling
-- Product image styling
-- Price display styling (USD and Bitcoin)
-- Responsive breakpoints for tablets and mobile
-- Card elevation and shadow effects
-
 #### `order.css` (10,013 bytes)
 Order and cart page styling:
 - Cart container and item list layout
@@ -503,7 +492,7 @@ To customize the application's appearance:
    }
    ```
 
-3. **Page-Specific Styles** - Edit store.css, order.css, etc.
+3. **Page-Specific Styles** - Edit scoped blocks in `styles.css` or page files such as `order.css`.
 
 4. **Responsive Design** - Update media query breakpoints as needed:
    ```css

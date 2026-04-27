@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Back Home Brew Store - Bitcoin Only</title>
+    <title>Back Home Brew Shop - Bitcoin Only</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="store.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="shop">
     <header class="header">
         <nav class="nav">
             <div class="nav-brand">
-                <h1>
+                <div class="site-title">
                     <a href="index.html">
                         Back Home Brew
                         <svg class="logo-house-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -22,18 +21,15 @@
                             <circle cx="12" cy="9" r="1"></circle>
                         </svg>
                     </a>
-                </h1>
+                </div>
             </div>
             <div class="nav-links">
-                <a href="index.html#about">About</a>
-                <a href="index.html#menu">Menu</a>
-                <a href="store.html" class="active">Store</a>
-                <a href="order.html">Order</a>
-                <a href="index.html#contact">Contact</a>
-                <div class="cart-icon" onclick="toggleCart()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
-                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
-                    </svg>
+                <a href="index.html#origin" class="hide-sm">Story</a>
+                <a href="index.html#menu" class="hide-sm">Menu</a>
+                <a href="store.html" class="active">The Shop</a>
+                <a href="index.html#visit" class="hide-sm">Visit</a>
+                <div class="cart-icon" onclick="toggleCart()" role="button" tabindex="0" aria-label="Open cart">
+                    Cart
                     <span id="cart-count">0</span>
                 </div>
             </div>
@@ -44,249 +40,283 @@
             </div>
         </nav>
         <div class="mobile-menu" id="mobile-menu">
-            <a href="index.html#about" onclick="closeMobileMenu()">About</a>
+            <a href="index.html#origin" onclick="closeMobileMenu()">Story</a>
             <a href="index.html#menu" onclick="closeMobileMenu()">Menu</a>
-            <a href="store.html" class="active">Store</a>
-            <a href="order.html">Order</a>
-            <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
-            <div class="cart-icon mobile-cart" onclick="toggleCart(); closeMobileMenu()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
-                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
-                </svg>
+            <a href="store.html" class="active">The Shop</a>
+            <a href="index.html#visit" onclick="closeMobileMenu()">Visit</a>
+            <div class="cart-icon mobile-cart" onclick="toggleCart(); closeMobileMenu()" role="button" tabindex="0" aria-label="Open cart">
+                Cart
                 <span id="mobile-cart-count">0</span>
             </div>
         </div>
     </header>
 
-    <main class="store-main">
-        <section class="store-hero">
-            <div class="container">
-                <h1>Back Home Brew Store</h1>
-                <p>Premium coffee swag for the Bitcoin community</p>
-                <div class="bitcoin-badge">
-                    <span class="bitcoin-icon">₿</span>
-                    <span>Bitcoin Payments Only</span>
+    <main>
+        <section class="shop-hero">
+            <div class="hero-bg" aria-hidden="true"></div>
+            <div class="hero-eyebrow">Est. 2024 · The Shop · N°01</div>
+            <h1 class="hero-headline">Wear the <em>brew</em>.</h1>
+            <div class="hero-bottom">
+                <div>
+                    <p class="hero-lede">Small-batch goods, made by hand for the morning ritual. Limited runs, paid in Bitcoin, shipped from the kitchen counter.</p>
+                    <div class="hero-actions">
+                        <a href="#catalog" class="btn btn-primary">Shop the catalog</a>
+                        <a href="index.html#origin" class="btn btn-ghost">The story</a>
+                    </div>
+                </div>
+                <div class="hero-meta" aria-label="Shop details">
+                    <span><strong>06</strong> goods</span>
+                    <span><strong>BTC</strong> only</span>
+                    <span><strong>3–5</strong> days</span>
                 </div>
             </div>
         </section>
 
-        <section class="products">
-            <div class="container">
-                <div class="products-grid">
-                    <div class="product-card" data-product="tshirt">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a" alt="T-Shirt">
-                        </div>
-                        <div class="product-info">
-                            <h3>Back Home Brew T-Shirt</h3>
-                            <p>Premium cotton tee with our signature logo</p>
-                            <div class="product-options">
-                                <select class="size-select">
-                                    <option value="">Select Size</option>
-                                    <option value="S">Small</option>
-                                    <option value="M">Medium</option>
-                                    <option value="L">Large</option>
-                                    <option value="XL">X-Large</option>
-                                    <option value="XXL">XX-Large</option>
-                                </select>
-                            </div>
-                            <div class="product-price">
-                                <span class="btc-price">0.0008 BTC</span>
-                                <span class="sats-price">80,000 sats</span>
-                                <span class="usd-price">≈ $25.00</span>
-                            </div>
-                            <button class="add-to-cart" onclick="addToCart('tshirt', 'Back Home Brew T-Shirt', 0.0008, 25.00)">Add to Cart</button>
-                        </div>
-                    </div>
+        <section class="catalog" id="catalog">
+            <div class="catalog-head">
+                <div>
+                    <div class="section-label">The Catalog · N°02</div>
+                    <h2>Goods,<br>made at <em>home</em>.</h2>
+                </div>
+                <div class="filter-chips" aria-label="Catalog categories">
+                    <span>All</span>
+                    <span>Apparel</span>
+                    <span>Kitchen</span>
+                    <span>Beans</span>
+                </div>
+            </div>
 
-                    <div class="product-card" data-product="cap">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1533827432537-70133748f5c8" alt="Cap">
-                        </div>
-                        <div class="product-info">
-                            <h3>Coffee Lover's Cap</h3>
-                            <p>Adjustable cap with embroidered logo</p>
-                            <div class="product-options">
-                                <select class="color-select">
-                                    <option value="">Select Color</option>
-                                    <option value="black">Black</option>
-                                    <option value="brown">Coffee Brown</option>
-                                    <option value="cream">Cream</option>
-                                </select>
-                            </div>
-                            <div class="product-price">
-                                <span class="btc-price">0.0006 BTC</span>
-                                <span class="sats-price">60,000 sats</span>
-                                <span class="usd-price">≈ $20.00</span>
-                            </div>
-                            <button class="add-to-cart" onclick="addToCart('cap', 'Coffee Lover\'s Cap', 0.0006, 20.00)">Add to Cart</button>
-                        </div>
+            <div class="catalog-grid" data-decision="1" id="catalog-grid">
+                <article class="product" data-product="tshirt">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=900&q=80" alt="Folded cotton Back Home Brew house tee">
                     </div>
+                    <div class="product-info">
+                        <div class="num">N°01</div>
+                        <h3>House Tee</h3>
+                        <p>Premium cotton. Signature mark. Cut for the long walk back from the counter.</p>
+                        <div class="product-price">
+                            <span class="btc-price">0.0008 BTC</span>
+                            <span class="usd-price">≈ $25</span>
+                        </div>
+                        <label class="product-options">
+                            <span>Size</span>
+                            <select class="size-select" aria-label="House Tee size">
+                                <option value="">Select Size</option>
+                                <option value="S">Small</option>
+                                <option value="M">Medium</option>
+                                <option value="L">Large</option>
+                                <option value="XL">X-Large</option>
+                                <option value="XXL">XX-Large</option>
+                            </select>
+                        </label>
+                        <button class="add-to-cart btn btn-primary" onclick="addToCart('tshirt', 'House Tee', 0.0008, 25.00)">Add to cart</button>
+                    </div>
+                </article>
 
-                    <div class="product-card" data-product="cup">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772" alt="Coffee Cup">
-                        </div>
-                        <div class="product-info">
-                            <h3>Ceramic Coffee Cup</h3>
-                            <p>Perfect 12oz ceramic mug for your morning brew</p>
-                            <div class="product-options">
-                                <select class="color-select">
-                                    <option value="">Select Color</option>
-                                    <option value="white">Classic White</option>
-                                    <option value="brown">Coffee Brown</option>
-                                    <option value="black">Midnight Black</option>
-                                </select>
-                            </div>
-                            <div class="product-price">
-                                <span class="btc-price">0.0005 BTC</span>
-                                <span class="sats-price">50,000 sats</span>
-                                <span class="usd-price">≈ $15.00</span>
-                            </div>
-                            <button class="add-to-cart" onclick="addToCart('cup', 'Ceramic Coffee Cup', 0.0005, 15.00)">Add to Cart</button>
-                        </div>
+                <article class="product" data-product="hoodie">
+                    <div class="product-image">
+                        <img src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Heavyweight Back Home Brew house hoodie">
                     </div>
+                    <div class="product-info">
+                        <div class="num">N°02</div>
+                        <h3>House Hoodie</h3>
+                        <p>Heavyweight fleece for early roasts, late ledgers, and cold kitchen floors.</p>
+                        <div class="product-price">
+                            <span class="btc-price">0.0020 BTC</span>
+                            <span class="usd-price">≈ $65</span>
+                        </div>
+                        <label class="product-options">
+                            <span>Size</span>
+                            <select class="size-select" aria-label="House Hoodie size">
+                                <option value="">Select Size</option>
+                                <option value="S">Small</option>
+                                <option value="M">Medium</option>
+                                <option value="L">Large</option>
+                                <option value="XL">X-Large</option>
+                                <option value="XXL">XX-Large</option>
+                            </select>
+                        </label>
+                        <button class="add-to-cart btn btn-primary" onclick="addToCart('hoodie', 'House Hoodie', 0.0020, 65.00)">Add to cart</button>
+                    </div>
+                </article>
 
-                    <div class="product-card" data-product="jacket">
-                        <div class="product-image">
-                            <img src="https://images.pexels.com/photos/1183266/pexels-photo-1183266.jpeg" alt="Back Home Brew Hoodie">
-                        </div>
-                        <div class="product-info">
-                            <h3>Back Home Brew Hoodie</h3>
-                            <p>Cozy fleece hoodie perfect for coffee runs</p>
-                            <div class="product-options">
-                                <select class="size-select">
-                                    <option value="">Select Size</option>
-                                    <option value="S">Small</option>
-                                    <option value="M">Medium</option>
-                                    <option value="L">Large</option>
-                                    <option value="XL">X-Large</option>
-                                    <option value="XXL">XX-Large</option>
-                                </select>
-                            </div>
-                            <div class="product-price">
-                                <span class="btc-price">0.002 BTC</span>
-                                <span class="sats-price">200,000 sats</span>
-                                <span class="usd-price">≈ $65.00</span>
-                            </div>
-                            <button class="add-to-cart" onclick="addToCart('jacket', 'Back Home Brew Hoodie', 0.002, 65.00)">Add to Cart</button>
-                        </div>
+                <article class="product" data-product="mug">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=900&q=80" alt="Ceramic Back Home Brew kitchen mug">
                     </div>
+                    <div class="product-info">
+                        <div class="num">N°03</div>
+                        <h3>Kitchen Mug</h3>
+                        <p>Stoneware weight, morning grip, and enough room for the second pour.</p>
+                        <div class="product-price">
+                            <span class="btc-price">0.0005 BTC</span>
+                            <span class="usd-price">≈ $15</span>
+                        </div>
+                        <label class="product-options">
+                            <span>Color</span>
+                            <select class="color-select" aria-label="Kitchen Mug color">
+                                <option value="">Select Color</option>
+                                <option value="bone">Bone</option>
+                                <option value="onyx">Onyx</option>
+                                <option value="coffee">Coffee Brown</option>
+                            </select>
+                        </label>
+                        <button class="add-to-cart btn btn-primary" onclick="addToCart('mug', 'Kitchen Mug', 0.0005, 15.00)">Add to cart</button>
+                    </div>
+                </article>
 
-                    <div class="product-card" data-product="bag">
-                        <div class="product-image">
-                            <img src="https://images.unsplash.com/photo-1547949003-9792a18a2601" alt="Messenger Bag">
-                        </div>
-                        <div class="product-info">
-                            <h3>Messenger Bag</h3>
-                            <p>Durable canvas bag for your daily essentials</p>
-                            <div class="product-options">
-                                <select class="color-select">
-                                    <option value="">Select Color</option>
-                                    <option value="khaki">Khaki</option>
-                                    <option value="brown">Coffee Brown</option>
-                                    <option value="black">Black</option>
-                                </select>
-                            </div>
-                            <div class="product-price">
-                                <span class="btc-price">0.0015 BTC</span>
-                                <span class="sats-price">150,000 sats</span>
-                                <span class="usd-price">≈ $45.00</span>
-                            </div>
-                            <button class="add-to-cart" onclick="addToCart('bag', 'Messenger Bag', 0.0015, 45.00)">Add to Cart</button>
-                        </div>
+                <article class="product" data-product="tote">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1547949003-9792a18a2601?auto=format&fit=crop&w=900&q=80" alt="Canvas Back Home Brew market tote">
                     </div>
+                    <div class="product-info">
+                        <div class="num">N°04</div>
+                        <h3>Market Tote</h3>
+                        <p>Canvas carry-all for beans, paperbacks, and the things you forgot to list.</p>
+                        <div class="product-price">
+                            <span class="btc-price">0.0015 BTC</span>
+                            <span class="usd-price">≈ $45</span>
+                        </div>
+                        <label class="product-options">
+                            <span>Color</span>
+                            <select class="color-select" aria-label="Market Tote color">
+                                <option value="">Select Color</option>
+                                <option value="khaki">Khaki</option>
+                                <option value="coffee">Coffee Brown</option>
+                                <option value="black">Black</option>
+                            </select>
+                        </label>
+                        <button class="add-to-cart btn btn-primary" onclick="addToCart('tote', 'Market Tote', 0.0015, 45.00)">Add to cart</button>
+                    </div>
+                </article>
 
-                    <div class="product-card" data-product="tumbler">
-                        <div class="product-image">
-                            <img src="https://images.pexels.com/photos/8581023/pexels-photo-8581023.jpeg" alt="Insulated Tumbler">
-                        </div>
-                        <div class="product-info">
-                            <h3>Insulated Tumbler</h3>
-                            <p>20oz stainless steel tumbler keeps drinks hot or cold</p>
-                            <div class="product-options">
-                                <select class="color-select">
-                                    <option value="">Select Color</option>
-                                    <option value="silver">Stainless Steel</option>
-                                    <option value="black">Matte Black</option>
-                                    <option value="brown">Coffee Brown</option>
-                                </select>
-                            </div>
-                            <div class="product-price">
-                                <span class="btc-price">0.0007 BTC</span>
-                                <span class="sats-price">70,000 sats</span>
-                                <span class="usd-price">≈ $22.00</span>
-                            </div>
-                            <button class="add-to-cart" onclick="addToCart('tumbler', 'Insulated Tumbler', 0.0007, 22.00)">Add to Cart</button>
-                        </div>
+                <article class="product" data-product="beans">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=900&q=80" alt="Bag of Back Home Brew house beans">
                     </div>
+                    <div class="product-info">
+                        <div class="num">N°05</div>
+                        <h3>House Beans</h3>
+                        <p>A rotating roast from the same small batches poured at the counter.</p>
+                        <div class="product-price">
+                            <span class="btc-price">0.0009 BTC</span>
+                            <span class="usd-price">≈ $28</span>
+                        </div>
+                        <label class="product-options">
+                            <span>Grind</span>
+                            <select class="color-select" aria-label="House Beans grind">
+                                <option value="">Select Grind</option>
+                                <option value="whole">Whole Bean</option>
+                                <option value="espresso">Espresso</option>
+                                <option value="filter">Filter</option>
+                            </select>
+                        </label>
+                        <button class="add-to-cart btn btn-primary" onclick="addToCart('beans', 'House Beans', 0.0009, 28.00)">Add to cart</button>
+                    </div>
+                </article>
+
+                <article class="product" data-product="cap">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1533827432537-70133748f5c8?auto=format&fit=crop&w=900&q=80" alt="Back Home Brew embroidered coffee cap">
+                    </div>
+                    <div class="product-info">
+                        <div class="num">N°06</div>
+                        <h3>Coffee Cap</h3>
+                        <p>Low-profile cotton twill with a stitched mark and a kitchen-counter curve.</p>
+                        <div class="product-price">
+                            <span class="btc-price">0.0006 BTC</span>
+                            <span class="usd-price">≈ $20</span>
+                        </div>
+                        <label class="product-options">
+                            <span>Color</span>
+                            <select class="color-select" aria-label="Coffee Cap color">
+                                <option value="">Select Color</option>
+                                <option value="black">Black</option>
+                                <option value="coffee">Coffee Brown</option>
+                                <option value="cream">Cream</option>
+                            </select>
+                        </label>
+                        <button class="add-to-cart btn btn-primary" onclick="addToCart('cap', 'Coffee Cap', 0.0006, 20.00)">Add to cart</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="pull-quote" aria-label="The House Manifesto">
+            <blockquote>
+                "Made by hand.<br>
+                Worn at <em>home</em>."
+            </blockquote>
+            <div class="pull-quote-meta">
+                <span class="pull-quote-attr">— The House Manifesto · N°03</span>
+                <div class="pull-quote-dots" id="dots" aria-hidden="true">
+                    <span class="pull-quote-dot on"></span>
+                    <span class="pull-quote-dot"></span>
+                    <span class="pull-quote-dot"></span>
                 </div>
             </div>
         </section>
 
-        <section class="bitcoin-info">
-            <div class="container">
-                <div class="bitcoin-payment-info">
-                    <h2>Bitcoin Payments Only</h2>
-                    <div class="bitcoin-features">
-                        <div class="bitcoin-feature">
-                            <span class="feature-icon">🔒</span>
-                            <h3>Secure</h3>
-                            <p>Decentralized and encrypted transactions</p>
-                        </div>
-                        <div class="bitcoin-feature">
-                            <span class="feature-icon">⚡</span>
-                            <h3>Fast</h3>
-                            <p>Quick processing with Lightning Network</p>
-                        </div>
-                        <div class="bitcoin-feature">
-                            <span class="feature-icon">🌍</span>
-                            <h3>Global</h3>
-                            <p>No borders, no traditional banking limits</p>
-                        </div>
-                    </div>
-                    <p class="bitcoin-note">We believe in the future of decentralized currency. All prices are calculated in Bitcoin first, USD is for reference only.</p>
-                </div>
+        <section class="fine-print">
+            <div class="fine-print-head">
+                <div class="section-label">The Fine Print · N°04</div>
+                <h2>Before you<br>check out.</h2>
+            </div>
+            <div class="fine-print-grid">
+                <article class="fine-print-cell">
+                    <div class="label">Shipping</div>
+                    <h3>3–5 days</h3>
+                    <p><strong>Domestic only.</strong> Packed and posted from the kitchen counter, Mon–Wed.</p>
+                </article>
+                <article class="fine-print-cell">
+                    <div class="label">Returns</div>
+                    <h3>14 days</h3>
+                    <p><strong>Unworn, unwashed.</strong> Beans and kitchenware are final sale.</p>
+                </article>
+                <article class="fine-print-cell">
+                    <div class="label">Payment</div>
+                    <h3>BTC only</h3>
+                    <p><strong>On-chain or Lightning.</strong> Address shown at checkout. Confirm 1 block.</p>
+                </article>
+                <article class="fine-print-cell">
+                    <div class="label">Talk to us</div>
+                    <h3>Drop a line</h3>
+                    <p><strong>orders@backhomebrew.com</strong>. Replies within a day, usually faster.</p>
+                </article>
             </div>
         </section>
     </main>
 
-    <!-- Shopping Cart Sidebar -->
-    <div id="cart-sidebar" class="cart-sidebar">
-        <div class="cart-header">
-            <h3>Your Cart ⌂</h3>
-            <button class="close-cart" onclick="toggleCart()">×</button>
-        </div>
-        <div class="cart-items" id="cart-items">
-            <p class="empty-cart">Your cart is empty</p>
-        </div>
-        <div class="cart-footer" id="cart-footer" style="display: none;">
-            <div class="cart-total">
-                <div class="total-btc">Total: <span id="total-btc">0</span> BTC</div>
-                <div class="total-usd">≈ $<span id="total-usd">0.00</span></div>
-            </div>
-            <button class="checkout-btn" onclick="checkout()">Checkout with Bitcoin</button>
-        </div>
-    </div>
-    
-    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
-
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>Back Home Brew ⌂</h3>
-                    <p>Coffee & Bitcoin - The Perfect Blend</p>
-                </div>
-                <div class="footer-social">
-                    <p>Follow us: @backhomebrew</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Back Home Brew. Powered by Bitcoin ₿</p>
-            </div>
+        <div>
+            <div class="footer-brand">Back Home Brew</div>
+            <div class="footer-meta">— Made at home · Est. 2024</div>
+        </div>
+        <div class="footer-meta">
+            Home · Menu · The Shop · Visit<br>
+            <span>orders@backhomebrew.com</span>
         </div>
     </footer>
+
+    <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+    <aside id="cart-sidebar" class="cart-sidebar" aria-label="Shopping cart">
+        <div class="cart-drawer-head">
+            <div>
+                <div class="label">— Your Cart</div>
+                <h3 id="cart-title">Empty</h3>
+            </div>
+            <button class="close-cart" onclick="toggleCart()" aria-label="Close cart">×</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <div class="cart-empty">No goods yet.<br>The catalog awaits.</div>
+        </div>
+        <div class="cart-foot" id="cart-footer" hidden>
+            <div class="cart-totals"><span>Subtotal</span><span id="sub-fiat">$0.00</span></div>
+            <div class="cart-totals grand"><span>Total · BTC</span><span class="grand-amt" id="sub-btc">0.00000000</span></div>
+            <button class="checkout-btn" onclick="checkout()">Pay with Bitcoin</button>
+        </div>
+    </aside>
 
     <script src="main.js"></script>
     <script src="store.js"></script>
@@ -294,6 +324,33 @@
         window.addEventListener('DOMContentLoaded', () => {
             document.body.style.visibility = 'visible';
             document.body.style.opacity = '1';
+
+            const hero = document.querySelector('.shop .shop-hero');
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (hero && !reduceMotion) {
+                const moveHero = () => {
+                    const heroBottom = hero.offsetTop + hero.offsetHeight;
+                    if (window.scrollY <= heroBottom) {
+                        hero.style.setProperty('--hero-y', `calc(50% + ${window.scrollY * 0.2}px)`);
+                    }
+                };
+
+                moveHero();
+                        window.addEventListener('scroll', moveHero, { passive: true });
+            }
+
+            const dots = Array.from(document.querySelectorAll('.pull-quote-dot'));
+            if (dots.length > 0 && !reduceMotion) {
+                let activeDot = dots.findIndex(dot => dot.classList.contains('on'));
+                activeDot = activeDot === -1 ? 0 : activeDot;
+
+                setInterval(() => {
+                    dots[activeDot].classList.remove('on');
+                    activeDot = (activeDot + 1) % dots.length;
+                    dots[activeDot].classList.add('on');
+                }, 2800);
+            }
         });
     </script>
 </body>

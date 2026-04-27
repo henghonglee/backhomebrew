@@ -3,10 +3,8 @@ function toggleMobileMenu() {
     const mobileToggle = document.querySelector('.mobile-menu-toggle');
     const cartCount = document.getElementById('cart-count');
     const mobileCartCount = document.getElementById('mobile-cart-count');
-    
     mobileMenu.classList.toggle('active');
     mobileToggle.classList.toggle('active');
-    
     // Sync cart count
     if (cartCount && mobileCartCount) {
         mobileCartCount.textContent = cartCount.textContent;
@@ -16,7 +14,6 @@ function toggleMobileMenu() {
 function closeMobileMenu() {
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileToggle = document.querySelector('.mobile-menu-toggle');
-    
     mobileMenu.classList.remove('active');
     mobileToggle.classList.remove('active');
 }
@@ -55,14 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     window.addEventListener('scroll', onScroll);
-    
     // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileToggle = document.querySelector('.mobile-menu-toggle');
-        
-        if (mobileMenu && mobileMenu.classList.contains('active') && 
-            !mobileMenu.contains(e.target) && 
+
+        if (mobileMenu && mobileMenu.classList.contains('active') &&
+            !mobileMenu.contains(e.target) &&
             !mobileToggle.contains(e.target)) {
             closeMobileMenu();
         }
