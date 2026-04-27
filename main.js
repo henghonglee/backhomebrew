@@ -22,22 +22,21 @@ function closeMobileMenu() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const navLinks = document.querySelectorAll('.nav-links a[href^="index.html#"]');
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"], .nav-links a[href^="index.html#"]');
     const sections = [];
 
     navLinks.forEach(link => {
-        const sectionId = link.getAttribute('href').split('#')[1];
+        const href = link.getAttribute('href');
+        const sectionId = href.includes('#') ? href.split('#')[1] : null;
         if (sectionId) {
             const section = document.getElementById(sectionId);
-            if (section) {
-                sections.push(section);
-            }
+            if (section) sections.push(section);
         }
     });
 
     const onScroll = () => {
         const scrollPosition = window.scrollY;
-        const offset = 100; // Offset for the fixed header height
+        const offset = 100;
 
         let currentSection = null;
         sections.forEach(section => {
@@ -48,23 +47,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (currentSection && link.getAttribute('href') === `index.html#${currentSection.id}`) {
-                link.classList.add('active');
+            if (currentSection) {
+                const href = link.getAttribute('href');
+                if (href === `#${currentSection.id}` || href === `index.html#${currentSection.id}`) {
+                    link.classList.add('active');
+                }
             }
         });
     };
 
     window.addEventListener('scroll', onScroll);
-    
+
     // Close mobile menu when clicking outside
     document.addEventListener('click', (e) => {
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileToggle = document.querySelector('.mobile-menu-toggle');
-        
-        if (mobileMenu && mobileMenu.classList.contains('active') && 
-            !mobileMenu.contains(e.target) && 
+
+        if (mobileMenu && mobileMenu.classList.contains('active') &&
+            !mobileMenu.contains(e.target) &&
             !mobileToggle.contains(e.target)) {
             closeMobileMenu();
         }
     });
+
+    // Sticky cart pill — fade in once the hero scrolls out of view.
+    const hero = document.getElementById('hero');
+    const pill = document.getElementById('cart-pill');
+    if (hero && pill && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    pill.classList.remove('is-visible');
+                } else {
+                    pill.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        observer.observe(hero);
+    }
 });
