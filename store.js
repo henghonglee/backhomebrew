@@ -234,7 +234,40 @@ function removeFromCart(itemId) {
 
 function updateCartCount() {
     const cartCount = document.getElementById('cart-count');
-    cartCount.textContent = cart.length;
+    if (cartCount) cartCount.textContent = cart.length;
+
+    const mobileCartCount = document.getElementById('mobile-cart-count');
+    if (mobileCartCount) mobileCartCount.textContent = cart.length;
+
+    const pillCount = document.getElementById('pillCount');
+    if (pillCount) pillCount.textContent = cart.length;
+}
+
+// Quick-add for typographic menu cards on the home page.
+// The button lives inside an element marked with [data-menu-item] and carries
+// data-name / data-btc / data-usd attributes — no size/options to validate.
+function addMenuItem(button) {
+    const card = button.closest('[data-menu-item]');
+    if (!card) return;
+
+    const name = card.dataset.name;
+    const btcPrice = parseFloat(card.dataset.btc);
+    const usdPrice = parseFloat(card.dataset.usd);
+
+    cart.push({
+        id: Date.now(),
+        productId: name.toLowerCase().replace(/\s+/g, '-'),
+        name,
+        btcPrice,
+        usdPrice,
+        options: '',
+        quantity: 1,
+        type: 'coffee'
+    });
+
+    updateCartUI();
+    updateCartCount();
+    showAddToCartMessage(name);
 }
 
 function updateCartUI() {
