@@ -26,6 +26,10 @@ function isShopPage() {
     return document.body.classList.contains('shop');
 }
 
+function isOrderPage() {
+    return document.body.classList.contains('order');
+}
+
 function showToast(message, options = {}) {
     const type = options.type || 'info';
     let toastContainer = document.getElementById('toast-container');
@@ -222,7 +226,9 @@ function updateCartUI() {
     if (cart.length === 0) {
         cartItems.innerHTML = isShopPage()
             ? '<div class="cart-empty">No goods yet.<br>The catalog awaits.</div>'
-            : '<p class="empty-cart">Your cart is empty</p>';
+            : isOrderPage()
+                ? '<div class="cart-empty">No cups yet — pick something from the list and we&#39;ll start a tab.</div>'
+                : '<p class="empty-cart">Your cart is empty</p>';
 
         if (cartTitle) cartTitle.textContent = 'Empty';
         cartFooter.hidden = true;
@@ -236,7 +242,11 @@ function updateCartUI() {
 
     if (cartTitle) cartTitle.textContent = `${totalItems} item${totalItems === 1 ? '' : 's'}`;
 
-    cartItems.innerHTML = cart.map(item => isShopPage() ? renderShopCartLine(item) : renderLegacyCartItem(item)).join('');
+    cartItems.innerHTML = cart.map(item => {
+        if (isShopPage()) return renderShopCartLine(item);
+        if (isOrderPage()) return renderOrderCartLine(item);
+        return renderLegacyCartItem(item);
+    }).join('');
 
     const subBtc = document.getElementById('sub-btc');
     const subFiat = document.getElementById('sub-fiat');
@@ -245,11 +255,35 @@ function updateCartUI() {
 
     if (subBtc) subBtc.textContent = formatBtc(totalBTC);
     if (subFiat) subFiat.textContent = `$${totalUSD.toFixed(2)}`;
-    if (totalBtc) totalBtc.textContent = totalBTC.toFixed(4);
+    if (totalBtc) totalBtc.textContent = isOrderPage() ? `${formatBtc(totalBTC)} ฿` : totalBTC.toFixed(4);
     if (totalUsd) totalUsd.textContent = totalUSD.toFixed(2);
 
     cartFooter.hidden = false;
     cartFooter.style.display = isShopPage() ? 'block' : 'block';
+}
+
+function renderOrderCartLine(item) {
+    const safeName = escapeHtml(item.name);
+    const safeOptions = escapeHtml(item.options || 'House selection');
+    const lineBtc = item.btcPrice * item.quantity;
+
+    return `
+        <div class="cart-line">
+            <div class="cart-line-main">
+                <div class="cart-line-name">${safeName}</div>
+                <div class="cart-line-price">${formatBtc(lineBtc)} ฿</div>
+            </div>
+            <div class="cart-line-opt">${safeOptions} · ×${item.quantity}</div>
+            <div class="cart-line-actions">
+                <div class="cart-line-qty" aria-label="Quantity for ${safeName}">
+                    <button onclick="changeQuantity(${item.id}, -1)" aria-label="Decrease quantity">−</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="changeQuantity(${item.id}, 1)" aria-label="Increase quantity">+</button>
+                </div>
+                <button class="cart-line-remove" onclick="removeFromCart(${item.id})">Remove</button>
+            </div>
+        </div>
+    `;
 }
 
 function renderShopCartLine(item) {
@@ -342,12 +376,87 @@ function checkout() {
 }
 
 function showCheckoutModal(orderSummary, totalBTC, totalUSD) {
+    if (isOrderPage()) {
+        showOrderCheckoutSheet(orderSummary, totalBTC, totalUSD);
+        return;
+    }
+
     if (isShopPage()) {
         showShopCheckoutModal(orderSummary, totalBTC, totalUSD);
         return;
     }
 
     showLegacyCheckoutModal(orderSummary, totalBTC, totalUSD);
+}
+
+function showOrderCheckoutSheet(orderSummary, totalBTC, totalUSD) {
+    const modal = document.createElement('div');
+    modal.className = 'checkout-modal';
+    modal.innerHTML = `
+        <div class="checkout-sheet" role="dialog" aria-modal="true" aria-labelledby="order-checkout-title" data-decision="4">
+            <div class="checkout-head">
+                <span class="eyebrow">— CHECKOUT · NO. 04</span>
+                <button class="checkout-close" type="button" onclick="closeCheckoutModal({ preserveCart: true })">Close ×</button>
+            </div>
+            <div class="checkout-body">
+                <div class="checkout-pay">
+                    <h2 id="order-checkout-title">Pay in <em>bitcoin</em>.</h2>
+                    <p>Send the exact total to the address below. Reply with the txid to <a href="mailto:orders@backhomebrew.com">orders@backhomebrew.com</a> — we'll start brewing as soon as it confirms.</p>
+                    <span class="field-label">Address</span>
+                    <div class="address-block" id="btc-address">${BITCOIN_ADDRESS}</div>
+                    <div class="actions">
+                        <button class="btn btn-primary" type="button" onclick="copyBitcoinAddress()">Copy address</button>
+                        <a href="bitcoin:${BITCOIN_ADDRESS}?amount=${formatBtc(totalBTC)}" class="btn btn-ghost">Open in wallet</a>
+                    </div>
+                </div>
+                <div class="checkout-summary">
+                    <span class="eyebrow">Order summary</span>
+                    <div class="summary-grid">
+                        ${cart.map(item => `
+                            <div class="summary-row">
+                                <div>
+                                    <strong>${escapeHtml(item.name)}</strong>
+                                    <span>${escapeHtml(item.options || 'House selection')} · ×${item.quantity}</span>
+                                </div>
+                                <div class="amount">${formatBtc(item.btcPrice * item.quantity)} ฿</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="summary-total">
+                        <span class="label">Total</span>
+                        <span class="val">${formatBtc(totalBTC)} ฿</span>
+                    </div>
+                    <div class="summary-foot">Pickup · 22 Tanjong Pagar Lane · ready in ~20 min after confirm</div>
+                </div>
+            </div>
+        </div>
+    `;
+                                <strong>${escapeHtml(item.name)}</strong>
+                                <span>${escapeHtml(item.options || 'House selection')} · ×${item.quantity}</span>
+                            </div>
+                            <div>${formatBtc(item.btcPrice * item.quantity)} ฿</div>
+                        `).join('')}
+                    </div>
+                    <div class="summary-total">
+                        <span class="label">Total</span>
+                        <span class="val">${formatBtc(totalBTC)} ฿</span>
+                    </div>
+                    <div class="summary-foot">Pickup · 22 Tanjong Pagar Lane · ready in ~20 min after confirm</div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    modal.addEventListener('click', event => {
+        if (event.target === modal) {
+            closeCheckoutModal({ preserveCart: true });
+        }
+    });
+
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    window.currentModal = modal;
+    window.currentOrderSummary = orderSummary;
 }
 
 function showShopCheckoutModal(orderSummary, totalBTC, totalUSD) {
@@ -446,22 +555,188 @@ function copyBitcoinAddress() {
         .catch(fallbackCopy);
 }
 
-function closeCheckoutModal() {
+function closeCheckoutModal(options = {}) {
     if (window.currentModal) {
         window.currentModal.remove();
         window.currentModal = null;
         window.currentOrderSummary = null;
     }
 
-    cart = [];
+    if (!options.preserveCart) {
+        cart = [];
+        updateCartUI();
+        updateCartCount();
+        toggleCart(false);
+    } else if (!isCartOpen) {
+        document.body.style.overflow = 'auto';
+    }
+}
+
+let orderSheetState = {
+    card: null,
+    quantity: 1,
+    price: 0,
+    usdPrice: 0,
+    isPastry: false
+};
+
+function getActiveOption(groupName) {
+    const activeChip = document.querySelector(`.order-sheet .opt-row[data-group="${groupName}"] .opt-chip.active`);
+    return activeChip ? activeChip.dataset.value : '';
+}
+
+function updateOrderSheetAmount() {
+    const quantityValue = document.getElementById('qty-val');
+    const addAmount = document.getElementById('add-amount');
+    const total = orderSheetState.price * orderSheetState.quantity;
+
+    if (quantityValue) quantityValue.textContent = orderSheetState.quantity;
+    if (addAmount) addAmount.textContent = `${formatBtc(total)} ฿`;
+}
+
+function setOptionGroupVisibility(isPastry) {
+    const sizeGroup = document.getElementById('opt-size-group');
+    const milkGroup = document.getElementById('opt-milk-group');
+    const pastryGroup = document.getElementById('opt-pastry-group');
+
+    if (sizeGroup) sizeGroup.hidden = isPastry;
+    if (milkGroup) milkGroup.hidden = isPastry;
+    if (pastryGroup) pastryGroup.hidden = !isPastry;
+}
+
+function resetOrderSheetOptions() {
+    document.querySelectorAll('.order-sheet .opt-row').forEach(row => {
+        row.querySelectorAll('.opt-chip').forEach((chip, index) => {
+            chip.classList.toggle('active', index === 0);
+        });
+    });
+}
+
+function openOrderSheet(card) {
+    const sheet = document.getElementById('order-sheet');
+    const scrim = document.getElementById('order-scrim');
+    if (!sheet || !scrim) return;
+
+    const eyebrow = document.getElementById('sheet-eyebrow');
+    const title = document.getElementById('sheet-title');
+    const description = document.getElementById('sheet-desc');
+    const isPastry = card.dataset.pastry === '1';
+
+    orderSheetState = {
+        card,
+        quantity: 1,
+        price: Number(card.dataset.price || 0),
+        usdPrice: Number(card.dataset.usd || 0),
+        isPastry
+    };
+
+    if (eyebrow) eyebrow.textContent = `${card.dataset.num} · ${card.dataset.category}`;
+    if (title) title.innerHTML = card.dataset.title || escapeHtml(card.dataset.name);
+    if (description) description.textContent = card.dataset.description || '';
+
+    resetOrderSheetOptions();
+    setOptionGroupVisibility(isPastry);
+    updateOrderSheetAmount();
+
+    sheet.classList.add('open');
+    scrim.classList.add('open');
+    sheet.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeOrderSheet() {
+    const sheet = document.getElementById('order-sheet');
+    const scrim = document.getElementById('order-scrim');
+    if (!sheet || !scrim) return;
+
+    sheet.classList.remove('open');
+    scrim.classList.remove('open');
+    sheet.setAttribute('aria-hidden', 'true');
+    orderSheetState.card = null;
+    if (!isCartOpen && !window.currentModal) {
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function addConfiguredOrderItem() {
+    const card = orderSheetState.card;
+    if (!card) return;
+
+    const options = orderSheetState.isPastry
+        ? [`Variant: ${getActiveOption('pastry')}`]
+        : [`Size: ${getActiveOption('size')}`, `Milk: ${getActiveOption('milk')}`];
+
+    cart.push({
+        id: Date.now(),
+        productId: card.dataset.product,
+        name: card.dataset.name,
+        btcPrice: orderSheetState.price,
+        usdPrice: orderSheetState.usdPrice,
+        options: options.join(', '),
+        quantity: orderSheetState.quantity,
+        type: orderSheetState.isPastry ? 'pastry' : 'coffee'
+    });
+
     updateCartUI();
     updateCartCount();
-    toggleCart(false);
+    showAddToCartMessage(card.dataset.name);
+    closeOrderSheet();
+}
+
+function initOrderSheet() {
+    if (!isOrderPage()) return;
+
+    document.querySelectorAll('.menu-card').forEach(card => {
+        card.addEventListener('click', () => openOrderSheet(card));
+        card.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openOrderSheet(card);
+            }
+        });
+    });
+
+    document.querySelectorAll('.order-sheet .opt-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            const row = chip.closest('.opt-row');
+            if (!row) return;
+
+            row.querySelectorAll('.opt-chip').forEach(rowChip => {
+                rowChip.classList.toggle('active', rowChip === chip);
+            });
+        });
+    });
+
+    document.querySelectorAll('.order-sheet .qty-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const delta = Number(button.dataset.delta || 0);
+            orderSheetState.quantity = Math.max(1, orderSheetState.quantity + delta);
+            updateOrderSheetAmount();
+        });
+    });
+
+    document.querySelector('.order-sheet .sheet-close')?.addEventListener('click', closeOrderSheet);
+    document.getElementById('order-scrim')?.addEventListener('click', closeOrderSheet);
+    document.getElementById('add-sheet')?.addEventListener('click', addConfiguredOrderItem);
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+            if (document.getElementById('order-sheet')?.classList.contains('open')) {
+                closeOrderSheet();
+                return;
+            }
+
+            if (window.currentModal) {
+                closeCheckoutModal({ preserveCart: isOrderPage() });
+            }
+        }
+    });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
     updateCartCount();
     updateCartUI();
+    initOrderSheet();
 
     const cartSidebar = document.getElementById('cart-sidebar');
     if (cartSidebar) {
