@@ -7,15 +7,15 @@
     .order-hero {
         padding: 8rem 0 4rem;
     }
-    
+
     .order-hero h1 {
         font-size: 2.2rem;
     }
-    
+
     .order-hero p {
         font-size: 1.1rem;
     }
-    
+
     .bitcoin-badge {
         font-size: 1rem;
         padding: 0.8rem 1.5rem;
@@ -26,7 +26,7 @@
     .order-hero {
         padding: 9rem 0 4rem;
     }
-    
+
     .order-hero h1 {
         font-size: 1.8rem;
     }
@@ -406,6 +406,291 @@
     accent-color: var(--primary-color);
 }
 
+/* Legacy cart styles kept for the order page after the shop redesign. */
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100vh;
+    background: var(--white);
+    box-shadow: -5px 0 20px var(--shadow);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.3s ease;
+}
+
+.cart-sidebar.open {
+    right: 0;
+}
+
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1500;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.cart-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    border-bottom: 1px solid var(--accent-color);
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+.cart-header h3 {
+    color: var(--white);
+    margin: 0;
+}
+
+.close-cart {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-items {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.empty-cart {
+    text-align: center;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--accent-color);
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item-info h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--primary-color);
+}
+
+.cart-item-details {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.cart-item-price {
+    font-weight: 600;
+}
+
+.cart-item-price .btc-price {
+    color: #f7931a;
+    display: block;
+}
+
+.cart-item-price .sats-price {
+    color: #ff8c00;
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.cart-item-price .usd-price {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.remove-item {
+    background: #ff4757;
+    color: var(--white);
+    border: none;
+    padding: 0.3rem 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background 0.3s ease;
+}
+
+.remove-item:hover {
+    background: #ff3838;
+}
+
+.cart-footer {
+    padding: 2rem;
+    border-top: 1px solid var(--accent-color);
+    background: var(--accent-color);
+}
+
+.cart-total {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.total-btc {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #f7931a;
+    margin-bottom: 0.5rem;
+}
+
+.total-usd {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+.checkout-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #f7931a;
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.checkout-btn:hover {
+    background: #e8830e;
+    transform: translateY(-2px);
+}
+
+.toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 5000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.toast {
+    background: rgba(255, 255, 255, 0.95);
+    border-left: 4px solid #007bff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    color: #333;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 300px;
+    min-width: 250px;
+    opacity: 0;
+    padding: 16px 20px;
+    pointer-events: auto;
+    transform: translateX(400px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    word-wrap: break-word;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast.error {
+    border-left-color: #dc3545;
+    color: #dc3545;
+}
+
+.toast.success {
+    border-left-color: #28a745;
+    color: #28a745;
+}
+
+.checkout-modal {
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    inset: 0;
+    justify-content: center;
+    padding: 2rem;
+    position: fixed;
+    z-index: 4000;
+}
+
+.checkout-modal-panel {
+    background: var(--white);
+    border-radius: 15px;
+    max-height: 80vh;
+    max-width: 500px;
+    overflow-y: auto;
+    padding: 2rem;
+    text-align: center;
+    width: 100%;
+}
+
+.checkout-modal-panel h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.checkout-total {
+    background: var(--accent-color);
+    border-radius: 10px;
+    color: var(--text-light);
+    display: grid;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+}
+
+.checkout-total strong {
+    color: #f7931a;
+    font-size: 1.5rem;
+}
+
+.checkout-address {
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-family: monospace;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    word-break: break-all;
+}
+
+.checkout-modal-panel pre {
+    text-align: left;
+    white-space: pre-wrap;
+}
+
+.checkout-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
 /* Animations */
 @keyframes steamRise {
     0%, 100% { transform: translateY(0px); }
@@ -448,47 +733,47 @@
     .coffee-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .coffee-visual {
         height: 150px;
     }
-    
+
     .menu-categories {
         gap: 0.5rem;
     }
-    
+
     .category-btn {
         padding: 0.6rem 1.5rem;
         font-size: 0.9rem;
     }
-    
+
     .order-hero h1 {
         font-size: 2rem;
     }
-    
+
     .delivery-options {
         grid-template-columns: 1fr;
     }
-    
+
     .coffee-menu h2::before,
     .coffee-menu h2::after,
     .delivery-info h2::before,
     .delivery-info h2::after {
         width: 40px;
     }
-    
+
     .coffee-menu h2::before {
         left: calc(50% - 120px);
     }
-    
+
     .coffee-menu h2::after {
         right: calc(50% - 120px);
     }
-    
+
     .delivery-info h2::before {
         left: calc(50% - 110px);
     }
-    
+
     .delivery-info h2::after {
         right: calc(50% - 110px);
     }
@@ -498,7 +783,7 @@
     .coffee-card {
         margin: 0 1rem;
     }
-    
+
     .bitcoin-badge {
         flex-direction: column;
         gap: 0.3rem;

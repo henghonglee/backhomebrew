@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Online - Back Home Brew</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="store.css">
     <link rel="stylesheet" href="order.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,7 +104,7 @@
                                     <span class="sats-price">11,000 sats</span>
                                     <span class="usd-price">≈ $3.50</span>
                                 </div>
-                                <button class="add-to-order" onclick="addToOrder('espresso', 'Classic Espresso', 0.00011, 3.50)">Add to Order</button>
+                                <button class="add-to-order" onclick="addToOrder('espresso', 'Classic Espresso', 0.00011, 3.50, this)">Add to Order</button>
                             </div>
                         </div>
 
@@ -138,7 +137,7 @@
                                     <span class="sats-price">15,000 sats</span>
                                     <span class="usd-price">≈ $4.75</span>
                                 </div>
-                                <button class="add-to-order" onclick="addToOrder('latte', 'Home Brew Latte', 0.00015, 4.75)">Add to Order</button>
+                                <button class="add-to-order" onclick="addToOrder('latte', 'Home Brew Latte', 0.00015, 4.75, this)">Add to Order</button>
                             </div>
                         </div>
 
@@ -163,7 +162,7 @@
                                     <span class="sats-price">14,000 sats</span>
                                     <span class="usd-price">≈ $4.25</span>
                                 </div>
-                                <button class="add-to-order" onclick="addToOrder('cappuccino', 'Artisan Cappuccino', 0.00014, 4.25)">Add to Order</button>
+                                <button class="add-to-order" onclick="addToOrder('cappuccino', 'Artisan Cappuccino', 0.00014, 4.25, this)">Add to Order</button>
                             </div>
                         </div>
                     </div>
@@ -193,7 +192,7 @@
                                     <span class="sats-price">16,000 sats</span>
                                     <span class="usd-price">≈ $5.00</span>
                                 </div>
-                                <button class="add-to-order" onclick="addToOrder('seasonal', 'Seasonal Blend', 0.00016, 5.00)">Add to Order</button>
+                                <button class="add-to-order" onclick="addToOrder('seasonal', 'Seasonal Blend', 0.00016, 5.00, this)">Add to Order</button>
                             </div>
                         </div>
                     </div>
@@ -223,7 +222,7 @@
                                     <span class="sats-price">13,000 sats</span>
                                     <span class="usd-price">≈ $4.00</span>
                                 </div>
-                                <button class="add-to-order" onclick="addToOrder('coldbrew', 'Cold Brew Special', 0.00013, 4.00)">Add to Order</button>
+                                <button class="add-to-order" onclick="addToOrder('coldbrew', 'Cold Brew Special', 0.00013, 4.00, this)">Add to Order</button>
                             </div>
                         </div>
                     </div>
@@ -254,7 +253,7 @@
                                     <span class="sats-price">8,000 - 13,000 sats</span>
                                     <span class="usd-price">≈ $2.50 - $4.00</span>
                                 </div>
-                                <button class="add-to-order" onclick="addToOrder('pastry', 'Fresh Baked Pastry', 0.00008, 2.50)">Add to Order</button>
+                                <button class="add-to-order" onclick="addToOrder('pastry', 'Fresh Baked Pastry', 0.00008, 2.50, this)">Add to Order</button>
                             </div>
                         </div>
                     </div>
@@ -311,7 +310,7 @@
             <button class="checkout-btn" onclick="checkout()">Checkout with Bitcoin</button>
         </div>
     </div>
-    
+
     <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
 
     <footer class="footer">
@@ -337,7 +336,7 @@
         window.addEventListener('DOMContentLoaded', () => {
             document.body.style.visibility = 'visible';
             document.body.style.opacity = '1';
-            
+
             // Initialize coffee menu
             showCategory('espresso');
         });
