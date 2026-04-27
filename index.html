@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="home">
     <header class="header">
         <nav class="nav">
             <div class="nav-brand">
-                <h1>
+                <div class="site-title">
                     <a href="index.html">
                         Back Home Brew
                         <svg class="logo-house-svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -21,14 +21,14 @@
                             <circle cx="12" cy="9" r="1"></circle>
                         </svg>
                     </a>
-                </h1>
+                </div>
             </div>
             <div class="nav-links">
-                <a href="index.html#about">About</a>
+                <a href="index.html#origin">Story</a>
                 <a href="index.html#menu">Menu</a>
                 <a href="store.html">Store</a>
                 <a href="order.html">Order</a>
-                <a href="index.html#contact">Contact</a>
+                <a href="index.html#visit">Visit</a>
                 <div class="cart-icon" onclick="toggleCart()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
                         <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
@@ -43,14 +43,14 @@
             </div>
         </nav>
         <div class="mobile-menu" id="mobile-menu">
-            <a href="index.html#about" onclick="closeMobileMenu()">About</a>
+            <a href="index.html#origin" onclick="closeMobileMenu()">Story</a>
             <a href="index.html#menu" onclick="closeMobileMenu()">Menu</a>
             <a href="store.html">Store</a>
             <a href="order.html">Order</a>
-            <a href="index.html#contact" onclick="closeMobileMenu()">Contact</a>
+            <a href="index.html#visit" onclick="closeMobileMenu()">Visit</a>
             <div class="cart-icon mobile-cart" onclick="toggleCart(); closeMobileMenu()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
-                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1-1H3a1 1 0 0 1-1-1V5z"/>
                 </svg>
                 <span id="mobile-cart-count">0</span>
             </div>
@@ -59,154 +59,156 @@
 
     <main>
         <section class="hero">
+            <div class="hero-eyebrow">Est. 2024 — Home-Based, Hand-Roasted</div>
             <div class="hero-content">
-                <h2>Welcome Home to Perfect Coffee</h2>
-                <p>Experience artisanal coffee crafted with love in our cozy home-based coffee shop. Every cup tells a story of passion, quality, and community.</p>
-                <div class="hero-buttons">
-                    <a href="order.html" class="btn btn-primary">Order Now</a>
-                    <a href="#menu" class="btn btn-secondary">View Menu</a>
+                <h1>Coffee, brewed<br>at <em>home.</em></h1>
+                <p>A small kitchen. A slow roast. A neighborhood that keeps coming back. Three chapters of how every cup gets to yours — start at the beginning.</p>
+                <div class="hero-actions">
+                    <a href="order.html" class="btn btn-primary">Order a cup →</a>
+                    <a href="#origin" class="btn btn-ghost">Read the story</a>
                 </div>
             </div>
-            <div class="hero-image">
-                <img src="https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg" alt="Artisanal coffee setup">
+            <div class="scroll-cue">Scroll</div>
+        </section>
+
+        <section id="origin" class="chapter chapter-origin">
+            <div class="chapter-text">
+                <div class="chapter-num">Origin</div>
+                <h2>It started in a <em>kitchen.</em></h2>
+                <p class="chapter-body">One bag of green beans, a borrowed roaster, and a pilot light that wouldn't quit. We started Back Home Brew because the best coffee we'd ever had was made by someone who cared about who they were making it for.</p>
+                <p class="chapter-body">Every batch still leaves the same kitchen it started in.</p>
+                <div class="chapter-meta">
+                    <div><b>Founded</b><br>2024 · Hometown</div>
+                    <div><b>Roasts</b><br>Daily, by hand</div>
+                </div>
+            </div>
+            <div class="chapter-art art-origin" aria-hidden="true"></div>
+        </section>
+
+        <section id="craft" class="chapter chapter-craft">
+            <div class="chapter-text">
+                <div class="chapter-num">Craft</div>
+                <h2>Roasted slow, by <em>hand.</em></h2>
+                <p class="chapter-body">Small batches mean we taste every roast before it leaves the kitchen. We choose ethically sourced single-origin beans and pull each shot the way we'd pull it for a friend who just walked in tired on a Tuesday.</p>
+                <p class="chapter-body">No shortcuts. Just time, heat, and attention.</p>
+                <div class="chapter-meta">
+                    <div><b>Sourcing</b><br>Single-origin, ethical</div>
+                    <div><b>Method</b><br>Small-batch roast</div>
+                </div>
+            </div>
+            <div class="chapter-art art-craft" aria-hidden="true"></div>
+        </section>
+
+        <section id="community" class="chapter chapter-community">
+            <div class="chapter-text">
+                <div class="chapter-num">Community</div>
+                <h2>Shared with <em>neighbors.</em></h2>
+                <p class="chapter-body">Every cup is a small hello. We know our regulars by their orders and their dogs' names. The shop is the front of a home, and the home stays open because the neighborhood keeps showing up for it.</p>
+                <p class="chapter-body">Bitcoin only — because the future tastes good with espresso.</p>
+                <div class="chapter-meta">
+                    <div><b>Open</b><br>M–F 7–3 · Sat–Sun 8–4</div>
+                    <div><b>Pay</b><br>Bitcoin accepted</div>
+                </div>
+            </div>
+            <div class="chapter-art art-community" aria-hidden="true"></div>
+        </section>
+
+        <section id="menu" class="menu-strip">
+            <div class="menu-strip-head">
+                <h3>From the <em>menu.</em></h3>
+                <p class="lede">A short list, made with care. Six things we'd serve our oldest friends — and now we're serving them to you.</p>
+            </div>
+            <div class="menu-grid">
+                <article class="menu-card">
+                    <span class="num">N°01</span>
+                    <h4>Classic Espresso</h4>
+                    <p>Rich, bold espresso shot pulled from our signature Hometown blend.</p>
+                    <div class="price">Single origin <b>0.00008 ฿</b></div>
+                </article>
+                <article class="menu-card">
+                    <span class="num">N°02</span>
+                    <h4>Home Brew Latte</h4>
+                    <p>Smooth espresso, steamed whole milk, a touch of love. Our most-ordered cup.</p>
+                    <div class="price">House signature <b>0.00012 ฿</b></div>
+                </article>
+                <article class="menu-card">
+                    <span class="num">N°03</span>
+                    <h4>Artisan Cappuccino</h4>
+                    <p>Espresso, steamed milk, a thick cap of foam. Three parts of one perfect thing.</p>
+                    <div class="price">Classic <b>0.00011 ฿</b></div>
+                </article>
+                <article class="menu-card">
+                    <span class="num">N°04</span>
+                    <h4>Cold Brew Special</h4>
+                    <p>Steeped 24 hours. Smooth, low-acid, served over a single big cube.</p>
+                    <div class="price">Slow steeped <b>0.00013 ฿</b></div>
+                </article>
+                <article class="menu-card">
+                    <span class="num">N°05</span>
+                    <h4>Seasonal Blend</h4>
+                    <p>A rotating roast that follows the harvest. This month: Ethiopian Yirgacheffe.</p>
+                    <div class="price">This season <b>0.00014 ฿</b></div>
+                </article>
+                <article class="menu-card">
+                    <span class="num">N°06</span>
+                    <h4>Homemade Pastries</h4>
+                    <p>Baked daily in the same kitchen the coffee gets roasted in.</p>
+                    <div class="price">From the oven <b>0.00009 ฿</b></div>
+                </article>
             </div>
         </section>
 
-        <section id="about" class="about">
-            <div class="container">
-                <h2>Our Story</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>Back Home Brew started as a dream to bring café-quality coffee to your neighborhood. From our home-based setup, we carefully select, roast, and brew each cup with the attention and care that only a local, family-run business can provide.</p>
-                        <p>We believe that great coffee brings people together, creates moments of joy, and makes every day a little brighter. That's why we've made it our mission to serve not just coffee, but a warm, welcoming experience that feels like home.</p>
-                    </div>
-                    <div class="about-features">
-                        <div class="feature">
-                            <div class="feature-icon">🏠</div>
-                            <h3>Home-Based</h3>
-                            <p>Crafted with personal care in our cozy home setup</p>
-                        </div>
-                        <div class="feature">
-                            <div class="feature-icon">🌱</div>
-                            <h3>Sustainable</h3>
-                            <p>Ethically sourced beans with eco-friendly practices</p>
-                        </div>
-                        <div class="feature">
-                            <div class="feature-icon">❤️</div>
-                            <h3>Community</h3>
-                            <p>Supporting local community one cup at a time</p>
-                        </div>
-                    </div>
-                </div>
+        <section class="pull-quote" aria-label="Customer testimonial">
+            <blockquote>
+                "Tastes like a <em>friend's kitchen</em> — because it actually is one."
+            </blockquote>
+            <div class="attrib">— Sarah M. · Regular since week one</div>
+            <div class="dots" aria-hidden="true">
+                <span class="dot"></span>
+                <span class="dot active"></span>
+                <span class="dot"></span>
             </div>
         </section>
 
-        <section id="menu" class="menu">
-            <div class="container">
-                <h2>Our Menu</h2>
-                <div class="menu-grid">
-                    <div class="menu-item">
-                        <h3>Classic Espresso</h3>
-                        <p>Rich, bold espresso shot made from our signature blend</p>
-                    </div>
-                    <div class="menu-item">
-                        <h3>Home Brew Latte</h3>
-                        <p>Smooth espresso with steamed milk and a touch of love</p>
-                    </div>
-                    <div class="menu-item">
-                        <h3>Artisan Cappuccino</h3>
-                        <p>Perfect balance of espresso, steamed milk, and foam</p>
-                    </div>
-                    <div class="menu-item">
-                        <h3>Cold Brew Special</h3>
-                        <p>Smooth, refreshing cold brew steeped for 24 hours</p>
-                    </div>
-                    <div class="menu-item">
-                        <h3>Seasonal Blend</h3>
-                        <p>Our rotating seasonal coffee featuring local flavors</p>
-                    </div>
-                    <div class="menu-item">
-                        <h3>Homemade Pastries</h3>
-                        <p>Fresh baked goods made daily in our home kitchen</p>
-                    </div>
-                </div>
+        <section id="visit" class="visit">
+            <div class="visit-head">
+                <h3>Come <em>by.</em></h3>
+                <a href="https://maps.google.com/?q=123+Cozy+Street+Hometown" class="btn btn-primary">Get directions →</a>
             </div>
-        </section>
-
-        <section class="testimonials">
-            <div class="container">
-                <h2>What Our Customers Say</h2>
-                <div class="testimonials-grid">
-                    <div class="testimonial">
-                        <p>"The best coffee in the neighborhood! You can taste the love and care in every cup."</p>
-                        <div class="testimonial-author">- Sarah M.</div>
-                    </div>
-                    <div class="testimonial">
-                        <p>"Back Home Brew feels like visiting a friend. The coffee is amazing and the atmosphere is so welcoming."</p>
-                        <div class="testimonial-author">- Mike T.</div>
-                    </div>
-                    <div class="testimonial">
-                        <p>"Finally found my perfect morning coffee spot. The attention to detail is incredible!"</p>
-                        <div class="testimonial-author">- Emma L.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact">
-            <div class="container">
-                <h2>Visit Us</h2>
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <h3>Hours</h3>
-                            <p>Monday - Friday: 7:00 AM - 3:00 PM</p>
-                            <p>Saturday - Sunday: 8:00 AM - 4:00 PM</p>
-                        </div>
-                        <div class="contact-item">
-                            <h3>Location</h3>
-                            <p>123 Cozy Street</p>
-                            <p>Hometown, ST 12345</p>
-                        </div>
-                        <div class="contact-item">
-                            <h3>Contact</h3>
-                            <p>Phone: (555) 123-BREW</p>
-                            <p>Email: hello@backhomebrew.com</p>
-                        </div>
-                        <div class="contact-item">
-                            <h3>Payment</h3>
-                            <p>We accept Bitcoin only</p>
-                            <p>Experience the future of coffee payments</p>
-                        </div>
-                    </div>
-                    <div class="contact-form">
-                        <h3>Get in Touch</h3>
-                        <form>
-                            <input type="text" placeholder="Your Name" required>
-                            <input type="email" placeholder="Your Email" required>
-                            <textarea placeholder="Your Message" rows="4" required></textarea>
-                            <button type="submit" class="btn btn-primary">Send Message</button>
-                        </form>
-                    </div>
-                </div>
+            <div class="visit-grid">
+                <article class="visit-cell">
+                    <div class="label">Hours</div>
+                    <h4>Mon–Fri</h4>
+                    <p>7:00 AM — 3:00 PM</p>
+                    <h4>Sat–Sun</h4>
+                    <p>8:00 AM — 4:00 PM</p>
+                </article>
+                <article class="visit-cell">
+                    <div class="label">Address</div>
+                    <h4>123 Cozy Street</h4>
+                    <p>Hometown, ST 12345</p>
+                    <p>Around the back, follow the smell.</p>
+                </article>
+                <article class="visit-cell">
+                    <div class="label">Talk to us</div>
+                    <h4>(555) 123-BREW</h4>
+                    <p>hello@backhomebrew.com</p>
+                    <p>@backhomebrew</p>
+                </article>
+                <article class="visit-cell">
+                    <div class="label">Payment</div>
+                    <h4>Bitcoin only</h4>
+                    <p>Live BTC/USD at checkout. No cards, no cash — the future tastes good.</p>
+                </article>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>Back Home Brew ⌂</h3>
-                    <p>Bringing you home to perfect coffee</p>
-                </div>
-                <div class="footer-social">
-                    <p>Follow us: @backhomebrew</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Back Home Brew. Made with ❤️ and lots of coffee.</p>
-            </div>
+        <div class="footer-content">
+            <div class="brand">Back Home Brew.</div>
+            <div>© 2026 · Made with care &amp; lots of coffee</div>
+            <div>Follow @backhomebrew</div>
         </div>
     </footer>
 
@@ -227,7 +229,7 @@
             <button class="checkout-btn" onclick="checkout()">Checkout with Bitcoin</button>
         </div>
     </div>
-    
+
     <div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
 
     <script src="store.js"></script>
@@ -236,6 +238,33 @@
         window.addEventListener('DOMContentLoaded', () => {
             document.body.style.visibility = 'visible';
             document.body.style.opacity = '1';
+
+            const hero = document.querySelector('.home .hero');
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (hero && !reduceMotion) {
+                const moveHero = () => {
+                    const heroBottom = hero.offsetTop + hero.offsetHeight;
+                    if (window.scrollY <= heroBottom) {
+                        hero.style.setProperty('--hero-y', `calc(50% + ${window.scrollY * 0.3}px)`);
+                    }
+                };
+
+                moveHero();
+                window.addEventListener('scroll', moveHero, { passive: true });
+            }
+
+            const dots = Array.from(document.querySelectorAll('.pull-quote .dot'));
+            if (dots.length > 0 && !reduceMotion) {
+                let activeDot = dots.findIndex(dot => dot.classList.contains('active'));
+                activeDot = activeDot === -1 ? 0 : activeDot;
+
+                setInterval(() => {
+                    dots[activeDot].classList.remove('active');
+                    activeDot = (activeDot + 1) % dots.length;
+                    dots[activeDot].classList.add('active');
+                }, 2800);
+            }
         });
     </script>
 </body>
