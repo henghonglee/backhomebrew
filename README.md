@@ -933,15 +933,18 @@ For questions or support:
 
 ---
 
-**Last Updated:** March 18, 2026
+**Last Updated:** April 26, 2026
 
-**Version:** 2.0 - Comprehensive Documentation
+**Version:** 2.1 - Hero Banner Update
 
 Built with ❤️ for Back Home Brew
 
 ---
 
 ## Changelog
+
+### Version 2.1 (April 2026)
+- Updated hero banner text to "Welcome Home to Perfect Coffee"
 
 ### Version 2.0 (March 2026)
 - Comprehensive README with detailed sections
