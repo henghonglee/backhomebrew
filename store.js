@@ -3,6 +3,7 @@ let cart = [];
 let isCartOpen = false;
 
 const BITCOIN_ADDRESS = 'bc1qak0r24z2elxnku9akznhap2ppg3pjpwsg2hds5';
+const REFERRAL_CODE_RE = /^[a-z]+-[a-z]+$/;
 
 function escapeHtml(value) {
     return String(value || '').replace(/[&<>"']/g, char => ({
@@ -349,30 +350,38 @@ function showAddToCartMessage(productName) {
     showToast(`${productName} added to cart`, { type: 'success' });
 }
 
+function buildOrderSummaryText(referralCode) {
+    const totalBTC = cart.reduce((sum, item) => sum + item.btcPrice * item.quantity, 0);
+    const totalUSD = cart.reduce((sum, item) => sum + item.usdPrice * item.quantity, 0);
+    let summary = 'Back Home Brew Order Summary:\n\n';
+
+    cart.forEach(item => {
+        summary += `${item.name}\n`;
+        summary += `${item.options}\n`;
+        summary += `Qty: ${item.quantity}\n`;
+        summary += `${formatBtc(item.btcPrice * item.quantity)} BTC (≈ $${(item.usdPrice * item.quantity).toFixed(2)})\n\n`;
+    });
+
+    summary += `Total: ${formatBtc(totalBTC)} BTC (≈ $${totalUSD.toFixed(2)})\n`;
+    if (referralCode && REFERRAL_CODE_RE.test(referralCode)) {
+        summary += `Referral: ${referralCode}\n`;
+    }
+    summary += '\nBitcoin Payment Address:\n';
+    summary += `${BITCOIN_ADDRESS}\n\n`;
+    summary += 'Please send the exact BTC amount to complete your order.\n';
+    summary += 'Email us at orders@backhomebrew.com with your transaction ID.';
+
+    return { summary, totalBTC, totalUSD };
+}
+
 function checkout() {
     if (cart.length === 0) {
         showToast('Your cart is empty', { type: 'error' });
         return;
     }
 
-    const totalBTC = cart.reduce((sum, item) => sum + item.btcPrice * item.quantity, 0);
-    const totalUSD = cart.reduce((sum, item) => sum + item.usdPrice * item.quantity, 0);
-    let orderSummary = 'Back Home Brew Order Summary:\n\n';
-
-    cart.forEach(item => {
-        orderSummary += `${item.name}\n`;
-        orderSummary += `${item.options}\n`;
-        orderSummary += `Qty: ${item.quantity}\n`;
-        orderSummary += `${formatBtc(item.btcPrice * item.quantity)} BTC (≈ $${(item.usdPrice * item.quantity).toFixed(2)})\n\n`;
-    });
-
-    orderSummary += `Total: ${formatBtc(totalBTC)} BTC (≈ $${totalUSD.toFixed(2)})\n\n`;
-    orderSummary += 'Bitcoin Payment Address:\n';
-    orderSummary += `${BITCOIN_ADDRESS}\n\n`;
-    orderSummary += 'Please send the exact BTC amount to complete your order.\n';
-    orderSummary += 'Email us at orders@backhomebrew.com with your transaction ID.';
-
-    showCheckoutModal(orderSummary, totalBTC, totalUSD);
+    const { summary, totalBTC, totalUSD } = buildOrderSummaryText();
+    showCheckoutModal(summary, totalBTC, totalUSD);
 }
 
 function showCheckoutModal(orderSummary, totalBTC, totalUSD) {
@@ -411,6 +420,16 @@ function showOrderCheckoutSheet(orderSummary, totalBTC, totalUSD) {
                 </div>
                 <div class="checkout-summary">
                     <span class="eyebrow">Order summary</span>
+                    <div class="referral-disclosure" data-decision="5">
+                        <button class="referral-toggle" type="button" id="referral-toggle" aria-expanded="false" aria-controls="referral-content">
+                            <span class="referral-icon" aria-hidden="true">+</span>
+                            <span>I have a referral code</span>
+                        </button>
+                        <div class="referral-content" id="referral-content" hidden>
+                            <input class="referral-input" type="text" id="referral-input" autocomplete="off" spellcheck="false" placeholder="word-pair from your card · e.g. mustard-onyx" aria-describedby="referral-hint">
+                            <div class="referral-hint" id="referral-hint">Word-pair from the card a friend passed you.</div>
+                        </div>
+                    </div>
                     <div class="summary-grid">
                         ${cart.map(item => `
                             <div class="summary-row">
@@ -421,6 +440,13 @@ function showOrderCheckoutSheet(orderSummary, totalBTC, totalUSD) {
                                 <div class="amount">${formatBtc(item.btcPrice * item.quantity)} ฿</div>
                             </div>
                         `).join('')}
+                        <div class="summary-row referral-row" id="referral-row" hidden data-decision="3">
+                            <div>
+                                <strong>Referral</strong>
+                                <span id="referral-row-code"></span>
+                            </div>
+                            <div class="amount">PASTRY ON US</div>
+                        </div>
                     </div>
                     <div class="summary-total">
                         <span class="label">Total</span>
@@ -442,6 +468,67 @@ function showOrderCheckoutSheet(orderSummary, totalBTC, totalUSD) {
     document.body.style.overflow = 'hidden';
     window.currentModal = modal;
     window.currentOrderSummary = orderSummary;
+
+    initReferralDisclosure(modal);
+}
+
+function initReferralDisclosure(modal) {
+    const toggle = modal.querySelector('#referral-toggle');
+    const content = modal.querySelector('#referral-content');
+    const input = modal.querySelector('#referral-input');
+    const hint = modal.querySelector('#referral-hint');
+    const row = modal.querySelector('#referral-row');
+    const rowCode = modal.querySelector('#referral-row-code');
+    const icon = toggle?.querySelector('.referral-icon');
+    if (!toggle || !content || !input || !hint || !row) return;
+
+    toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        const next = !expanded;
+        toggle.setAttribute('aria-expanded', String(next));
+        content.hidden = !next;
+        if (icon) icon.textContent = next ? '−' : '+';
+        if (next) {
+            requestAnimationFrame(() => input.focus());
+        }
+    });
+
+    const applyReferral = () => {
+        const raw = input.value.trim().toLowerCase();
+        const valid = raw && REFERRAL_CODE_RE.test(raw);
+
+        input.classList.toggle('valid', !!valid);
+        input.classList.toggle('invalid', !!raw && !valid);
+
+        if (valid) {
+            hint.textContent = 'A pastry on the house, on your first order.';
+            hint.classList.add('success');
+            hint.classList.remove('error');
+            row.hidden = false;
+            rowCode.textContent = raw;
+        } else if (raw) {
+            hint.textContent = 'Codes are two lowercase words joined by a hyphen — e.g. mustard-onyx.';
+            hint.classList.add('error');
+            hint.classList.remove('success');
+            row.hidden = true;
+            rowCode.textContent = '';
+        } else {
+            hint.textContent = 'Word-pair from the card a friend passed you.';
+            hint.classList.remove('success', 'error');
+            row.hidden = true;
+            rowCode.textContent = '';
+        }
+
+        const code = valid ? raw : null;
+        const rebuilt = buildOrderSummaryText(code);
+        window.currentOrderSummary = rebuilt.summary;
+    };
+
+    input.addEventListener('input', () => {
+        input.value = input.value.toLowerCase();
+        applyReferral();
+    });
+    input.addEventListener('blur', applyReferral);
 }
 
 function showShopCheckoutModal(orderSummary, totalBTC, totalUSD) {
