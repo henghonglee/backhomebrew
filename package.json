@@ -4,7 +4,8 @@
   "description": "A modern, responsive website for a home-based coffee shop with online ordering and Bitcoin payment support.",
   "scripts": {
     "start": "python3 -m http.server 8080",
-    "dev": "python3 -m http.server 3000"
+    "dev": "python3 -m http.server 3000",
+    "mint": "node scripts/mint-code.js"
   },
   "keywords": ["coffee", "e-commerce", "vanilla-js"],
   "license": "MIT"

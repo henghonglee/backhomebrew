@@ -2670,6 +2670,116 @@ html {
     margin-top: 1.5rem;
 }
 
+.order .referral-disclosure {
+    border-top: 1px solid rgba(236, 228, 211, 0.2);
+    border-bottom: 1px solid rgba(236, 228, 211, 0.2);
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 0;
+}
+
+.order .referral-toggle {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    color: rgba(236, 228, 211, 0.78);
+    cursor: pointer;
+    display: flex;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 800;
+    gap: 0.6rem;
+    letter-spacing: 0.18em;
+    padding: 0.85rem 0;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.order .referral-toggle:hover,
+.order .referral-toggle[aria-expanded="true"] {
+    color: var(--mustard);
+}
+
+.order .referral-icon {
+    color: var(--mustard);
+    display: inline-block;
+    font-family: var(--display);
+    font-size: 1.05rem;
+    font-weight: 900;
+    line-height: 1;
+    width: 0.9rem;
+}
+
+.order .referral-content {
+    padding: 0.5rem 0 0.85rem;
+}
+
+.order .referral-input {
+    background: rgba(236, 228, 211, 0.06);
+    border: 1px solid rgba(236, 228, 211, 0.28);
+    border-radius: 0;
+    color: var(--bone);
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    outline: none;
+    padding: 0.85rem 1rem;
+    text-transform: lowercase;
+    transition: border-color 0.15s ease;
+    width: 100%;
+}
+
+.order .referral-input::placeholder {
+    color: rgba(236, 228, 211, 0.36);
+    text-transform: none;
+    letter-spacing: 0.02em;
+}
+
+.order .referral-input:focus {
+    border-color: var(--mustard);
+}
+
+.order .referral-input.valid {
+    border-color: var(--mustard);
+    color: var(--mustard);
+}
+
+.order .referral-input.invalid {
+    border-color: #d95f5f;
+}
+
+.order .referral-hint {
+    color: rgba(236, 228, 211, 0.56);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-top: 0.55rem;
+    text-transform: uppercase;
+}
+
+.order .referral-hint.success {
+    color: var(--mustard);
+}
+
+.order .referral-hint.error {
+    color: #ffb4b4;
+}
+
+.order .summary-row.referral-row strong {
+    color: var(--mustard);
+    font-style: italic;
+}
+
+.order .summary-row.referral-row .amount {
+    color: var(--mustard);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.74rem;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .order *,
     .order *::before,

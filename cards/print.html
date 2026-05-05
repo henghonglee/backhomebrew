@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Referral cards · Print sheet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Playfair+Display:ital,wght@0,900;1,900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --onyx: #0E0E0E;
+            --bone: #ECE4D3;
+            --mustard: #D4A017;
+            --hairline: rgba(14, 14, 14, 0.18);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html, body {
+            background: #2a2a2a;
+            font-family: 'Inter', sans-serif;
+            color: var(--bone);
+        }
+
+        .chrome {
+            padding: 1.5rem clamp(1rem, 4vw, 3rem);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            border-bottom: 1px solid rgba(236, 228, 211, 0.12);
+        }
+
+        .chrome h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 1.6rem;
+            letter-spacing: -0.03em;
+        }
+
+        .chrome h1 em {
+            color: var(--mustard);
+            font-style: italic;
+        }
+
+        .chrome .meta {
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(236, 228, 211, 0.72);
+        }
+
+        .chrome .actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .chrome button {
+            background: var(--mustard);
+            color: var(--onyx);
+            border: 1px solid var(--mustard);
+            border-radius: 0;
+            padding: 0.7rem 1.1rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.74rem;
+            font-weight: 900;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .chrome button.ghost {
+            background: transparent;
+            color: var(--bone);
+            border-color: rgba(236, 228, 211, 0.4);
+        }
+
+        .chrome button:hover { background: var(--bone); color: var(--onyx); border-color: var(--bone); }
+
+        .status {
+            padding: 1rem clamp(1rem, 4vw, 3rem);
+            font-size: 0.85rem;
+            color: rgba(236, 228, 211, 0.72);
+        }
+
+        .status.error { color: #ffb4b4; }
+
+        /* Letter sheet — 8.5in × 11in. 2 cols × 4 rows = 4.25in × 2.75in cards. */
+        .sheet {
+            background: var(--bone);
+            color: var(--onyx);
+            width: 8.5in;
+            height: 11in;
+            margin: 1.5rem auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            page-break-after: always;
+        }
+
+        .card {
+            border: 1px dashed var(--hairline);
+            padding: 0.45in 0.4in;
+            display: grid;
+            grid-template-columns: 1.1in 1fr;
+            gap: 0.35in;
+            align-items: start;
+        }
+
+        .card .mono {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 900;
+            font-size: 1.1in;
+            line-height: 0.85;
+            color: var(--mustard);
+            letter-spacing: -0.06em;
+        }
+
+        .card .mono span {
+            color: var(--onyx);
+        }
+
+        .card .body { display: flex; flex-direction: column; gap: 0.12in; }
+
+        .card .kicker {
+            font-size: 0.085in;
+            font-weight: 900;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--onyx);
+        }
+
+        .card .head {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 0.34in;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            color: var(--onyx);
+            margin-top: 0.05in;
+        }
+
+        .card .head em {
+            color: var(--mustard);
+            font-style: italic;
+        }
+
+        .card .body-copy {
+            font-size: 0.105in;
+            line-height: 1.45;
+            color: rgba(14, 14, 14, 0.78);
+            max-width: 3.2in;
+            margin-top: 0.05in;
+        }
+
+        .card .rule {
+            border-top: 1px solid var(--hairline);
+            margin-top: 0.06in;
+            padding-top: 0.07in;
+        }
+
+        .card .code-label {
+            font-size: 0.075in;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: rgba(14, 14, 14, 0.6);
+        }
+
+        .card .code-line {
+            font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 0.155in;
+            font-weight: 700;
+            color: var(--mustard);
+            letter-spacing: 0.06em;
+            margin-top: 0.04in;
+            text-transform: uppercase;
+        }
+
+        .empty-card {
+            border: 1px dashed rgba(14, 14, 14, 0.08);
+        }
+
+        @media print {
+            html, body { background: #fff; }
+            .chrome, .status { display: none !important; }
+            .sheet { margin: 0; box-shadow: none; }
+            .card { border: 1px dashed rgba(14, 14, 14, 0.18); }
+            @page { size: letter; margin: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="chrome">
+        <div>
+            <h1>Referral cards · <em>print sheet</em></h1>
+            <div class="meta">8 cards per letter · cut on dashed lines</div>
+        </div>
+        <div class="actions">
+            <button type="button" id="print-btn">Print sheet</button>
+            <button type="button" class="ghost" id="mark-btn">Mark printed</button>
+        </div>
+    </div>
+    <div class="status" id="status">Loading codes from referrals/codes.json…</div>
+    <div id="sheets"></div>
+
+    <script>
+        const CARDS_PER_SHEET = 8;
+        const status = document.getElementById('status');
+        const sheets = document.getElementById('sheets');
+        let unprinted = [];
+
+        function escapeHtml(value) {
+            return String(value || '').replace(/[&<>"']/g, char => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            })[char]);
+        }
+
+        function renderCard(entry) {
+            const code = escapeHtml(entry.code);
+            return `
+                <div class="card">
+                    <div class="mono">B<span>.</span></div>
+                    <div class="body">
+                        <div class="kicker">Back Home Brew</div>
+                        <div class="head">From a friend's hand to <em>yours</em>.</div>
+                        <div class="body-copy">A pastry on the house, with your first bag. And one for the friend who passed it on. Mention this code when you order.</div>
+                        <div class="rule">
+                            <div class="code-label">Code</div>
+                            <div class="code-line">${code}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderEmpty() {
+            return `<div class="card empty-card"></div>`;
+        }
+
+        function renderSheets(entries) {
+            if (!entries.length) {
+                sheets.innerHTML = '';
+                status.textContent = 'No unprinted codes. Run `npm run mint "<referrer>"` to mint one, then reload.';
+                return;
+            }
+
+            const pages = [];
+            for (let i = 0; i < entries.length; i += CARDS_PER_SHEET) {
+                const slice = entries.slice(i, i + CARDS_PER_SHEET);
+                const cells = slice.map(renderCard);
+                while (cells.length < CARDS_PER_SHEET) cells.push(renderEmpty());
+                pages.push(`<div class="sheet">${cells.join('')}</div>`);
+            }
+            sheets.innerHTML = pages.join('');
+            const sheetCount = pages.length;
+            status.textContent = `${entries.length} unprinted code${entries.length === 1 ? '' : 's'} · ${sheetCount} sheet${sheetCount === 1 ? '' : 's'}. Print, cut, and click "Mark printed" to flip the printed flag.`;
+        }
+
+        async function load() {
+            try {
+                const response = await fetch('../referrals/codes.json', { cache: 'no-store' });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const all = await response.json();
+                unprinted = all.filter(entry => !entry.printed);
+                renderSheets(unprinted);
+            } catch (err) {
+                status.classList.add('error');
+                status.textContent = `Could not load referrals/codes.json — ${err.message}. Serve the repo via "npm run dev" and open this page over http://, not file://.`;
+            }
+        }
+
+        document.getElementById('print-btn').addEventListener('click', () => window.print());
+
+        document.getElementById('mark-btn').addEventListener('click', async () => {
+            if (!unprinted.length) {
+                status.textContent = 'Nothing unprinted to mark.';
+                return;
+            }
+            const codes = unprinted.map(e => e.code).join(', ');
+            const note = `Codes printed in this batch: ${codes}\n\nManually edit referrals/codes.json and set "printed": true on these entries before the next print run.`;
+            try {
+                await navigator.clipboard.writeText(codes);
+                status.textContent = `Copied ${unprinted.length} code${unprinted.length === 1 ? '' : 's'} to clipboard. ${note}`;
+            } catch {
+                status.textContent = note;
+            }
+        });
+
+        load();
+    </script>
+</body>
+</html>
