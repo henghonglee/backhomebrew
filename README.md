@@ -2,9 +2,11 @@
 
 A modern, responsive website for a home-based coffee shop featuring a beautiful storefront, product catalog, and online ordering system with Bitcoin payment support.
 
-## Project Overview
+## Overview
 
 Back Home Brew is a full-featured single-page web application designed to showcase a home-based coffee business. It provides customers with an intuitive interface to browse the menu, explore the store, and place orders online with cryptocurrency payment options. The site is fully responsive and optimized for both desktop and mobile devices, offering a seamless shopping experience across all platforms.
+
+Design system reference: see [`DESIGN.md`](./DESIGN.md) for the Editorial Onyx tokens and layout conventions used across the site.
 
 ## Features
 
@@ -43,13 +45,13 @@ backhomebrew/
 - **Python**: Development and production server
 - **Google Fonts**: Raleway and Inter typefaces for typography
 
-## Getting Started
-
-### Prerequisites
+## Prerequisites
 
 - **Web Browser**: Chrome, Firefox, Safari, Edge, or any modern browser with ES6+ support
 - **Python 3.x**: Required for running the development and production servers (Python 2.7 is supported as a fallback)
 - **Git**: For cloning the repository (optional if downloading as ZIP)
+
+## Getting Started
 
 ### Installation
 
@@ -923,7 +925,7 @@ Currently, products are hardcoded. For inventory management:
 
 ---
 
-## Contact & Support
+## Contact
 
 For questions or support:
 - **GitHub Issues**: [Report bugs and request features](https://github.com/henghonglee/backhomebrew/issues)
@@ -933,7 +935,7 @@ For questions or support:
 
 ---
 
-**Last Updated:** March 18, 2026
+**Last Updated:** May 26, 2026
 
 **Version:** 2.0 - Comprehensive Documentation
 
