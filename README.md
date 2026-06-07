@@ -89,6 +89,12 @@ python3 -m http.server 8080
 python -m SimpleHTTPServer 8080
 ```
 
+#### Option 4: Using npm scripts
+```bash
+npm start          # serves on http://localhost:8080
+npm run dev        # serves on http://localhost:3000
+```
+
 3. **Access the application:**
    Open your web browser and navigate to:
    ```
