@@ -282,7 +282,7 @@ Full-bleed mustard panel. Quote in Playfair 900 italic at hero-scale (up to 9rem
 
 ### Chapter art panels
 
-Generative compositions built from CSS gradients (no images). Each panel uses a different geometric motif — concentric rings (Origin), light beam over hatched fill (Craft), three solid circles in mustard/bone/mustard (Community) — and is signed with a giant outlined Playfair italic numeral (01, 02, 03) bleeding off the bottom-right corner. Min-height `34rem` desktop, `24rem` mobile.
+Full-bleed Unsplash photographs, one per chapter — Origin: coffee beans roasting; Craft: an espresso machine at work; Community: neighbors sharing coffee. Each photo is darkened with a layered onyx overlay (`rgba(14,14,14,0.42)` → `0.62`) so the panel keeps the moody, after-hours tone, and is signed with a giant outlined Playfair italic numeral (01, 02, 03) bleeding off the bottom-right corner. Min-height `34rem` desktop, `24rem` mobile. Photo URLs are hotlinked from `images.unsplash.com`; photographer credits live in the CSS rule comments and in `index.html`.
 
 ## Do's and Don'ts
 
