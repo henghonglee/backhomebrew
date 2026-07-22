@@ -1016,7 +1016,8 @@ html {
 }
 
 .home .hero::before {
-    background-image: image-set(url("background.avif") type("image/avif"), url("https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg") type("image/jpeg"));
+    /* Unsplash — home coffee setup by Daniel Norris (https://unsplash.com/photos/ZN_86cZrSN0) */
+    background-image: url("https://images.unsplash.com/photo-1570222094114-d054a817e56b?auto=format&fit=crop&w=1920&q=80");
     background-position: center var(--hero-y);
     background-size: cover;
     content: '';
@@ -1221,9 +1222,11 @@ html {
 }
 
 .home .art-origin {
+    /* Unsplash — coffee beans roasting by Scott Soltys-Curry (https://unsplash.com/photos/_7CVm353m7A) */
     background:
-        radial-gradient(circle at 50% 50%, transparent 0 13%, var(--mustard) 13.2% 14.4%, transparent 14.6% 28%, rgba(212, 160, 23, 0.74) 28.2% 29.2%, transparent 29.4% 45%, rgba(236, 228, 211, 0.2) 45.2% 46%, transparent 46.2%),
-        radial-gradient(circle at 40% 38%, rgba(212, 160, 23, 0.32), transparent 28rem),
+        linear-gradient(180deg, rgba(14, 14, 14, 0.42) 0%, rgba(14, 14, 14, 0.62) 100%),
+        radial-gradient(circle at 40% 38%, rgba(212, 160, 23, 0.28), transparent 28rem),
+        url("https://images.unsplash.com/photo-1680381615265-6cce996f6e4f?auto=format&fit=crop&w=1000&q=80") center / cover no-repeat,
         var(--onyx-soft);
 }
 
@@ -1232,9 +1235,10 @@ html {
 }
 
 .home .art-craft {
+    /* Unsplash — espresso machine by Battlecreek Coffee Roasters (https://unsplash.com/photos/IbZFP9eAIic) */
     background:
-        radial-gradient(circle at 55% 55%, transparent 0 22%, var(--mustard) 22.4% 30%, transparent 30.4%),
-        repeating-linear-gradient(135deg, rgba(236, 228, 211, 0.08) 0 1px, transparent 1px 28px),
+        linear-gradient(180deg, rgba(14, 14, 14, 0.42) 0%, rgba(14, 14, 14, 0.62) 100%),
+        url("https://images.unsplash.com/photo-1561480337-7fb12b1d9bc4?auto=format&fit=crop&w=1000&q=80") center / cover no-repeat,
         linear-gradient(135deg, #101010 0%, #202020 100%);
     box-shadow: inset 0 0 9rem rgba(0, 0, 0, 0.58);
 }
@@ -1256,10 +1260,10 @@ html {
 }
 
 .home .art-community {
+    /* Unsplash — friends sharing coffee by Priscilla Du Preez (https://unsplash.com/photos/3gAiajAfjXI) */
     background:
-        radial-gradient(circle at 35% 48%, var(--mustard) 0 18%, transparent 18.3%),
-        radial-gradient(circle at 54% 48%, var(--bone) 0 18%, transparent 18.3%),
-        radial-gradient(circle at 70% 48%, rgba(212, 160, 23, 0.82) 0 18%, transparent 18.3%),
+        linear-gradient(180deg, rgba(14, 14, 14, 0.42) 0%, rgba(14, 14, 14, 0.62) 100%),
+        url("https://images.unsplash.com/photo-1604881991405-b273c7a4386a?auto=format&fit=crop&w=1000&q=80") center / cover no-repeat,
         linear-gradient(135deg, #111 0%, #202020 100%);
 }
 
